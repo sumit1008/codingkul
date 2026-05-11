@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\sumit\\\\Desktop\\\\AlgoShashtra\\\\Frontend\\\\codingkul\" -Recurse -File | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\sumit\\\\Desktop\\\\AlgoShashtra\\\\Frontend\\\\codingkul\\\\\",\"\"\\) })",
+      "Bash(Get-Content \"C:\\\\Users\\\\sumit\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-sumit-Desktop-AlgoShashtra\\\\c25cc0cf-6fb8-4866-ac1d-690a92d4f9ab\\\\tasks\\\\bxsm43quu.output\" -Wait)",
+      "Bash(Select-String -Pattern \"ready|error|localhost|compiled|warn\" --line-buffer)",
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git -C \"C:\\\\Users\\\\sumit\\\\Desktop\\\\AlgoShashtra\\\\Backend\" status)",
+      "Bash(Select-Object Name)",
+      "Bash(rm -rf \"C:\\\\Users\\\\sumit\\\\Desktop\\\\AlgoShashtra\\\\Frontend\\\\.git\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\sumit\\Desktop\\AlgoShashtra\\Frontend\\.git"
+    ]
+  }
+}
