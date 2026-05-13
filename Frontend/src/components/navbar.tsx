@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Code2 } from "lucide-react";
+import { Menu, X, Code2, LayoutDashboard } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 const NAV_LINKS = [
   { label: "Courses", href: "#courses" },
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -76,25 +78,51 @@ export default function Navbar() {
 
           {/* Right — desktop */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/login">
-              <Button
-                variant="ghost"
-                className="text-sm text-[#8888aa] hover:text-white hover:bg-white/5 px-4 h-9 rounded-xl"
-              >
-                Login
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button
-                className="text-sm px-4 h-9 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
-                style={{
-                  background: "linear-gradient(135deg, #6366f1, #a855f7)",
-                  boxShadow: "0 0 20px rgba(99,102,241,0.4)",
-                }}
-              >
-                Sign Up
-              </Button>
-            </Link>
+            {!isLoading && (
+              user ? (
+                <Link href="/dashboard">
+                  <Button
+                    className="flex items-center gap-2 text-sm px-4 h-9 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
+                    style={{
+                      background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                      boxShadow: "0 0 20px rgba(99,102,241,0.4)",
+                    }}
+                  >
+                    {user.avatar?.startsWith("http") ? (
+                      <img src={user.avatar} alt="" className="w-5 h-5 rounded-md object-cover" />
+                    ) : (
+                      <div className="w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-bold bg-white/20">
+                        {user.avatar}
+                      </div>
+                    )}
+                    Dashboard
+                    <LayoutDashboard className="w-3.5 h-3.5" />
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button
+                      variant="ghost"
+                      className="text-sm text-[#8888aa] hover:text-white hover:bg-white/5 px-4 h-9 rounded-xl"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button
+                      className="text-sm px-4 h-9 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
+                      style={{
+                        background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                        boxShadow: "0 0 20px rgba(99,102,241,0.4)",
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )
+            )}
           </div>
 
           {/* Mobile toggle */}
@@ -128,21 +156,35 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="flex gap-3 pb-1">
-              <Button
-                variant="ghost"
-                className="flex-1 text-sm text-[#8888aa] hover:text-white hover:bg-white/5 h-9 rounded-xl"
-              >
-                Login
-              </Button>
-              <Button
-                className="flex-1 text-sm h-9 rounded-xl font-semibold"
-                style={{
-                  background: "linear-gradient(135deg, #6366f1, #a855f7)",
-                  boxShadow: "0 0 20px rgba(99,102,241,0.4)",
-                }}
-              >
-                Sign Up
-              </Button>
+              {user ? (
+                <Link href="/dashboard" className="flex-1">
+                  <Button
+                    className="w-full text-sm h-9 rounded-xl font-semibold"
+                    style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+                  >
+                    Go to Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login" className="flex-1">
+                    <Button
+                      variant="ghost"
+                      className="w-full text-sm text-[#8888aa] hover:text-white hover:bg-white/5 h-9 rounded-xl"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup" className="flex-1">
+                    <Button
+                      className="w-full text-sm h-9 rounded-xl font-semibold"
+                      style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, Loader2, Code2, Sparkles, Copy } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Loader2, Code2 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import AuthLeftPanel from "@/components/auth/left-panel";
 
@@ -27,8 +27,11 @@ function GitHubIcon() {
   );
 }
 
+const BACKEND = "http://localhost:5000";
+
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login, user, isLoading } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -42,6 +45,16 @@ export default function LoginPage() {
   useEffect(() => {
     if (!isLoading && user) router.push("/dashboard");
   }, [user, isLoading, router]);
+
+  useEffect(() => {
+    if (searchParams.get("error") === "google_failed") {
+      setError("Google sign-in failed. Please try again.");
+    }
+  }, [searchParams]);
+
+  const handleGoogleLogin = useCallback(() => {
+    window.location.href = `${BACKEND}/api/auth/google`;
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -225,30 +238,33 @@ export default function LoginPage() {
 
           {/* Social */}
           <div className="grid grid-cols-2 gap-3">
-            {[
-              { name: "Google", Icon: GoogleIcon },
-              { name: "GitHub", Icon: GitHubIcon },
-            ].map(({ name, Icon }) => (
-              <button
-                key={name}
-                type="button"
-                className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.09)",
-                  color: "#e8e8f0",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(99,102,241,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
-                }}
-              >
-                <Icon />
-                {name}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", color: "#e8e8f0" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(66,133,244,0.5)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(66,133,244,0.06)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
+              }}
+            >
+              <GoogleIcon />
+              Google
+            </button>
+            <button
+              type="button"
+              disabled
+              title="GitHub login coming soon"
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium opacity-40 cursor-not-allowed"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", color: "#e8e8f0" }}
+            >
+              <GitHubIcon />
+              GitHub
+            </button>
           </div>
 
           <p className="text-center text-sm mt-6" style={{ color: "#8888aa" }}>
@@ -258,82 +274,6 @@ export default function LoginPage() {
             </Link>
           </p>
 
-          {/* Demo credentials card */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4 }}
-            className="mt-5 rounded-2xl p-4 relative overflow-hidden"
-            style={{
-              background: "rgba(99,102,241,0.05)",
-              border: "1px solid rgba(99,102,241,0.18)",
-            }}
-          >
-            {/* Glow */}
-            <div
-              className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 pointer-events-none"
-              style={{
-                background: "radial-gradient(circle, rgba(99,102,241,0.8) 0%, transparent 70%)",
-                filter: "blur(16px)",
-              }}
-            />
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-3">
-                <div
-                  className="w-5 h-5 rounded-md flex items-center justify-center"
-                  style={{ background: "rgba(99,102,241,0.2)" }}
-                >
-                  <Sparkles className="w-3 h-3 text-indigo-400" />
-                </div>
-                <span className="text-xs font-bold" style={{ color: "#a5b4fc" }}>
-                  Demo Access
-                </span>
-                <span
-                  className="ml-auto text-[10px] px-2 py-0.5 rounded-full font-semibold"
-                  style={{ background: "rgba(16,185,129,0.12)", color: "#34d399", border: "1px solid rgba(16,185,129,0.2)" }}
-                >
-                  Active
-                </span>
-              </div>
-
-              <div
-                className="rounded-xl px-3 py-2.5 mb-3 space-y-2"
-                style={{ background: "rgba(0,0,0,0.25)", border: "1px solid rgba(255,255,255,0.06)" }}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "#555577" }}>
-                    Email
-                  </span>
-                  <span className="text-xs font-mono" style={{ color: "#c4b5fd" }}>
-                    demo@dsaacademy.dev
-                  </span>
-                </div>
-                <div className="h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "#555577" }}>
-                    Password
-                  </span>
-                  <span className="text-xs font-mono" style={{ color: "#c4b5fd" }}>
-                    12345678
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => { setEmail("demo@dsaacademy.dev"); setPassword("12345678"); }}
-                className="w-full h-8 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all duration-200 hover:scale-[1.02]"
-                style={{
-                  background: "rgba(99,102,241,0.15)",
-                  border: "1px solid rgba(99,102,241,0.28)",
-                  color: "#a5b4fc",
-                }}
-              >
-                <Copy className="w-3 h-3" />
-                Use these credentials
-              </button>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </div>

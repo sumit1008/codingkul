@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Codingkul — Frontend
 
-## Getting Started
+Next.js 15 (App Router) student-facing web application.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui + Lucide icons
+- **Animations**: Framer Motion
+- **Auth**: httpOnly JWT cookie via `AuthContext` — no client-side token storage
+
+## Structure
+
+```
+src/
+├── app/
+│   ├── (auth)/          # login, signup pages (no navbar layout)
+│   ├── (app)/           # dashboard pages (sidebar layout)
+│   ├── layout.tsx        # root layout with AuthProvider
+│   ├── page.tsx          # landing page
+│   └── providers.tsx     # client providers wrapper
+├── components/
+│   ├── auth/             # shared auth UI (left panel)
+│   ├── dashboard/        # sidebar, top-navbar, widgets
+│   ├── navbar.tsx        # landing page navbar (auth-aware)
+│   └── ui/               # shadcn base components
+└── lib/
+    └── auth-context.tsx  # global auth state, API calls
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Auth Flow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. On mount, `AuthContext` calls `GET /api/auth/me` to restore session from cookie
+2. Login / signup call backend REST endpoints, cookie is set server-side
+3. Google OAuth redirects to `http://localhost:5000/api/auth/google` — backend handles the full flow and redirects back to `/dashboard`
+4. Logout calls `POST /api/auth/logout` to clear the cookie, then redirects to `/login`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Running Locally
 
-## Learn More
+```bash
+npm install
+npm run dev      # http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+Backend must be running on `http://localhost:5000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Building for Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```

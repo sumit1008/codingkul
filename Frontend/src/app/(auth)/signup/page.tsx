@@ -27,7 +27,8 @@ function GitHubIcon() {
   );
 }
 
-const TAKEN_USERNAMES = ["admin", "user", "test", "root", "codingkul", "moderator"];
+const API = "http://localhost:5000/api";
+const BACKEND = "http://localhost:5000";
 
 function getPasswordStrength(pw: string): { score: number; label: string; color: string } {
   let score = 0;
@@ -60,6 +61,10 @@ export default function SignupPage() {
     if (!isLoading && user) router.push("/dashboard");
   }, [user, isLoading, router]);
 
+  const handleGoogleSignup = () => {
+    window.location.href = `${BACKEND}/api/auth/google`;
+  };
+
   const set = (field: string, val: string) => setForm((f) => ({ ...f, [field]: val }));
 
   const onUsernameChange = (val: string) => {
@@ -68,8 +73,14 @@ export default function SignupPage() {
     if (usernameTimer.current) clearTimeout(usernameTimer.current);
     if (val.length >= 3) {
       setUsernameStatus("checking");
-      usernameTimer.current = setTimeout(() => {
-        setUsernameStatus(TAKEN_USERNAMES.includes(val.toLowerCase()) ? "taken" : "available");
+      usernameTimer.current = setTimeout(async () => {
+        try {
+          const res = await fetch(`${API}/auth/check-username?username=${encodeURIComponent(val)}`);
+          const data = await res.json();
+          setUsernameStatus(data.available ? "available" : "taken");
+        } catch {
+          setUsernameStatus("idle");
+        }
       }, 700);
     }
   };
@@ -308,7 +319,7 @@ export default function SignupPage() {
             <label className="flex items-start gap-3 cursor-pointer select-none">
               <div
                 onClick={() => setAgreed(!agreed)}
-                className="w-4 h-4 rounded flex items-center justify-center flex-shrink-0 mt-0.5 transition-all cursor-pointer"
+                className="w-4 h-4 rounded flex items-center justify-center shrink-0 mt-0.5 transition-all cursor-pointer"
                 style={{
                   background: agreed ? "linear-gradient(135deg, #6366f1, #a855f7)" : "rgba(255,255,255,0.06)",
                   border: agreed ? "none" : "1px solid rgba(255,255,255,0.15)",
@@ -356,30 +367,33 @@ export default function SignupPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {[
-              { name: "Google", Icon: GoogleIcon },
-              { name: "GitHub", Icon: GitHubIcon },
-            ].map(({ name, Icon }) => (
-              <button
-                key={name}
-                type="button"
-                className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.09)",
-                  color: "#e8e8f0",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(99,102,241,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
-                }}
-              >
-                <Icon />
-                {name}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", color: "#e8e8f0" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(66,133,244,0.5)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(66,133,244,0.06)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
+              }}
+            >
+              <GoogleIcon />
+              Google
+            </button>
+            <button
+              type="button"
+              disabled
+              title="GitHub signup coming soon"
+              className="flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-medium opacity-40 cursor-not-allowed"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", color: "#e8e8f0" }}
+            >
+              <GitHubIcon />
+              GitHub
+            </button>
           </div>
 
           <p className="text-center text-sm mt-6" style={{ color: "#8888aa" }}>

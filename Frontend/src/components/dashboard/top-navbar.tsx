@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, Search, Bell, Flame, Zap, Trophy, ChevronDown, LogOut, User } from "lucide-react";
@@ -15,25 +15,40 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
   const router = useRouter();
   const [profileOpen, setProfileOpen] = useState(false);
   const [searchFocus, setSearchFocus] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = () => {
-    logout();
+  // Close dropdown on outside click — avoids the fixed-inside-backdropFilter bug
+  useEffect(() => {
+    if (!profileOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [profileOpen]);
+
+  const handleLogout = async () => {
+    setProfileOpen(false);
+    await logout();
     router.push("/login");
   };
 
   return (
     <header
-      className="flex items-center gap-3 px-5 py-3 border-b flex-shrink-0"
+      className="flex items-center gap-3 px-5 py-3 border-b shrink-0"
       style={{
-        background: "rgba(5,5,16,0.95)",
+        background: "rgba(5,5,16,0.98)",
         borderColor: "rgba(255,255,255,0.06)",
-        backdropFilter: "blur(12px)",
+        zIndex: 40,
+        position: "relative",
       }}
     >
       {/* Hamburger */}
       <button
         onClick={onMenuClick}
-        className="lg:hidden p-2 rounded-xl transition-colors hover:bg-white/5 flex-shrink-0"
+        className="lg:hidden p-2 rounded-xl transition-colors hover:bg-white/5 shrink-0"
         style={{ color: "#8888aa" }}
       >
         <Menu className="w-5 h-5" />
@@ -63,11 +78,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
         {/* Streak */}
         <div
           className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold"
-          style={{
-            background: "rgba(249,115,22,0.1)",
-            border: "1px solid rgba(249,115,22,0.2)",
-            color: "#fb923c",
-          }}
+          style={{ background: "rgba(249,115,22,0.1)", border: "1px solid rgba(249,115,22,0.2)", color: "#fb923c" }}
         >
           <Flame className="w-3.5 h-3.5" />
           {user?.streak ?? 0}d
@@ -76,11 +87,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
         {/* XP */}
         <div
           className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold"
-          style={{
-            background: "rgba(234,179,8,0.1)",
-            border: "1px solid rgba(234,179,8,0.2)",
-            color: "#facc15",
-          }}
+          style={{ background: "rgba(234,179,8,0.1)", border: "1px solid rgba(234,179,8,0.2)", color: "#facc15" }}
         >
           <Zap className="w-3.5 h-3.5" />
           {user?.xp.toLocaleString() ?? 0} XP
@@ -89,11 +96,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
         {/* Rank */}
         <div
           className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold"
-          style={{
-            background: "rgba(99,102,241,0.1)",
-            border: "1px solid rgba(99,102,241,0.2)",
-            color: "#a5b4fc",
-          }}
+          style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", color: "#a5b4fc" }}
         >
           <Trophy className="w-3.5 h-3.5" />
           #{user?.rank ?? 0}
@@ -105,69 +108,109 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
           style={{ color: "#8888aa" }}
         >
           <Bell className="w-4 h-4" />
-          <span
-            className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
-            style={{ background: "#6366f1" }}
-          />
+          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full" style={{ background: "#6366f1" }} />
         </button>
 
         {/* Avatar + dropdown */}
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <button
-            onClick={() => setProfileOpen(!profileOpen)}
+            onClick={() => setProfileOpen((o) => !o)}
             className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-xl transition-colors hover:bg-white/5"
           >
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
-            >
-              {user?.avatar ?? "?"}
-            </div>
+            {user?.avatar?.startsWith("http") ? (
+              <img
+                src={user.avatar}
+                alt={user.name ?? "avatar"}
+                className="w-7 h-7 rounded-lg shrink-0 object-cover"
+              />
+            ) : (
+              <div
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shrink-0"
+                style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+              >
+                {user?.avatar ?? "?"}
+              </div>
+            )}
             <span className="hidden md:block text-sm font-medium text-white">
-              {user?.name.split(" ")[0]}
+              {user?.name?.split(" ")[0]}
             </span>
             <ChevronDown
-              className="w-3.5 h-3.5 transition-transform"
-              style={{ color: "#8888aa", transform: profileOpen ? "rotate(180deg)" : "rotate(0)" }}
+              className="w-3.5 h-3.5 transition-transform duration-200"
+              style={{ color: "#8888aa", transform: profileOpen ? "rotate(180deg)" : "rotate(0deg)" }}
             />
           </button>
 
           {profileOpen && (
-            <>
-              <div className="fixed inset-0 z-10" onClick={() => setProfileOpen(false)} />
-              <div
-                className="absolute right-0 top-full mt-2 w-52 rounded-2xl py-1.5 z-20"
-                style={{
-                  background: "rgba(12,12,28,0.98)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
-                  backdropFilter: "blur(12px)",
-                }}
-              >
-                <div className="px-4 py-3 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                  <p className="text-sm font-semibold text-white">{user?.name}</p>
-                  <p className="text-xs" style={{ color: "#8888aa" }}>@{user?.username}</p>
+            <div
+              className="absolute right-0 top-full mt-2 w-56 rounded-2xl overflow-hidden"
+              style={{
+                background: "#0d0d20",
+                border: "1px solid rgba(255,255,255,0.12)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.8), 0 0 0 1px rgba(99,102,241,0.1)",
+                zIndex: 9999,
+              }}
+            >
+              {/* User info */}
+              <div className="px-4 py-3.5 border-b flex items-center gap-3" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+                {user?.avatar?.startsWith("http") ? (
+                  <img src={user.avatar} alt={user.name ?? "avatar"} className="w-9 h-9 rounded-xl object-cover shrink-0" />
+                ) : (
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}>
+                    {user?.avatar ?? "?"}
+                  </div>
+                )}
+                <div>
+                <p className="text-sm font-semibold text-white">{user?.name}</p>
+                <p className="text-xs mt-0.5" style={{ color: "#8888aa" }}>@{user?.username}</p>
+                <div
+                  className="flex items-center gap-1.5 mt-2 text-[11px] font-medium px-2 py-1 rounded-lg w-fit"
+                  style={{ background: "rgba(99,102,241,0.12)", color: "#a5b4fc" }}
+                >
+                  Level {user?.level} · {user?.title}
                 </div>
-                <div className="py-1">
-                  <button
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-white/5 text-left"
-                    style={{ color: "#8888aa" }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#e8e8f0"; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#8888aa"; }}
-                  >
-                    <User className="w-4 h-4" />
-                    Profile
-                  </button>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-red-500/10 text-left text-red-400"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    Sign out
-                  </button>
                 </div>
               </div>
-            </>
+
+              {/* Menu items */}
+              <div className="py-1.5 px-1.5">
+                <Link
+                  href="/dashboard/profile"
+                  onClick={() => setProfileOpen(false)}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors w-full"
+                  style={{ color: "#aaaacc" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.06)";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#e8e8f0";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#aaaacc";
+                  }}
+                >
+                  <User className="w-4 h-4 shrink-0" />
+                  Profile
+                </Link>
+
+                <div className="my-1 h-px mx-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors w-full text-left"
+                  style={{ color: "#f87171" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(239,68,68,0.1)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "#fca5a5";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+                    (e.currentTarget as HTMLButtonElement).style.color = "#f87171";
+                  }}
+                >
+                  <LogOut className="w-4 h-4 shrink-0" />
+                  Sign out
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

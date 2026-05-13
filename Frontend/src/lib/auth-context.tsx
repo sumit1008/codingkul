@@ -2,10 +2,14 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
+const API = "http://localhost:5000/api";
+
 export interface User {
+  id: string;
   name: string;
   username: string;
   email: string;
+  avatar: string;
   level: number;
   xp: number;
   xpMax: number;
@@ -13,8 +17,8 @@ export interface User {
   rank: number;
   rating: number;
   solved: number;
-  avatar: string;
   title: string;
+  role: string;
 }
 
 interface AuthContextType {
@@ -22,23 +26,28 @@ interface AuthContextType {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signup: (data: { name: string; username: string; email: string; password: string }) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
-const MOCK_USER: User = {
-  name: "Siddharth Sharma",
-  username: "siddharth_s",
-  email: "siddharth@example.com",
-  level: 12,
-  xp: 3240,
-  xpMax: 5000,
-  streak: 28,
-  rank: 142,
-  rating: 1847,
-  solved: 487,
-  avatar: "SS",
-  title: "Algorithm Apprentice",
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapUser(u: any): User {
+  return {
+    id: u._id || u.id || "",
+    name: u.fullName || u.name || "",
+    username: u.username || "",
+    email: u.email || "",
+    avatar: u.avatar || (u.fullName || u.name || "U").slice(0, 2).toUpperCase(),
+    level: u.level ?? 1,
+    xp: u.xp ?? 0,
+    xpMax: 5000,
+    streak: u.streak ?? 0,
+    rank: u.rank ?? 0,
+    rating: u.rating ?? 0,
+    solved: u.solved ?? 0,
+    title: "Algorithm Apprentice",
+    role: u.role || "student",
+  };
+}
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -46,43 +55,58 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Restore session via httpOnly cookie on mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("ck_user");
-      if (stored) setUser(JSON.parse(stored));
-    } catch {}
-    setIsLoading(false);
+    fetch(`${API}/auth/me`, { credentials: "include" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data?.user) setUser(mapUser(data.user)); })
+      .catch(() => {})
+      .finally(() => setIsLoading(false));
   }, []);
 
   const login = async (email: string, password: string) => {
-    await new Promise((r) => setTimeout(r, 1100));
-    if (!email || !password) return { success: false, error: "Please enter your email and password." };
-    if (email !== "demo@dsaacademy.dev" || password !== "12345678") {
-      return { success: false, error: "Invalid credentials. Use the demo account below." };
+    try {
+      const res = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) return { success: false, error: data.message || "Invalid credentials" };
+      sessionStorage.setItem("ck_new_login", "true");
+      setUser(mapUser(data.user));
+      return { success: true };
+    } catch {
+      return { success: false, error: "Network error. Please try again." };
     }
-    localStorage.setItem("ck_user", JSON.stringify(MOCK_USER));
-    sessionStorage.setItem("ck_new_login", "true");
-    setUser(MOCK_USER);
-    return { success: true };
   };
 
   const signup = async (data: { name: string; username: string; email: string; password: string }) => {
-    await new Promise((r) => setTimeout(r, 1400));
-    const u = {
-      ...MOCK_USER,
-      name: data.name,
-      username: data.username,
-      email: data.email,
-      avatar: data.name.slice(0, 2).toUpperCase(),
-    };
-    localStorage.setItem("ck_user", JSON.stringify(u));
-    sessionStorage.setItem("ck_new_login", "true");
-    setUser(u);
-    return { success: true };
+    try {
+      const res = await fetch(`${API}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          fullName: data.name,
+          username: data.username,
+          email: data.email,
+          password: data.password,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok) return { success: false, error: json.message || "Signup failed" };
+      sessionStorage.setItem("ck_new_login", "true");
+      setUser(mapUser(json.user));
+      return { success: true };
+    } catch {
+      return { success: false, error: "Network error. Please try again." };
+    }
   };
 
-  const logout = () => {
-    localStorage.removeItem("ck_user");
+  const logout = async () => {
+    await fetch(`${API}/auth/logout`, { method: "POST", credentials: "include" }).catch(() => {});
     setUser(null);
   };
 
