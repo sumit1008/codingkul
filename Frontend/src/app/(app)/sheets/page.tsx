@@ -1,327 +1,386 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Search, ChevronRight, BookOpen, CheckCircle2, Circle } from "lucide-react";
+import {
+  CheckCircle2, TrendingUp, Star, Zap, Flame, BookOpen, Lock, ArrowRight, Crown,
+} from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
-import { SHEETS, loadSolved, type Sheet } from "@/data/sheets";
+import { loadSolved } from "@/lib/progress";
+import api from "@/lib/api";
+import type { SheetMeta } from "@/types/sheet";
+import type { CourseTier } from "@/types/course";
+import { TIER_LEVELS } from "@/types/course";
 
-// Per-sheet solved count, loaded from localStorage on client
-function useSolvedCounts(userId: string) {
+// ── Access logic ────────────────────────────────────────────────────────────
+
+function isI200Sheet(slug: string, isPremium: boolean): boolean {
+  return isPremium || /i.?200/i.test(slug);
+}
+
+function canAccessSheet(userTier: CourseTier, isPremium: boolean, slug: string): boolean {
+  if (isI200Sheet(slug, isPremium)) return userTier === "PLACEMENT"; // I-200: Placement only
+  return TIER_LEVELS[userTier] >= TIER_LEVELS["FOUNDATION"];          // others: any paid tier
+}
+
+function requiredTierLabel(isPremium: boolean, slug: string): string {
+  return isI200Sheet(slug, isPremium) ? "Placement Plan required" : "Any paid plan required";
+}
+
+// ── Feature lists ────────────────────────────────────────────────────────────
+
+const FREE_FEATURES = [
+  { icon: CheckCircle2, text: "Topic-wise progression system" },
+  { icon: CheckCircle2, text: "100+ curated problems" },
+  { icon: CheckCircle2, text: "Unlockable topics & achievements" },
+];
+
+const PREMIUM_FEATURES = [
+  { icon: TrendingUp, text: "High-frequency interview questions" },
+  { icon: TrendingUp, text: "Company-wise problem tags" },
+  { icon: TrendingUp, text: "Interview readiness tracking" },
+];
+
+// ── Solved hook ──────────────────────────────────────────────────────────────
+
+function useSolvedCounts(userId: string, sheets: SheetMeta[]) {
   const [counts, setCounts] = useState<Record<string, number>>({});
-
   useEffect(() => {
+    if (!sheets.length || !userId) return;
     const result: Record<string, number> = {};
-    for (const sheet of SHEETS) {
-      result[sheet.slug] = loadSolved(userId, sheet.slug).size;
-    }
+    for (const s of sheets) result[s.slug] = loadSolved(userId, s.slug).size;
     setCounts(result);
-  }, [userId]);
-
+  }, [userId, sheets]);
   return counts;
 }
 
-const DIFFICULTY_COLORS = {
-  Easy: { text: "#34d399", bg: "rgba(52,211,153,0.1)", border: "rgba(52,211,153,0.2)" },
-  Medium: { text: "#fbbf24", bg: "rgba(251,191,36,0.1)", border: "rgba(251,191,36,0.2)" },
-  Hard: { text: "#fb7185", bg: "rgba(251,113,133,0.1)", border: "rgba(251,113,133,0.2)" },
-};
+// ── Sheet Card ───────────────────────────────────────────────────────────────
 
-function SheetCard({ sheet, solved, index }: { sheet: Sheet; solved: number; index: number }) {
-  const total = sheet.problems.length;
+function SheetCard({
+  sheet, solved, hasAccess, onLockedClick,
+}: {
+  sheet: SheetMeta;
+  solved: number;
+  hasAccess: boolean;
+  userTier: CourseTier;
+  onLockedClick: () => void;
+}) {
+  const router = useRouter();
+  const total = sheet.totalProblems;
   const pct = total > 0 ? Math.round((solved / total) * 100) : 0;
+  const features = sheet.isPremium ? PREMIUM_FEATURES : FREE_FEATURES;
 
-  const easy = sheet.problems.filter((p) => p.difficulty === "Easy").length;
-  const medium = sheet.problems.filter((p) => p.difficulty === "Medium").length;
-  const hard = sheet.problems.filter((p) => p.difficulty === "Hard").length;
+  const handleClick = () => {
+    if (hasAccess) router.push(`/sheet/${sheet.slug}`);
+    else onLockedClick();
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
+      whileHover={{ scale: 1.012, y: -3 }}
+      transition={{ duration: 0.2 }}
+      onClick={handleClick}
+      className="relative rounded-2xl h-full flex flex-col overflow-hidden cursor-pointer"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: hasAccess
+          ? "1px solid rgba(255,255,255,0.08)"
+          : "1px solid rgba(255,255,255,0.05)",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+        opacity: hasAccess ? 1 : 0.75,
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = hasAccess
+          ? `${sheet.accentColor}44`
+          : "rgba(99,102,241,0.3)";
+        (e.currentTarget as HTMLDivElement).style.boxShadow = hasAccess
+          ? `0 8px 40px ${sheet.accentColor}18`
+          : "0 8px 40px rgba(99,102,241,0.08)";
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = hasAccess
+          ? "rgba(255,255,255,0.08)"
+          : "rgba(255,255,255,0.05)";
+        (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 24px rgba(0,0,0,0.4)";
+      }}
     >
-      <Link href={`/sheet/${sheet.slug}`} className="block group">
+      {/* Lock overlay */}
+      {!hasAccess && (
         <div
-          className="relative rounded-2xl overflow-hidden transition-all duration-300 h-full group-hover:scale-[1.02]"
-          style={{
-            background: "rgba(255,255,255,0.025)",
-            border: "1px solid rgba(255,255,255,0.07)",
-            boxShadow: "0 0 0 0 transparent",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLDivElement).style.borderColor = `${sheet.colorFrom}44`;
-            (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 32px ${sheet.colorFrom}18`;
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)";
-            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 0 0 0 transparent";
-          }}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 rounded-2xl"
+          style={{ background: "rgba(5,5,16,0.7)", backdropFilter: "blur(3px)" }}
         >
-          {/* Gradient accent bar */}
           <div
-            className="h-1 w-full"
-            style={{ background: `linear-gradient(90deg, ${sheet.colorFrom}, ${sheet.colorTo})` }}
-          />
-
-          <div className="p-5">
-            {/* Header */}
-            <div className="flex items-start gap-3 mb-3">
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0"
-                style={{
-                  background: `linear-gradient(135deg, ${sheet.colorFrom}22, ${sheet.colorTo}11)`,
-                  border: `1px solid ${sheet.colorFrom}33`,
-                }}
-              >
-                {sheet.icon}
-              </div>
-              <div className="min-w-0">
-                <h3 className="font-bold text-white text-base leading-tight mb-0.5 group-hover:text-indigo-300 transition-colors">
-                  {sheet.title}
-                </h3>
-                <p className="text-xs" style={{ color: "#6677aa" }}>
-                  by {sheet.author}
-                </p>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p className="text-sm leading-relaxed mb-4 line-clamp-2" style={{ color: "#8888aa" }}>
-              {sheet.description}
-            </p>
-
-            {/* Topic tags */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {sheet.tags.slice(0, 4).map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[11px] px-2 py-0.5 rounded-full font-medium"
-                  style={{
-                    background: `${sheet.colorFrom}18`,
-                    color: sheet.accentColor,
-                    border: `1px solid ${sheet.colorFrom}28`,
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-              {sheet.tags.length > 4 && (
-                <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ color: "#555577", background: "rgba(255,255,255,0.04)" }}>
-                  +{sheet.tags.length - 4}
-                </span>
-              )}
-            </div>
-
-            {/* Difficulty breakdown */}
-            <div className="flex items-center gap-3 mb-4">
-              {(["Easy", "Medium", "Hard"] as const).map((d) => {
-                const count = d === "Easy" ? easy : d === "Medium" ? medium : hard;
-                const col = DIFFICULTY_COLORS[d];
-                return (
-                  <div key={d} className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full" style={{ background: col.text }} />
-                    <span className="text-xs font-medium" style={{ color: col.text }}>
-                      {count}
-                    </span>
-                    <span className="text-xs" style={{ color: "#555577" }}>
-                      {d}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Progress bar */}
-            <div className="mb-1.5">
-              <div className="flex items-center justify-between text-xs mb-2">
-                <span style={{ color: "#8888aa" }}>
-                  <span className="text-white font-semibold">{solved}</span> / {total} solved
-                </span>
-                <span className="font-semibold" style={{ color: sheet.accentColor }}>
-                  {pct}%
-                </span>
-              </div>
-              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ background: `linear-gradient(90deg, ${sheet.colorFrom}, ${sheet.colorTo})` }}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${pct}%` }}
-                  transition={{ duration: 0.8, delay: index * 0.08 + 0.3, ease: "easeOut" }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div
-            className="mx-5 mb-5 h-10 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3"
-            style={{
-              background: `linear-gradient(135deg, ${sheet.colorFrom}22, ${sheet.colorTo}11)`,
-              border: `1px solid ${sheet.colorFrom}33`,
-              color: sheet.accentColor,
-            }}
+            className="w-14 h-14 rounded-2xl flex items-center justify-center"
+            style={{ background: "rgba(99,102,241,0.12)", border: "1px solid rgba(99,102,241,0.25)" }}
           >
-            {solved > 0 ? (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Continue Sheet
-              </>
-            ) : (
-              <>
-                <Circle className="w-4 h-4" />
-                Start Sheet
-              </>
-            )}
-            <ChevronRight className="w-4 h-4 ml-auto" />
+            <Lock className="w-6 h-6" style={{ color: "#a5b4fc" }} />
+          </div>
+          <div className="text-center px-6">
+            <p className="text-sm font-bold text-white mb-1">
+              {sheet.isPremium ? "Placement Exclusive" : "Paid Members Only"}
+            </p>
+            <p className="text-xs mb-4" style={{ color: "#8888aa" }}>
+              {requiredTierLabel(sheet.isPremium, sheet.slug)}
+            </p>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white"
+              style={{
+                background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                boxShadow: "0 0 16px rgba(99,102,241,0.3)",
+              }}
+            >
+              <Crown className="w-3.5 h-3.5" />
+              {sheet.isPremium ? "Upgrade to Placement" : "View Plans"}
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
           </div>
         </div>
-      </Link>
+      )}
+
+      {/* Premium badge */}
+      {sheet.isPremium && (
+        <div
+          className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold z-5"
+          style={{ background: `linear-gradient(135deg, ${sheet.accentFrom}, ${sheet.accentTo})` }}
+        >
+          <Star className="w-3 h-3 fill-white text-white" />
+          PREMIUM
+        </div>
+      )}
+
+      <div className="p-6 flex-1 flex flex-col" style={{ filter: hasAccess ? "none" : "blur(1.5px)" }}>
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+          style={{
+            background: `linear-gradient(135deg, ${sheet.accentFrom}22, ${sheet.accentTo}11)`,
+            border: `1px solid ${sheet.accentFrom}33`,
+          }}
+        >
+          {sheet.isPremium ? (
+            <Star className="w-6 h-6" style={{ color: sheet.accentColor }} />
+          ) : (
+            <BookOpen className="w-6 h-6" style={{ color: sheet.accentColor }} />
+          )}
+        </div>
+
+        <h2
+          className="text-2xl font-black mb-2 tracking-tight"
+          style={sheet.isPremium ? { color: sheet.accentColor } : { color: "#ffffff" }}
+        >
+          {sheet.title.toUpperCase()}
+        </h2>
+
+        <p className="text-sm leading-relaxed mb-5" style={{ color: "#8888aa" }}>
+          {sheet.description}
+        </p>
+
+        <div className="space-y-2.5 mb-5 flex-1">
+          {features.map(({ icon: Icon, text }) => (
+            <div key={text} className="flex items-center gap-2.5">
+              <Icon
+                className="w-4 h-4 shrink-0"
+                style={{ color: sheet.isPremium ? "#a855f7" : "#22d3ee" }}
+              />
+              <span className="text-sm" style={{ color: "#ccccdd" }}>{text}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-1.5 mb-5">
+          <Zap className="w-3.5 h-3.5" style={{ color: sheet.accentColor }} />
+          <span className="text-sm font-medium" style={{ color: sheet.accentColor }}>
+            {sheet.isPremium ? "Perfect for interview prep" : "Perfect for beginners to advanced"}
+          </span>
+        </div>
+
+        <div
+          className="p-4 rounded-xl"
+          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-xs mb-0.5" style={{ color: "#8888aa" }}>Progress</p>
+              <p className="text-xl font-bold text-white">
+                {hasAccess ? solved : "—"} / {total}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-xs mb-0.5" style={{ color: "#8888aa" }}>Solved</p>
+              <p className="text-xl font-bold" style={{ color: sheet.accentColor }}>
+                {hasAccess ? `${pct}%` : "—"}
+              </p>
+            </div>
+          </div>
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+            {hasAccess && (
+              <motion.div
+                className="h-full rounded-full"
+                style={{ background: `linear-gradient(90deg, ${sheet.accentFrom}, ${sheet.accentTo})` }}
+                initial={{ width: 0 }}
+                animate={{ width: `${pct}%` }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="px-6 pb-6" style={{ filter: hasAccess ? "none" : "blur(1.5px)" }}>
+        <div
+          className="w-full h-12 rounded-xl flex items-center justify-center gap-2 text-sm font-bold text-white transition-all duration-200"
+          style={{
+            background: hasAccess
+              ? `linear-gradient(135deg, ${sheet.accentFrom}, ${sheet.accentTo})`
+              : "rgba(255,255,255,0.05)",
+            boxShadow: hasAccess ? `0 4px 16px ${sheet.accentColor}33` : "none",
+          }}
+        >
+          {hasAccess ? "Open Dashboard →" : "Locked"}
+        </div>
+      </div>
     </motion.div>
   );
 }
 
+// ── Page ─────────────────────────────────────────────────────────────────────
+
 export default function SheetsPage() {
   const { user } = useAuth();
-  const solvedCounts = useSolvedCounts(user?.id ?? "");
-  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const [sheets, setSheets] = useState<SheetMeta[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const totalProblems = SHEETS.reduce((acc, s) => acc + s.problems.length, 0);
+  const userTier: CourseTier = user?.courseTier ?? "NONE";
+
+  useEffect(() => {
+    api
+      .get<{ success: boolean; data: SheetMeta[] }>("/sheets")
+      .then((res) => setSheets(res.data.data))
+      .catch(() => setSheets([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const solvedCounts = useSolvedCounts(user?.id ?? "", sheets);
+
+  const totalProblems = sheets.reduce((acc, s) => acc + s.totalProblems, 0);
   const totalSolved = Object.values(solvedCounts).reduce((acc, n) => acc + n, 0);
 
-  const filtered = SHEETS.filter(
-    (s) =>
-      s.title.toLowerCase().includes(search.toLowerCase()) ||
-      s.author.toLowerCase().includes(search.toLowerCase()) ||
-      s.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()))
-  );
+  const globalStats = [
+    { value: totalProblems > 0 ? `${totalProblems}+` : "—", label: "Total Problems", color: "#a5b4fc" },
+    { value: totalSolved.toString(), label: "Problems Solved", color: "#34d399" },
+    { value: user?.xp.toLocaleString() ?? "0", label: "Total XP Earned", color: "#22d3ee" },
+    { value: `${user?.streak ?? 0}`, label: "Day Streak", color: "#fb923c" },
+  ];
 
   return (
-    <div className="p-5 sm:p-7 max-w-6xl mx-auto">
-      {/* Page header */}
+    <div className="min-h-full p-6 sm:p-8 max-w-5xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: -12 }}
+        initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="mb-8"
+        transition={{ duration: 0.45 }}
+        className="text-center mb-10"
       >
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)", boxShadow: "0 0 18px rgba(99,102,241,0.35)" }}
-          >
-            <BookOpen className="w-4.5 h-4.5 text-white w-5 h-5" />
-          </div>
-          <h1 className="text-2xl font-bold text-white" style={{ letterSpacing: "-0.02em" }}>
-            DSA Sheets
-          </h1>
-        </div>
-        <p style={{ color: "#8888aa" }} className="text-sm ml-12">
-          Systematically master data structures and algorithms with curated problem sets
-        </p>
-      </motion.div>
-
-      {/* Stats + search row */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-7"
-      >
-        {/* Stats chips */}
-        <div className="flex items-center gap-3 flex-wrap">
-          {[
-            { label: "Sheets", value: SHEETS.length, color: "#a5b4fc" },
-            { label: "Problems", value: totalProblems, color: "#fbbf24" },
-            { label: "Solved", value: totalSolved, color: "#34d399" },
-          ].map(({ label, value, color }) => (
-            <div
-              key={label}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color }}
-            >
-              <span className="font-bold text-sm">{value}</span>
-              <span style={{ color: "#8888aa" }}>{label}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Search */}
-        <div className="relative sm:ml-auto w-full sm:w-64">
-          <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none"
-            style={{ color: "#555577" }}
-          />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search sheets or topics..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm placeholder-[#555577] text-[#e8e8f0] outline-none transition-all"
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-            onFocus={(e) => {
-              (e.currentTarget as HTMLInputElement).style.borderColor = "rgba(99,102,241,0.45)";
-              (e.currentTarget as HTMLInputElement).style.boxShadow = "0 0 0 3px rgba(99,102,241,0.08)";
-            }}
-            onBlur={(e) => {
-              (e.currentTarget as HTMLInputElement).style.borderColor = "rgba(255,255,255,0.08)";
-              (e.currentTarget as HTMLInputElement).style.boxShadow = "none";
-            }}
-          />
-        </div>
-      </motion.div>
-
-      {/* Overall progress bar */}
-      {totalSolved > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-7 p-4 rounded-2xl"
-          style={{ background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)" }}
+        <h1
+          className="text-4xl sm:text-5xl font-black mb-3 tracking-tight"
+          style={{
+            background: "linear-gradient(135deg, #a5b4fc, #c084fc)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
         >
-          <div className="flex items-center justify-between text-xs mb-2">
-            <span className="font-semibold text-white">Overall Progress</span>
-            <span style={{ color: "#a5b4fc" }}>
-              {totalSolved} / {totalProblems} problems solved ({Math.round((totalSolved / totalProblems) * 100)}%)
-            </span>
-          </div>
-          <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-            <motion.div
-              className="h-full rounded-full"
-              style={{ background: "linear-gradient(90deg, #6366f1, #a855f7)" }}
-              initial={{ width: 0 }}
-              animate={{ width: `${(totalSolved / totalProblems) * 100}%` }}
-              transition={{ duration: 1, ease: "easeOut" }}
-            />
-          </div>
-        </motion.div>
-      )}
+          DSA Sheets
+        </h1>
+        <p className="text-base" style={{ color: "#8888aa" }}>
+          Choose your learning path and start solving
+        </p>
 
-      {/* Sheet cards grid */}
-      {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
-          {filtered.map((sheet, i) => (
-            <SheetCard
-              key={sheet.slug}
-              sheet={sheet}
-              solved={solvedCounts[sheet.slug] ?? 0}
-              index={i}
-            />
+        {/* Tier banner */}
+        {userTier === "NONE" && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl text-sm"
+            style={{
+              background: "rgba(99,102,241,0.08)",
+              border: "1px solid rgba(99,102,241,0.2)",
+              color: "#a5b4fc",
+            }}
+          >
+            <Lock className="w-3.5 h-3.5" />
+            Sheets are locked on the free plan.
+            <button
+              onClick={() => router.push("/courses")}
+              className="font-semibold underline underline-offset-2 hover:text-white transition-colors"
+            >
+              Upgrade to unlock
+            </button>
+          </motion.div>
+        )}
+      </motion.div>
+
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {[0, 1].map((i) => (
+            <div key={i} className="h-96 rounded-2xl animate-pulse" style={{ background: "rgba(255,255,255,0.04)" }} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-20">
-          <p className="text-lg font-semibold text-white mb-2">No sheets found</p>
-          <p className="text-sm" style={{ color: "#8888aa" }}>
-            Try searching with a different keyword
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {sheets.map((sheet, i) => {
+            const hasAccess = canAccessSheet(userTier, sheet.isPremium, sheet.slug);
+            return (
+              <motion.div
+                key={sheet.slug}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+              >
+                <SheetCard
+                  sheet={sheet}
+                  solved={solvedCounts[sheet.slug] ?? 0}
+                  hasAccess={hasAccess}
+                  userTier={userTier}
+                  onLockedClick={() => router.push("/courses")}
+                />
+              </motion.div>
+            );
+          })}
         </div>
+      )}
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+      >
+        {globalStats.map(({ value, label, color }) => (
+          <div
+            key={label}
+            className="rounded-2xl p-5 text-center"
+            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+          >
+            <p className="text-3xl font-black mb-1" style={{ color }}>{value}</p>
+            <p className="text-xs" style={{ color: "#8888aa" }}>{label}</p>
+          </div>
+        ))}
+      </motion.div>
+
+      {(user?.streak ?? 0) > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-6 flex items-center justify-center gap-2 text-sm"
+          style={{ color: "#fb923c" }}
+        >
+          <Flame className="w-4 h-4" />
+          <span className="font-semibold">{user?.streak} day streak</span>
+          <span style={{ color: "#555577" }}>— keep it going!</span>
+        </motion.div>
       )}
     </div>
   );
