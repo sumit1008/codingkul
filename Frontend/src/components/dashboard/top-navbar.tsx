@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, Search, Bell, Flame, Zap, Trophy, ChevronDown, LogOut, User } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
+import { Menu, Bell, Flame, Zap, Trophy, ChevronDown, LogOut, User, Crown } from "lucide-react";
+import { useAuth, TIER_LABELS } from "@/lib/auth-context";
 
 interface TopNavbarProps {
   onMenuClick: () => void;
@@ -14,7 +14,6 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [profileOpen, setProfileOpen] = useState(false);
-  const [searchFocus, setSearchFocus] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown on outside click — avoids the fixed-inside-backdropFilter bug
@@ -53,26 +52,6 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
       >
         <Menu className="w-5 h-5" />
       </button>
-
-      {/* Search */}
-      <div className="flex-1 max-w-sm relative">
-        <Search
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none"
-          style={{ color: searchFocus ? "#6366f1" : "#555577" }}
-        />
-        <input
-          type="text"
-          placeholder="Search problems, topics..."
-          onFocus={() => setSearchFocus(true)}
-          onBlur={() => setSearchFocus(false)}
-          className="w-full pl-9 pr-4 py-2 rounded-xl text-sm placeholder-[#555577] text-[#e8e8f0] outline-none transition-all duration-200"
-          style={{
-            background: "rgba(255,255,255,0.04)",
-            border: searchFocus ? "1px solid rgba(99,102,241,0.45)" : "1px solid rgba(255,255,255,0.07)",
-            boxShadow: searchFocus ? "0 0 0 3px rgba(99,102,241,0.08)" : "none",
-          }}
-        />
-      </div>
 
       <div className="ml-auto flex items-center gap-2">
         {/* Streak */}
@@ -167,6 +146,28 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
                   style={{ background: "rgba(99,102,241,0.12)", color: "#a5b4fc" }}
                 >
                   Level {user?.level} · {user?.title}
+                </div>
+                <div
+                  className="flex items-center gap-1 mt-1.5 text-[10px] font-semibold px-2 py-0.5 rounded-lg w-fit"
+                  style={{
+                    background: user?.courseTier === "PLACEMENT"
+                      ? "rgba(168,85,247,0.15)"
+                      : user?.courseTier === "ACCELERATOR"
+                      ? "rgba(234,179,8,0.12)"
+                      : user?.courseTier === "FOUNDATION"
+                      ? "rgba(34,197,94,0.12)"
+                      : "rgba(255,255,255,0.05)",
+                    color: user?.courseTier === "PLACEMENT"
+                      ? "#c084fc"
+                      : user?.courseTier === "ACCELERATOR"
+                      ? "#fbbf24"
+                      : user?.courseTier === "FOUNDATION"
+                      ? "#4ade80"
+                      : "#8888aa",
+                  }}
+                >
+                  <Crown className="w-2.5 h-2.5" />
+                  {TIER_LABELS[user?.courseTier ?? "NONE"]}
                 </div>
                 </div>
               </div>

@@ -1,7 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { CheckCircle2, Circle, Lock } from "lucide-react";
+import { CheckCircle2, Lock, ArrowRight } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 const CHAPTERS = [
   {
@@ -76,6 +78,13 @@ function StatusIcon({ status }: { status: string }) {
 }
 
 export default function DsaSheetSection() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  const handleSheetsCTA = () => {
+    router.push(user ? "/sheets" : "/login");
+  };
+
   return (
     <section id="sheets" className="relative z-10 py-24 px-4">
       <div className="max-w-7xl mx-auto">
@@ -313,6 +322,27 @@ export default function DsaSheetSection() {
             </motion.div>
           </div>
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex justify-center mt-10"
+        >
+          <button
+            onClick={handleSheetsCTA}
+            className="flex items-center gap-2 px-8 h-11 rounded-xl text-sm font-semibold text-white transition-all hover:scale-[1.03]"
+            style={{
+              background: "linear-gradient(135deg, #6366f1, #a855f7)",
+              boxShadow: "0 0 30px rgba(99,102,241,0.35)",
+            }}
+          >
+            {user ? "Open DSA Sheets" : "Start Solving Free"}
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </motion.div>
       </div>
     </section>
   );
