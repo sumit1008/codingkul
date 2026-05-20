@@ -38,3 +38,9 @@ Thumbs.db
 
 # Turbopack / Next.js cache
 Frontend/.turbo/
+
+# Local dev log — never commit
+DEVLOG.md
+
+# Admin CMS secrets
+Admin/.env.local

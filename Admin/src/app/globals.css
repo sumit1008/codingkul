@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #05050f;
+  color: #e8e8f4;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* scrollbar */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(99,102,241,0.3); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.6); }
+
+/* selection */
+::selection { background: rgba(99,102,241,0.3); color: #fff; }
+
+/* focus ring */
+:focus-visible { outline: 2px solid rgba(99,102,241,0.7); outline-offset: 2px; }
+
+@layer components {
+  .glass {
+    background: rgba(12, 12, 30, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card {
+    @apply bg-bg-card rounded-2xl border border-white/[0.07] shadow-card;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-hover text-white font-semibold px-4 py-2 rounded-xl
+           transition-all duration-200 hover:shadow-glow-sm hover:scale-[1.02] active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-ghost {
+    @apply text-text-muted hover:text-text hover:bg-white/[0.06] px-4 py-2 rounded-xl transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-danger/10 hover:bg-danger/20 text-danger border border-danger/20
+           px-4 py-2 rounded-xl transition-all duration-200 font-medium;
+  }
+
+  .input {
+    @apply w-full bg-bg-elevated border border-white/[0.08] rounded-xl px-4 py-2.5 text-sm
+           text-text placeholder-text-faint outline-none
+           focus:border-primary/50 focus:ring-1 focus:ring-primary/20
+           transition-all duration-200;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-muted mb-1.5;
+  }
+
+  .badge-easy   { @apply text-easy bg-easy-bg px-2.5 py-0.5 rounded-full text-xs font-semibold; }
+  .badge-medium { @apply text-medium bg-medium-bg px-2.5 py-0.5 rounded-full text-xs font-semibold; }
+  .badge-hard   { @apply text-hard bg-hard-bg px-2.5 py-0.5 rounded-full text-xs font-semibold; }
+
+  .page-title {
+    @apply text-2xl font-bold text-text tracking-tight;
+  }
+
+  .section-header {
+    @apply flex items-center justify-between mb-6;
+  }
+}
