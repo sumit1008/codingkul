@@ -1,5 +1,7 @@
 export type Difficulty = "Easy" | "Medium" | "Hard";
 export type Platform = "LeetCode" | "Codeforces" | "GeeksforGeeks" | "CodingNinjas" | "AtCoder" | "Other";
+export type ContestStatus = "upcoming" | "running" | "completed";
+export type ContestDifficulty = "Beginner" | "Intermediate" | "Advanced";
 
 export interface Sheet {
   _id: string;
@@ -46,6 +48,43 @@ export interface AdminUser {
   role: string;
 }
 
+export interface AdminContest {
+  _id: string;
+  title: string;
+  slug: string;
+  codeforcesContestId: number;
+  codeforcesContestLink: string;
+  startTime: string;
+  endTime: string;
+  duration: string;
+  difficulty: ContestDifficulty;
+  topics: string[];
+  xpReward: number;
+  status: ContestStatus;
+  processedResults: boolean;
+  participantCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ContestParticipant {
+  _id: string;
+  userId: {
+    _id: string;
+    fullName: string;
+    username: string;
+    email: string;
+  } | null;
+  cfHandle: string;
+  globalRank: number;
+  solved: number;
+  penalty: number;
+  ratingChange: number;
+  xpEarned: number;
+  academyRatingAfter: number;
+  createdAt: string;
+}
+
 export interface PaginatedResponse<T> {
   success: boolean;
   data: T[];
@@ -87,6 +126,8 @@ export const PLATFORMS: Platform[] = [
 ];
 
 export const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
+
+export const CONTEST_DIFFICULTIES: ContestDifficulty[] = ["Beginner", "Intermediate", "Advanced"];
 
 export const COMPANIES = [
   "Google", "Amazon", "Microsoft", "Meta", "Apple", "Netflix", "Uber",

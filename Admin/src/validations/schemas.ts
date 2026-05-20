@@ -49,7 +49,22 @@ export const csvRowSchema = z.object({
   order:        z.coerce.number().optional().default(0),
 });
 
+export const contestSchema = z.object({
+  title:                z.string().min(3, "Title must be at least 3 characters").max(200),
+  slug:                 z.string().min(2).max(200).regex(/^[a-z0-9-]+$/, "Slug: lowercase, numbers, hyphens only").optional().or(z.literal("")).default(""),
+  codeforcesContestId:  z.coerce.number({ invalid_type_error: "Must be a number" }).int("Must be an integer").positive("Must be positive"),
+  codeforcesContestLink:z.string().url("Must be a valid URL"),
+  startTime:            z.string().min(1, "Start time required"),
+  endTime:              z.string().min(1, "End time required"),
+  duration:             z.string().min(1, "Duration required").default("2 hours"),
+  difficulty:           z.enum(["Beginner", "Intermediate", "Advanced"]).default("Intermediate"),
+  topics:               z.string().optional().default(""),
+  xpReward:             z.coerce.number().int().min(0).max(2000).default(200),
+  status:               z.enum(["upcoming", "running", "completed"]).default("upcoming"),
+});
+
 export type LoginInput    = z.infer<typeof loginSchema>;
 export type SheetInput    = z.infer<typeof sheetSchema>;
 export type ProblemInput  = z.infer<typeof problemSchema>;
 export type CsvRowInput   = z.infer<typeof csvRowSchema>;
+export type ContestInput  = z.infer<typeof contestSchema>;

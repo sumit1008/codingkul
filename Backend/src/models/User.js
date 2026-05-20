@@ -62,6 +62,49 @@ const userSchema = new mongoose.Schema(
       default: "NONE",
     },
     purchasedCourses: [{ type: String }],
+
+    // ── Contest / competitive fields (added in S4) ──────────────────
+    codeforcesHandle: {
+      type: String,
+      trim: true,
+      default: "",
+      sparse: true,
+    },
+    academyRating: {
+      type: Number,
+      default: 1200,
+      min: 800,
+    },
+    academyRankTitle: {
+      type: String,
+      default: "Pupil",
+    },
+    contestXP: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    contestsParticipated: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    contestBestRank: {
+      type: Number,
+      default: null,
+    },
+    contestHistory: [
+      {
+        contestId: { type: mongoose.Schema.Types.ObjectId, ref: "Contest" },
+        contestTitle: { type: String },
+        rank: { type: Number },
+        solved: { type: Number },
+        ratingChange: { type: Number },
+        xpEarned: { type: Number },
+        ratingAfter: { type: Number },
+        date: { type: Date, default: Date.now },
+      },
+    ],
   },
   { timestamps: true }
 );

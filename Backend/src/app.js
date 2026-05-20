@@ -12,6 +12,8 @@ import healthRoutes from "./routes/healthRoutes.js";
 import sheetRoutes from "./routes/sheetRoutes.js";
 import problemRoutes from "./routes/problemRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
+import contestRoutes from "./routes/contestRoutes.js";
+import adminContestRoutes from "./routes/adminContestRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -65,6 +67,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/sheets", sheetRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/contests", contestRoutes);
+app.use("/api/admin/contests", adminContestRoutes);
 
 // Error handling
 app.use(notFound);
