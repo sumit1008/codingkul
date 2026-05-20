@@ -5,7 +5,12 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "seed:master": "node seed/importMasterSheet.js",
+    "seed:new-topics": "node seed/importMasterDsaSheet.js",
+    "seed:final": "node seed/importAndReorder.js",
+    "seed:subtopics": "node seed/assignSubtopics.js",
+    "seed:i200": "node seed/importI200Sheet.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +20,7 @@
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "csv-parser": "^3.2.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.1",

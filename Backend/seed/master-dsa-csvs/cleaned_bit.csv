@@ -1,0 +1,35 @@
+title,link,platform,resource_type,pattern,subpattern,difficulty,priority,topic
+Bit Manipulation Basics (Operators & Tricks),https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/,GFG,Article,,,,,BIT
+Bit Manipulation Complete Guide,https://www.geeksforgeeks.org/bit-manipulation-techniques/,GFG,Article,,,,,BIT
+Brian Kernighanâs Algorithm (Counting Set Bits),https://www.geeksforgeeks.org/count-set-bits-in-an-integer/,GFG,Article,,,,,BIT
+XOR Properties & Applications,https://www.geeksforgeeks.org/bitwise-xor-operator-in-programming/,GFG,Article,,,,,BIT
+Subset Generation using Bitmasking,https://www.geeksforgeeks.org/find-distinct-subsets-given-set/,GFG,Article,,,,,BIT
+Bitmasking for Competitive Programming,https://www.geeksforgeeks.org/bitmasking-in-competitive-programming/,GFG,Article,,,,,BIT
+Problem,Link,,,,,,,BIT
+Number of 1 Bits,https://leetcode.com/problems/number-of-1-bits/description/,LeetCode,,,,Easy,,BIT
+Counting Bits,https://leetcode.com/problems/counting-bits/description/,LeetCode,,,,Easy,,BIT
+Set Bits Count,https://www.geeksforgeeks.org/problems/set-bits0143/1,GFG,,,,Easy,,BIT
+Power of Two,https://leetcode.com/problems/power-of-two/description/,LeetCode,,,,Easy,,BIT
+Power of Four,https://leetcode.com/problems/power-of-four/description/,LeetCode,,,,Easy,,BIT
+Reverse Bits,https://leetcode.com/problems/reverse-bits/description/,LeetCode,,,,Easy,,BIT
+Find XOR from L to R,https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1,GFG,,,,Medium,,BIT
+Missing Number,https://leetcode.com/problems/missing-number/description/,LeetCode,,,,Easy,,BIT
+Single Number,https://leetcode.com/problems/single-number/description/,LeetCode,,,,Easy,,BIT
+Find the Difference,https://leetcode.com/problems/find-the-difference/description/,LeetCode,,,,Easy,,BIT
+Sum of Two Integers,https://leetcode.com/problems/sum-of-two-integers/description/,LeetCode,,,,Medium,,BIT
+Single Number II,https://leetcode.com/problems/single-number-ii/description/,LeetCode,,,,Medium,,BIT
+Single Number III,https://leetcode.com/problems/single-number-iii/description/,LeetCode,,,,Medium,,BIT
+Bitwise AND of Numbers Range,https://leetcode.com/problems/bitwise-and-of-numbers-range/description/,LeetCode,,,,Medium,,BIT
+Minimum Flips to Make a OR b Equal to c,https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/,LeetCode,,,,Medium,,BIT
+Total Hamming Distance,https://leetcode.com/problems/total-hamming-distance/description/,LeetCode,,,,Medium,,BIT
+Subsets,https://leetcode.com/problems/subsets/description/,LeetCode,,,,Medium,,BIT
+Subsets II,https://leetcode.com/problems/subsets-ii/description/,LeetCode,,,,Medium,,BIT
+Maximum Product of Word Lengths,https://leetcode.com/problems/maximum-product-of-word-lengths/description/,LeetCode,,,,Medium,,BIT
+Count Triplets That Can Form Two Arrays of Equal XOR,https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/,LeetCode,,,,Medium,,BIT
+Maximum XOR of Two Numbers in an Array,https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/,LeetCode,,,,Medium,,BIT
+Beautiful Arrangement,https://leetcode.com/problems/beautiful-arrangement/description/,LeetCode,,,,Medium,,BIT
+Find Position of Only Set Bit,https://www.geeksforgeeks.org/problems/find-position-of-set-bit3706/1,GFG,,,,Easy,,BIT
+Check Whether K-th Bit is Set,https://www.geeksforgeeks.org/problems/check-whether-k-th-bit-is-set-or-not-1587115620/1,GFG,,,,Easy,,BIT
+Toggle Bits Given Range,https://www.geeksforgeeks.org/problems/toggle-bits-given-range0952/1,GFG,,,,Medium,,BIT
+Count Total Set Bits,https://www.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1,GFG,,,,Medium,,BIT
+Maximum XOR Subarray,https://www.geeksforgeeks.org/problems/maximum-xor-subarray/1,GFG,,,,Medium,,BIT

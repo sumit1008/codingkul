@@ -1,0 +1,18 @@
+title,slug,link,difficulty,platform,tags
+Trie Data Structure Introduction,trie-data-structure-introduction,https://www.geeksforgeeks.org/trie-insert-and-search/,,GeeksforGeeks,trie
+Trie Delete Operation,trie-delete-operation,https://www.geeksforgeeks.org/trie-delete/,,GeeksforGeeks,trie
+Trie Applications,trie-applications,https://www.geeksforgeeks.org/applications-of-trie-data-structure/,,GeeksforGeeks,trie
+Bitwise Trie (XOR Problems),bitwise-trie-xor-problems,https://www.geeksforgeeks.org/maximum-xor-of-two-numbers-in-an-array/,,GeeksforGeeks,trie
+Implement Trie (Prefix Tree),implement-trie-prefix-tree,https://leetcode.com/problems/implement-trie-prefix-tree/,,LeetCode,trie
+Trie Insert and Search,trie-insert-and-search,https://www.geeksforgeeks.org/problems/trie-insert-and-search0651/1,,GeeksforGeeks,trie
+Count Words With Prefix,count-words-with-prefix,https://www.geeksforgeeks.org/problems/prefix-trie/1,,GeeksforGeeks,trie
+Implement Trie II,implement-trie-ii,https://leetcode.com/problems/implement-trie-ii-prefix-tree/,,LeetCode,trie
+Longest Common Prefix,longest-common-prefix,https://leetcode.com/problems/longest-common-prefix/,,LeetCode,trie
+Replace Words,replace-words,https://leetcode.com/problems/replace-words/,,LeetCode,trie
+Word Dictionary (Add and Search),word-dictionary-add-search,https://leetcode.com/problems/design-add-and-search-words-data-structure/,,LeetCode,trie
+Short Encoding of Words,short-encoding-of-words,https://leetcode.com/problems/short-encoding-of-words/,,LeetCode,trie
+Word Search,word-search,https://leetcode.com/problems/word-search/,,LeetCode,trie
+Word Search II,word-search-ii,https://leetcode.com/problems/word-search-ii/,,LeetCode,trie
+Maximum XOR of Two Numbers,maximum-xor-of-two-numbers,https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/,,LeetCode,trie
+Maximum XOR With Queries,maximum-xor-with-queries,https://leetcode.com/problems/maximum-xor-with-an-element-from-array/,,LeetCode,trie
+Count Pairs With XOR,count-pairs-with-xor,https://www.geeksforgeeks.org/problems/count-pairs-with-given-xor/1,,GeeksforGeeks,trie

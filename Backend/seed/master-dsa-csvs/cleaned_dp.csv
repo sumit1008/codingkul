@@ -1,0 +1,99 @@
+title,link,platform,resource_type,pattern,subpattern,difficulty,priority,topic
+Climbing Stairs,https://leetcode.com/problems/climbing-stairs/,LeetCode,,Linear DP,Fibonacci,Beginner,â­ Must Teach,DP
+Min Cost Climbing Stairs,https://leetcode.com/problems/min-cost-climbing-stairs/,LeetCode,,Linear DP,Fibonacci Variant,Beginner,â­ Must Teach,DP
+Frog Jump,https://atcoder.jp/contests/dp/tasks/dp_a,AtCoder,,Linear DP,Jump DP,Beginner,â­ Must Teach,DP
+Frog Jump K Distance,https://atcoder.jp/contests/dp/tasks/dp_b,AtCoder,,Linear DP,Jump DP,Beginner,â­ Must Teach,DP
+House Robber,https://leetcode.com/problems/house-robber/,LeetCode,,Linear DP,Adjacent DP,Beginner,â­ Must Teach,DP
+House Robber II,https://leetcode.com/problems/house-robber-ii/,LeetCode,,Linear DP,Circular DP,Intermediate,â­ Must Teach,DP
+House Robber III,https://leetcode.com/problems/house-robber-iii/,LeetCode,,Linear DP,Tree DP,Intermediate,â­ Must Teach,DP
+Maximum Sum of Non-Adjacent Elements,https://www.geeksforgeeks.org/problems/max-sum-without-adjacents2430/1,GFG,,Linear DP,Adjacent DP,Beginner,â Practice,DP
+Jump Game,https://leetcode.com/problems/jump-game/,LeetCode,,Linear DP,Reachability,Beginner,â­ Must Teach,DP
+Jump Game II,https://leetcode.com/problems/jump-game-ii/,LeetCode,,Linear DP,Min Jumps,Intermediate,â­ Must Teach,DP
+Decode Ways,https://leetcode.com/problems/decode-ways/,LeetCode,,Linear DP,String DP,Intermediate,â­ Must Teach,DP
+Count Ways to Reach Nth Stair,https://www.geeksforgeeks.org/problems/count-ways-to-reach-the-nth-stair-1587115620/1,GFG,,Linear DP,Fibonacci,Beginner,â Practice,DP
+Maximum Sum Circular Subarray,https://leetcode.com/problems/maximum-sum-circular-subarray/,LeetCode,,Linear DP,Kadane Variant,Intermediate,â Practice,DP
+Problem (KNAPSACK PATTERN),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Subset Sum Problem,https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1,GFG,,Knapsack,0/1 Knapsack,Beginner,â­ Must Teach,DP
+Partition Equal Subset Sum,https://leetcode.com/problems/partition-equal-subset-sum/,LeetCode,,Knapsack,Equal Partition,Beginner,â­ Must Teach,DP
+Perfect Sum Problem (Count Subsets),https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1,GFG,,Knapsack,Count Subsets,Beginner,â­ Must Teach,DP
+Minimum Subset Sum Difference,https://www.geeksforgeeks.org/problems/minimum-sum-partition3317/1,GFG,,Knapsack,Partition Difference,Intermediate,â­ Must Teach,DP
+Count Subsets With Given Difference,https://www.geeksforgeeks.org/problems/count-number-of-subsets-with-given-difference/1,GFG,,Knapsack,Subset Difference,Intermediate,â­ Must Teach,DP
+Target Sum,https://leetcode.com/problems/target-sum/,LeetCode,,Knapsack,Subset Transformation,Intermediate,â­ Must Teach,DP
+0/1 Knapsack (Classic),https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1,GFG,,Knapsack,0/1 Knapsack,Beginner,â­ Must Teach,DP
+Problem (LIS PATTERN),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Unbounded Knapsack,https://www.geeksforgeeks.org/problems/unbounded-knapsack/1,GFG,,Knapsack,Unbounded Knapsack,Intermediate,â­ Must Teach,DP
+Rod Cutting Problem,https://www.geeksforgeeks.org/problems/rod-cutting0840/1,GFG,,Knapsack,Unbounded,Intermediate,â­ Must Teach,DP
+Coin Change (Minimum Coins),https://leetcode.com/problems/coin-change/,LeetCode,,Knapsack,Unbounded,Intermediate,â­ Must Teach,DP
+Coin Change II (Number of Ways),https://leetcode.com/problems/coin-change-ii/,LeetCode,,Knapsack,Unbounded,Intermediate,â­ Must Teach,DP
+Ones and Zeroes,https://leetcode.com/problems/ones-and-zeroes/,LeetCode,,Knapsack,2D Knapsack,Intermediate,â­ Must Teach,DP
+Last Stone Weight II,https://leetcode.com/problems/last-stone-weight-ii/,LeetCode,,Knapsack,Subset Difference,Intermediate,â­ Must Teach,DP
+Shopping Offers,https://leetcode.com/problems/shopping-offers/,LeetCode,,Knapsack,State Compression,Advanced,â¡ Advanced,DP
+Minimum Cost for Tickets,https://leetcode.com/problems/minimum-cost-for-tickets/,LeetCode,,Knapsack,Cost Optimization,Intermediate,â Practice,DP
+Length of Longest Subsequence With Target Sum,https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/,LeetCode,,Knapsack,Variation,Advanced,â¡ Advanced,DP
+Problem (LCS PATTERN),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Longest Increasing Subsequence,https://leetcode.com/problems/longest-increasing-subsequence/,LeetCode,,LIS DP,Classic LIS,Beginner,â­ Must Teach,DP
+Printing Longest Increasing Subsequence,https://www.geeksforgeeks.org/problems/printing-longest-increasing-subsequence/1,GFG,,LIS DP,Path Reconstruction,Intermediate,â­ Must Teach,DP
+Maximum Sum Increasing Subsequence,https://www.geeksforgeeks.org/problems/maximum-sum-increasing-subsequence4749/1,GFG,,LIS DP,Sum Optimization,Intermediate,â­ Must Teach,DP
+Longest Bitonic Subsequence,https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1,GFG,,LIS DP,LIS + LDS,Intermediate,â­ Must Teach,DP
+Minimum Deletions to Make Array Sorted,https://www.geeksforgeeks.org/problems/minimum-number-of-deletions-to-make-a-sorted-sequence3248/1,GFG,,LIS DP,LIS Transformation,Intermediate,â­ Must Teach,DP
+Number of Longest Increasing Subsequences,https://leetcode.com/problems/number-of-longest-increasing-subsequence/,LeetCode,,LIS DP,Counting LIS,Intermediate,â­ Must Teach,DP
+Largest Divisible Subset,https://leetcode.com/problems/largest-divisible-subset/,LeetCode,,LIS DP,Subset LIS,Intermediate,â­ Must Teach,DP
+Best Team With No Conflicts,https://leetcode.com/problems/best-team-with-no-conflicts/,LeetCode,,LIS DP,LIS Variant,Intermediate,â Practice,DP
+Increasing Triplet Subsequence,https://leetcode.com/problems/increasing-triplet-subsequence/,LeetCode,,LIS DP,Binary Search LIS,Intermediate,â­ Must Teach,DP
+Russian Doll Envelopes,https://leetcode.com/problems/russian-doll-envelopes/,LeetCode,,LIS DP,Sort + LIS,Advanced,â­ Must Teach,DP
+Maximum Length of Pair Chain,https://leetcode.com/problems/maximum-length-of-pair-chain/,LeetCode,,LIS DP,Pair LIS,Intermediate,â Practice,DP
+Problem (GRID DP),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Unique Paths,https://leetcode.com/problems/unique-paths/,LeetCode,,Grid DP,Basic Grid Paths,Beginner,â­ Must Teach,DP
+Unique Paths II,https://leetcode.com/problems/unique-paths-ii/,LeetCode,,Grid DP,Obstacles,Beginner,â­ Must Teach,DP
+Minimum Path Sum,https://leetcode.com/problems/minimum-path-sum/,LeetCode,,Grid DP,Cost Path,Beginner,â­ Must Teach,DP
+Triangle,https://leetcode.com/problems/triangle/,LeetCode,,Grid DP,Variable Width Grid,Beginner,â­ Must Teach,DP
+Minimum Falling Path Sum,https://leetcode.com/problems/minimum-falling-path-sum/,LeetCode,,Grid DP,Multi Direction,Intermediate,â­ Must Teach,DP
+Minimum Falling Path Sum II,https://leetcode.com/problems/minimum-falling-path-sum-ii/,LeetCode,,Grid DP,Column Restriction,Intermediate,â Practice,DP
+Maximal Square,https://leetcode.com/problems/maximal-square/,LeetCode,,Grid DP,Square Detection,Intermediate,â­ Must Teach,DP
+Dungeon Game,https://leetcode.com/problems/dungeon-game/,LeetCode,,Grid DP,Reverse DP,Advanced,â­ Must Teach,DP
+Cherry Pickup I,https://leetcode.com/problems/cherry-pickup/,LeetCode,,Grid DP,Multi-Agent DP,Advanced,â­ Must Teach,DP
+Cherry Pickup II,https://leetcode.com/problems/cherry-pickup-ii/,LeetCode,,Grid DP,3D DP,Advanced,â­ Must Teach,DP
+Longest Increasing Path in Matrix,https://leetcode.com/problems/longest-increasing-path-in-a-matrix/,LeetCode,,Grid DP,DFS + DP,Advanced,â­ Must Teach,DP
+Number of Paths With Maximum Score,https://leetcode.com/problems/number-of-paths-with-max-score/,LeetCode,,Grid DP,Score Tracking,Advanced,â¡ Advanced,DP
+Minimum Path Cost in Grid,https://leetcode.com/problems/minimum-path-cost-in-a-grid/,LeetCode,,Grid DP,Weighted Moves,Intermediate,â Practice,DP
+Maximum Moves in a Grid,https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/,LeetCode,,Grid DP,Path Expansion,Intermediate,â Practice,DP
+Problem (LCS DP),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Longest Common Subsequence,https://leetcode.com/problems/longest-common-subsequence/,LeetCode,,LCS DP,Classic LCS,Beginner,â­ Must Teach,DP
+Longest Common Substring,https://www.geeksforgeeks.org/problems/longest-common-substring1452/1,GFG,,LCS DP,Substring DP,Beginner,â­ Must Teach,DP
+Print Longest Common Subsequence,https://www.geeksforgeeks.org/problems/printing-longest-common-subsequence/1,GFG,,LCS DP,Reconstruction,Intermediate,â­ Must Teach,DP
+Shortest Common Supersequence,https://leetcode.com/problems/shortest-common-supersequence/,LeetCode,,LCS DP,LCS Transformation,Intermediate,â­ Must Teach,DP
+Minimum Insertions to Make Palindrome,https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/,LeetCode,,LCS DP,Palindrome DP,Intermediate,â­ Must Teach,DP
+Longest Palindromic Subsequence,https://leetcode.com/problems/longest-palindromic-subsequence/,LeetCode,,LCS DP,Palindrome DP,Intermediate,â­ Must Teach,DP
+Longest Palindromic Substring,https://leetcode.com/problems/longest-palindromic-substring/,LeetCode,,LCS DP,Substring DP,Intermediate,â­ Must Teach,DP
+Delete Operation for Two Strings,https://leetcode.com/problems/delete-operation-for-two-strings/,LeetCode,,LCS DP,Edit Variant,Intermediate,â Practice,DP
+Minimum ASCII Delete Sum for Two Strings,https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/,LeetCode,,LCS DP,Cost DP,Intermediate,â Practice,DP
+Distinct Subsequences,https://leetcode.com/problems/distinct-subsequences/,LeetCode,,LCS DP,Counting DP,Advanced,â­ Must Teach,DP
+Distinct Subsequences II,https://leetcode.com/problems/distinct-subsequences-ii/,LeetCode,,LCS DP,Counting DP,Advanced,â¡ Advanced,DP
+Edit Distance,https://leetcode.com/problems/edit-distance/,LeetCode,,LCS DP,Edit Operations,Advanced,â­ Must Teach,DP
+Wildcard Matching,https://leetcode.com/problems/wildcard-matching/,LeetCode,,LCS DP,Pattern Matching,Advanced,â­ Must Teach,DP
+Regular Expression Matching,https://leetcode.com/problems/regular-expression-matching/,LeetCode,,LCS DP,Regex DP,Advanced,â­ Must Teach,DP
+Maximum Length of Repeated Subarray,https://leetcode.com/problems/maximum-length-of-repeated-subarray/,LeetCode,,LCS DP,Array LCS,Intermediate,â Practice,DP
+Problem (INTERVAL DP),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Matrix Chain Multiplication,https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1,GFG,,Interval DP,Partition DP,Intermediate,â­ Must Teach,DP
+Minimum Cost to Cut a Stick,https://leetcode.com/problems/minimum-cost-to-cut-a-stick/,LeetCode,,Interval DP,Partition DP,Advanced,â­ Must Teach,DP
+Burst Balloons,https://leetcode.com/problems/burst-balloons/,LeetCode,,Interval DP,Partition DP,Advanced,â­ Must Teach,DP
+Palindrome Partitioning,https://leetcode.com/problems/palindrome-partitioning/,LeetCode,,Interval DP,Partition DP,Intermediate,â­ Must Teach,DP
+Palindrome Partitioning II,https://leetcode.com/problems/palindrome-partitioning-ii/,LeetCode,,Interval DP,Min Cuts,Advanced,â­ Must Teach,DP
+Palindrome Partitioning III,https://leetcode.com/problems/palindrome-partitioning-iii/,LeetCode,,Interval DP,Cost Optimization,Advanced,â¡ Advanced,DP
+Merge Stones,https://leetcode.com/problems/minimum-cost-to-merge-stones/,LeetCode,,Interval DP,Merge Cost,Advanced,â­ Must Teach,DP
+Boolean Parenthesization,https://www.geeksforgeeks.org/problems/boolean-parenthesization5610/1,GFG,,Interval DP,Expression DP,Advanced,â­ Must Teach,DP
+Problem (GAME DP),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Predict the Winner,https://leetcode.com/problems/predict-the-winner/,LeetCode,,Game DP,Min-Max DP,Intermediate,â­ Must Teach,DP
+Stone Game,https://leetcode.com/problems/stone-game/,LeetCode,,Game DP,Turn-Based DP,Intermediate,â­ Must Teach,DP
+Stone Game II,https://leetcode.com/problems/stone-game-ii/,LeetCode,,Game DP,Multi-State DP,Advanced,â­ Must Teach,DP
+Stone Game III,https://leetcode.com/problems/stone-game-iii/,LeetCode,,Game DP,Score Difference DP,Advanced,â­ Must Teach,DP
+Stone Game IV,https://leetcode.com/problems/stone-game-iv/,LeetCode,,Game DP,Win/Lose DP,Advanced,â Practice,DP
+Divisor Game,https://leetcode.com/problems/divisor-game/,LeetCode,,Game DP,Mathematical DP,Beginner,â Practice,DP
+Nim Game,https://leetcode.com/problems/nim-game/,LeetCode,,Game DP,Mathematical Game,Beginner,â Practice,DP
+Problem (STOCK DP),Link,Platform,,Pattern,Subpattern,Difficulty,Priority,DP
+Best Time to Buy and Sell Stock I,https://leetcode.com/problems/best-time-to-buy-and-sell-stock/,LeetCode,,Stock DP,Single Transaction,Beginner,â­ Must Teach,DP
+Best Time to Buy and Sell Stock II,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/,LeetCode,,Stock DP,Unlimited Transactions,Beginner,â­ Must Teach,DP
+Best Time to Buy and Sell Stock III,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/,LeetCode,,Stock DP,Two Transactions,Intermediate,â­ Must Teach,DP
+Best Time to Buy and Sell Stock IV,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/,LeetCode,,Stock DP,K Transactions,Advanced,â­ Must Teach,DP
+Best Time to Buy and Sell Stock with Cooldown,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/,LeetCode,,Stock DP,Cooldown State,Intermediate,â­ Must Teach,DP
+Best Time to Buy and Sell Stock with Transaction Fee,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/,LeetCode,,Stock DP,Fee State,Intermediate,â­ Must Teach,DP

@@ -9,6 +9,9 @@ import passport from "passport";
 
 import authRoutes from "./routes/authRoutes.js";
 import healthRoutes from "./routes/healthRoutes.js";
+import sheetRoutes from "./routes/sheetRoutes.js";
+import problemRoutes from "./routes/problemRoutes.js";
+import courseRoutes from "./routes/courseRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -59,6 +62,9 @@ app.use(passport.session());
 // Routes
 app.use("/api/health", healthRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/sheets", sheetRoutes);
+app.use("/api/problems", problemRoutes);
+app.use("/api/courses", courseRoutes);
 
 // Error handling
 app.use(notFound);

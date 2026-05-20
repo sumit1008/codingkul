@@ -56,6 +56,12 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "instructor", "admin"],
       default: "student",
     },
+    courseTier: {
+      type: String,
+      enum: ["NONE", "FOUNDATION", "ACCELERATOR", "PLACEMENT"],
+      default: "NONE",
+    },
+    purchasedCourses: [{ type: String }],
   },
   { timestamps: true }
 );

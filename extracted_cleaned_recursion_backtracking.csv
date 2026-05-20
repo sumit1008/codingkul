@@ -1,0 +1,36 @@
+title,link,platform,resource_type,pattern,subpattern,difficulty,priority,topic
+Introduction to Recursion,https://www.geeksforgeeks.org/introduction-to-recursion/,,,,,,,RECURSION_BACKTRACKING
+Recursion Tree Method,https://www.geeksforgeeks.org/recursion-tree-method-for-solving-recurrence-relations/,,,,,,,RECURSION_BACKTRACKING
+Backtracking Algorithms,https://www.geeksforgeeks.org/backtracking-algorithms/,,,,,,,RECURSION_BACKTRACKING
+,,,,,,,,RECURSION_BACKTRACKING
+,,,,,,,,RECURSION_BACKTRACKING
+Problem,Link,,,,,,,RECURSION_BACKTRACKING
+Print N to 1 Without Loop,https://www.geeksforgeeks.org/problems/print-n-to-1-without-loop/1,,,,,,,RECURSION_BACKTRACKING
+Print 1 to N Without Loop,https://www.geeksforgeeks.org/problems/print-1-to-n-without-using-loops3621/1,,,,,,,RECURSION_BACKTRACKING
+Factorial,https://www.geeksforgeeks.org/problems/factorial5739/1,,,,,,,RECURSION_BACKTRACKING
+GCD of Two Numbers,https://www.geeksforgeeks.org/problems/gcd-of-two-numbers3459/1,,,,,,,RECURSION_BACKTRACKING
+Reverse a Number,https://www.geeksforgeeks.org/problems/reverse-coding2452/1,,,,,,,RECURSION_BACKTRACKING
+Reverse an Array,https://www.geeksforgeeks.org/problems/reverse-an-array/1,,,,,,,RECURSION_BACKTRACKING
+Palindrome String,https://www.geeksforgeeks.org/problems/palindrome-string0817/1,,,,,,,RECURSION_BACKTRACKING
+"Pow(x, n)",https://leetcode.com/problems/powx-n/description/,,,,,,,RECURSION_BACKTRACKING
+Tower of Hanoi,https://www.geeksforgeeks.org/problems/tower-of-hanoi-1587115621/1,,,,,,,RECURSION_BACKTRACKING
+Fibonacci Number,https://leetcode.com/problems/fibonacci-number/description/,,,,,,,RECURSION_BACKTRACKING
+Generate All Subsequences,https://www.geeksforgeeks.org/dsa/generating-all-possible-subsequences-using-recursion/,,,,,,,RECURSION_BACKTRACKING
+Subset Sum Problem,https://www.geeksforgeeks.org/problems/subset-sum-problem2014/1,,,,,,,RECURSION_BACKTRACKING
+Subset Sums,https://www.geeksforgeeks.org/problems/subset-sums2234/1,,,,,,,RECURSION_BACKTRACKING
+Subsets II,https://leetcode.com/problems/subsets-ii/description/,,,,,,,RECURSION_BACKTRACKING
+K-th Symbol in Grammar,https://leetcode.com/problems/k-th-symbol-in-grammar/description/,,,,,,,RECURSION_BACKTRACKING
+Count Good Numbers,https://leetcode.com/problems/count-good-numbers/description/,,,,,,,RECURSION_BACKTRACKING
+Subsets,https://leetcode.com/problems/subsets/description/,,,,,,,RECURSION_BACKTRACKING
+Permutations,https://leetcode.com/problems/permutations/description/,,,,,,,RECURSION_BACKTRACKING
+Permutations II,https://leetcode.com/problems/permutations-ii/description/,,,,,,,RECURSION_BACKTRACKING
+Combination Sum,https://leetcode.com/problems/combination-sum/description/,,,,,,,RECURSION_BACKTRACKING
+Combination Sum II,https://leetcode.com/problems/combination-sum-ii/description/,,,,,,,RECURSION_BACKTRACKING
+Letter Combinations of Phone Number,https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/,,,,,,,RECURSION_BACKTRACKING
+Word Search,https://leetcode.com/problems/word-search/description/,,,,,,,RECURSION_BACKTRACKING
+Palindrome Partitioning,https://leetcode.com/problems/palindrome-partitioning/description/,,,,,,,RECURSION_BACKTRACKING
+N-Queens,https://leetcode.com/problems/n-queens/description/,,,,,,,RECURSION_BACKTRACKING
+N-Queens II,https://leetcode.com/problems/n-queens-ii/description/,,,,,,,RECURSION_BACKTRACKING
+Sudoku Solver,https://leetcode.com/problems/sudoku-solver/description/,,,,,,,RECURSION_BACKTRACKING
+Rat in a Maze,https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1,,,,,,,RECURSION_BACKTRACKING
+M-Coloring Problem,https://www.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1,,,,,,,RECURSION_BACKTRACKING

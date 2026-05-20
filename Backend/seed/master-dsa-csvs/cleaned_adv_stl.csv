@@ -1,0 +1,39 @@
+title,link,platform,resource_type,pattern,subpattern,difficulty,priority,topic
+Stack Data Structure,https://www.geeksforgeeks.org/stack-data-structure/,GFG,Article,,,,â­ Mandatory,ADV_STL
+Queue Data Structure,https://www.geeksforgeeks.org/queue-data-structure/,GFG,Article,,,,â­ Mandatory,ADV_STL
+Monotonic Stack Guide,https://www.geeksforgeeks.org/introduction-to-monotonic-stack-2/,GFG,Article,,,,â­ Mandatory,ADV_STL
+Heap Data Structure,https://www.geeksforgeeks.org/heap-data-structure/,GFG,Article,,,,â­ Mandatory,ADV_STL
+Priority Queue in STL,https://www.geeksforgeeks.org/priority-queue-in-cpp-stl/,GFG,Article,,,,â­ Mandatory,ADV_STL
+Problem(STACK BASICS),Link,Platform,Difficulty,,,,Priority,ADV_STL
+Implement Stack using Array,https://www.geeksforgeeks.org/problems/implement-stack-using-array/1,GFG,Easy,,,,â­ Class,ADV_STL
+Implement Stack using Linked List,https://www.geeksforgeeks.org/problems/implement-stack-using-linked-list/1,GFG,Easy,,,,â­ Class,ADV_STL
+Valid Parentheses,https://leetcode.com/problems/valid-parentheses/,LeetCode,Easy,,,,â­ Class,ADV_STL
+Min Stack,https://leetcode.com/problems/min-stack/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Reverse a Stack,https://www.geeksforgeeks.org/problems/reverse-a-stack/1,GFG,Medium,,,,ð HW,ADV_STL
+Sort a Stack,https://www.geeksforgeeks.org/problems/sort-a-stack/1,GFG,Medium,,,,ð HW,ADV_STL
+Problem(QUEUE BASICS),Link,Platform,Difficulty,,,,Priority,ADV_STL
+Implement Queue using Array,https://www.geeksforgeeks.org/problems/implement-queue-using-array/1,GFG,Easy,,,,â­ Class,ADV_STL
+Implement Queue using Linked List,https://www.geeksforgeeks.org/problems/implement-queue-using-linked-list/1,GFG,Easy,,,,â­ Class,ADV_STL
+Implement Queue using Stack,https://leetcode.com/problems/implement-queue-using-stacks/,LeetCode,Easy,,,,â­ Class,ADV_STL
+Circular Queue,https://www.geeksforgeeks.org/problems/circular-queue/1,GFG,Medium,,,,â­ Class,ADV_STL
+First Negative Integer in Window,https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k/1,GFG,Medium,,,,ð HW,ADV_STL
+Problem(MONOTONIC STACK),Link,Platform,Difficulty,,,,Priority,ADV_STL
+Next Greater Element I,https://leetcode.com/problems/next-greater-element-i/,LeetCode,Easy,,,,â­ Class,ADV_STL
+Next Greater Element II,https://leetcode.com/problems/next-greater-element-ii/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Previous Greater Element,https://www.geeksforgeeks.org/problems/previous-greater-element/1,GFG,Easy,,,,â­ Class,ADV_STL
+Daily Temperatures,https://leetcode.com/problems/daily-temperatures/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Stock Span Problem,https://www.geeksforgeeks.org/problems/stock-span-problem/1,GFG,Medium,,,,â­ Class,ADV_STL
+Largest Rectangle in Histogram,https://leetcode.com/problems/largest-rectangle-in-histogram/,LeetCode,Hard,,,,â­ Class,ADV_STL
+Trapping Rain Water,https://leetcode.com/problems/trapping-rain-water/,LeetCode,Hard,,,,ð HW,ADV_STL
+Problem(HEAP),Link,Platform,Difficulty,,,,Priority,ADV_STL
+Kth Largest Element in Array,https://leetcode.com/problems/kth-largest-element-in-an-array/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Kth Smallest Element,https://www.geeksforgeeks.org/problems/kth-smallest-element/1,GFG,Medium,,,,â­ Class,ADV_STL
+Top K Frequent Elements,https://leetcode.com/problems/top-k-frequent-elements/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Merge K Sorted Lists,https://leetcode.com/problems/merge-k-sorted-lists/,LeetCode,Hard,,,,â­ Class,ADV_STL
+Nearly Sorted Array,https://www.geeksforgeeks.org/problems/nearly-sorted-algorithm/1,GFG,Medium,,,,â­ Class,ADV_STL
+Find Median from Data Stream,https://leetcode.com/problems/find-median-from-data-stream/,LeetCode,Hard,,,,ð HW,ADV_STL
+Connect Ropes to Minimize Cost,https://www.geeksforgeeks.org/problems/minimum-cost-of-ropes/1,GFG,Medium,,,,â­ Class,ADV_STL
+Task Scheduler,https://leetcode.com/problems/task-scheduler/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Reorganize String,https://leetcode.com/problems/reorganize-string/,LeetCode,Medium,,,,â­ Class,ADV_STL
+Sliding Window Maximum,https://leetcode.com/problems/sliding-window-maximum/,LeetCode,Hard,,,,â­ Class,ADV_STL
+Smallest Range Covering Elements,https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/,LeetCode,Hard,,,,ð HW,ADV_STL

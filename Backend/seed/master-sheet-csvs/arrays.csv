@@ -1,0 +1,23 @@
+title,slug,link,difficulty,platform,tags
+Display Array Elements,display-array-elements,https://www.geeksforgeeks.org/problems/print-array-elements/1,,GeeksforGeeks,arrays
+Sum of Array Elements,sum-of-array-elements,https://www.geeksforgeeks.org/problems/sum-of-array-elements/1,,GeeksforGeeks,arrays
+Average of Array,average-of-array,https://www.geeksforgeeks.org/problems/average-in-a-stream/1,,GeeksforGeeks,arrays
+Count Even and Odd,count-even-and-odd,https://www.geeksforgeeks.org/problems/count-even-odd/1,,GeeksforGeeks,arrays
+Find Maximum Element,find-maximum-element,https://www.geeksforgeeks.org/problems/largest-element-in-array/1,,GeeksforGeeks,arrays
+Find Minimum Element,find-minimum-element,https://www.geeksforgeeks.org/problems/minimum-element-in-array/1,,GeeksforGeeks,arrays
+Count Positive Numbers,count-positive-numbers,https://www.geeksforgeeks.org/problems/count-positive-negative/1,,GeeksforGeeks,arrays
+Linear Search,linear-search,https://www.geeksforgeeks.org/problems/linear-search/1,,GeeksforGeeks,arrays
+Count Occurrences,count-occurrences,https://www.geeksforgeeks.org/problems/count-occurrence-of-element/1,,GeeksforGeeks,arrays
+First Occurrence,first-occurrence,https://www.geeksforgeeks.org/problems/first-occurrence/1,,GeeksforGeeks,arrays
+Last Occurrence,last-occurrence,https://www.geeksforgeeks.org/problems/last-occurrence/1,,GeeksforGeeks,arrays
+Check Element Exists,check-element-exists,https://www.geeksforgeeks.org/problems/search-an-element-in-an-array/1,,GeeksforGeeks,arrays
+Reverse Array,reverse-array,https://www.geeksforgeeks.org/problems/reverse-an-array/1,,GeeksforGeeks,arrays
+Swap Alternate Elements,swap-alternate-elements,https://www.geeksforgeeks.org/problems/swap-and-maximize/1,,GeeksforGeeks,arrays
+Move Zeroes to End,move-zeroes-to-end,https://www.geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1,,GeeksforGeeks,arrays
+Replace Elements with Zero,replace-elements-with-zero,https://www.geeksforgeeks.org/problems/replace-all-0-with-5/1,,GeeksforGeeks,arrays
+Reverse Subarray,reverse-subarray,https://www.geeksforgeeks.org/problems/reverse-sub-array/1,,GeeksforGeeks,arrays
+Count Frequency of Element,count-frequency-of-element,https://www.geeksforgeeks.org/problems/count-frequency/1,,GeeksforGeeks,arrays
+Find Missing Number,find-missing-number,https://www.geeksforgeeks.org/problems/missing-number-in-array/1,,GeeksforGeeks,arrays
+Find Duplicate Element,find-duplicate-element,https://www.geeksforgeeks.org/problems/find-duplicate-element/1,,GeeksforGeeks,arrays
+Count Elements Greater than X,count-elements-greater-than-x,https://www.geeksforgeeks.org/problems/count-elements-greater-than-x/1,,GeeksforGeeks,arrays
+Count Elements Smaller than X,count-elements-smaller-than-x,https://www.geeksforgeeks.org/problems/count-smaller-elements/1,,GeeksforGeeks,arrays

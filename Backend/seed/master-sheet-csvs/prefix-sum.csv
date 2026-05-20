@@ -1,0 +1,33 @@
+title,slug,link,difficulty,platform,tags
+Prefix Sum â USACO Guide (Highly Recommended),prefix-sum-usaco-guide-highly-recommended,https://usaco.guide/silver/prefix-sums?lang=cpp,,USACO,prefix-sum
+Prefix Sum Technique â Complete Guide,prefix-sum-technique-complete-guide,https://www.geeksforgeeks.org/prefix-sum-array-implementation-applications-competitive-programming/,,GeeksforGeeks,prefix-sum
+Difference Array Technique,difference-array-technique,https://www.geeksforgeeks.org/difference-array-range-update-query-o1/,,GeeksforGeeks,prefix-sum
+Prefix Sum with HashMap (Very Important),prefix-sum-with-hashmap-very-important,https://www.geeksforgeeks.org/count-subarrays-with-given-sum/,,GeeksforGeeks,prefix-sum
+2D Prefix Sum Explained,2d-prefix-sum-explained,https://www.geeksforgeeks.org/prefix-sum-2d-array/,,GeeksforGeeks,prefix-sum
+Running Sum of 1D Array,running-sum-of-1d-array,https://leetcode.com/problems/running-sum-of-1d-array/description/,,LeetCode,prefix-sum
+Find the Highest Altitude,find-the-highest-altitude,https://leetcode.com/problems/find-the-highest-altitude/description/,,LeetCode,prefix-sum
+Find the Middle Index in Array,find-the-middle-index-in-array,https://leetcode.com/problems/find-the-middle-index-in-array/description/,,LeetCode,prefix-sum
+Range Sum Query â Immutable,range-sum-query-immutable,https://leetcode.com/problems/range-sum-query-immutable/description/,,LeetCode,prefix-sum
+Number of Ways to Split Array,number-of-ways-to-split-array,https://leetcode.com/problems/number-of-ways-to-split-array/description/,,LeetCode,prefix-sum
+Product of Array Except Self,product-of-array-except-self,https://leetcode.com/problems/product-of-array-except-self/description/,,LeetCode,prefix-sum
+Number of Subarrays With Odd Sum,number-of-subarrays-with-odd-sum,https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/,,LeetCode,prefix-sum
+Corporate Flight Bookings,corporate-flight-bookings,https://leetcode.com/problems/corporate-flight-bookings/description/,,LeetCode,prefix-sum
+Subarray Sum Equals K,subarray-sum-equals-k,https://leetcode.com/problems/subarray-sum-equals-k/,,LeetCode,prefix-sum
+Continuous Subarray Sum,continuous-subarray-sum,https://leetcode.com/problems/continuous-subarray-sum/,,LeetCode,prefix-sum
+Maximum Size Subarray Sum Equals K,maximum-size-subarray-sum-equals-k,https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/,,LeetCode,prefix-sum
+Count Number of Nice Subarrays,count-number-of-nice-subarrays,https://leetcode.com/problems/count-number-of-nice-subarrays/,,LeetCode,prefix-sum
+Binary Subarrays With Sum,binary-subarrays-with-sum,https://leetcode.com/problems/binary-subarrays-with-sum/,,LeetCode,prefix-sum
+Range Sum Query 2D â Immutable,range-sum-query-2d-immutable,https://leetcode.com/problems/range-sum-query-2d-immutable/,,LeetCode,prefix-sum
+Maximum Subarray (Kadane Related),maximum-subarray-kadane-related,https://leetcode.com/problems/maximum-subarray/,,LeetCode,prefix-sum
+Count Subarrays With Given Sum,count-subarrays-with-given-sum,https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1,,GeeksforGeeks,prefix-sum
+Prefix Sum Matrix (2D Sum Query),prefix-sum-matrix-2d-sum-query,https://www.geeksforgeeks.org/problems/prefix-sum-matrix/1,,GeeksforGeeks,prefix-sum
+Find Pivot Index,find-pivot-index,https://leetcode.com/problems/find-pivot-index/,,LeetCode,prefix-sum
+Range Addition,range-addition,https://leetcode.com/problems/range-addition/,,LeetCode,prefix-sum
+Count Subarrays Divisible by K,count-subarrays-divisible-by-k,https://leetcode.com/problems/subarray-sums-divisible-by-k/,,LeetCode,prefix-sum
+Find Longest Subarray With Equal 0 and 1,find-longest-subarray-with-equal-0-and-1,https://leetcode.com/problems/contiguous-array/,,LeetCode,prefix-sum
+Minimum Size Subarray Sum,minimum-size-subarray-sum,https://leetcode.com/problems/minimum-size-subarray-sum/,,LeetCode,prefix-sum
+Second Largest Element,second-largest-element,https://www.geeksforgeeks.org/problems/second-largest-element/1,,GeeksforGeeks,prefix-sum
+Check Sorted Array,check-sorted-array,https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1,,GeeksforGeeks,prefix-sum
+Remove Duplicates (Sorted Array),remove-duplicates-sorted-array,https://leetcode.com/problems/remove-duplicates-from-sorted-array/,,LeetCode,prefix-sum
+Check Array Rotation,check-array-rotation,https://www.geeksforgeeks.org/problems/check-if-array-is-sorted-and-rotated/1,,GeeksforGeeks,prefix-sum
+Rotate Array by One,rotate-array-by-one,https://www.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1,,GeeksforGeeks,prefix-sum

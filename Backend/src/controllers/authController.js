@@ -14,6 +14,8 @@ const safeUser = (user) => ({
   role: user.role,
   authProvider: user.authProvider,
   isVerified: user.isVerified,
+  courseTier: user.courseTier || "NONE",
+  purchasedCourses: user.purchasedCourses || [],
 });
 
 // POST /api/auth/signup
