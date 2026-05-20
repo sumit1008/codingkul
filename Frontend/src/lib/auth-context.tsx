@@ -4,6 +4,15 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 const API = "http://localhost:5000/api";
 
+export type CourseTier = "NONE" | "FOUNDATION" | "ACCELERATOR" | "PLACEMENT";
+
+export const TIER_LABELS: Record<CourseTier, string> = {
+  NONE: "Free User",
+  FOUNDATION: "Foundation Student",
+  ACCELERATOR: "Accelerator Student",
+  PLACEMENT: "Placement Student",
+};
+
 export interface User {
   id: string;
   name: string;
@@ -19,6 +28,8 @@ export interface User {
   solved: number;
   title: string;
   role: string;
+  courseTier: CourseTier;
+  purchasedCourses: string[];
 }
 
 interface AuthContextType {
@@ -46,6 +57,8 @@ function mapUser(u: any): User {
     solved: u.solved ?? 0,
     title: "Algorithm Apprentice",
     role: u.role || "student",
+    courseTier: u.courseTier || "NONE",
+    purchasedCourses: u.purchasedCourses || [],
   };
 }
 
