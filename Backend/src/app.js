@@ -1,10 +1,12 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import compression from "compression";
+import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
-import "./config/passport.js"; // register passport strategies
+import "./config/passport.js";
 import passport from "passport";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -19,24 +21,25 @@ import adminBatchRoutes from "./routes/adminBatchRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
+const isProd = process.env.NODE_ENV === "production";
 
-// Security
+// Trust Railway / Vercel reverse proxy — required for secure cookies + real IPs
+if (isProd) app.set("trust proxy", 1);
+
+// Security headers
 app.use(helmet());
 
-// Rate limiting
-app.use(
-  rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: { success: false, message: "Too many requests, please try again later." },
-  })
-);
+// Gzip compression
+app.use(compression());
 
-// CORS — must be before session/passport
-const allowedOrigins =
-  process.env.NODE_ENV === "development"
-    ? true // reflect any origin in dev (LAN + localhost)
-    : process.env.CLIENT_URL || "http://localhost:3000";
+// Request logging
+app.use(morgan(isProd ? "combined" : "dev"));
+
+// CORS — whitelist multiple origins from env var
+const rawOrigins = process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "http://localhost:3000";
+const allowedOrigins = isProd
+  ? rawOrigins.split(",").map((o) => o.trim())
+  : true; // reflect any origin in dev (LAN + localhost)
 
 app.use(
   cors({
@@ -45,21 +48,42 @@ app.use(
   })
 );
 
+// Global rate limit — 100 req / 15 min per IP
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many requests, please try again later." },
+});
+
+// Tighter limit for auth routes — 20 req / 15 min per IP
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many auth attempts, please try again later." },
+});
+
+app.use(globalLimiter);
+
 // Body parsing
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
 // Session — only needed for OAuth handshake state (not persistent auth)
 app.use(
   session({
-    secret: process.env.JWT_SECRET || "fallback_session_secret",
+    secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || "fallback_session_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 10 * 60 * 1000, // 10 min — just enough for OAuth round-trip
+      maxAge: 10 * 60 * 1000,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
     },
   })
 );
@@ -70,7 +94,7 @@ app.use(passport.session());
 
 // Routes
 app.use("/api/health", healthRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/sheets", sheetRoutes);
 app.use("/api/problems", problemRoutes);
 app.use("/api/courses", courseRoutes);

@@ -8,7 +8,7 @@ const attachmentSchema = new mongoose.Schema({
 const lectureSchema = new mongoose.Schema(
   {
     title:                { type: String, required: [true, "Title is required"], trim: true },
-    slug:                 { type: String, unique: true, lowercase: true, trim: true },
+    slug:                 { type: String, lowercase: true, trim: true },
     batchId:              { type: mongoose.Schema.Types.ObjectId, ref: "Batch", required: true },
     module:               { type: String, default: "General", trim: true },
     description:          { type: String, default: "" },
@@ -23,6 +23,7 @@ const lectureSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+lectureSchema.index({ slug: 1 }, { unique: true, sparse: true });
 lectureSchema.index({ batchId: 1, order: 1 });
 
 lectureSchema.pre("save", function () {

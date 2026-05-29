@@ -100,6 +100,12 @@ export const googleCallback = asyncHandler(async (req, res) => {
 
 // POST /api/auth/logout
 export const logout = asyncHandler(async (req, res) => {
-  res.cookie("ck_token", "", { httpOnly: true, expires: new Date(0) });
+  const isProd = process.env.NODE_ENV === "production";
+  res.cookie("ck_token", "", {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
+    expires: new Date(0),
+  });
   res.json({ success: true, message: "Logged out" });
 });

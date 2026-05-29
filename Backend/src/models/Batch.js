@@ -19,7 +19,7 @@ const announcementSchema = new mongoose.Schema({
 const batchSchema = new mongoose.Schema(
   {
     title:            { type: String, required: [true, "Title is required"], trim: true },
-    slug:             { type: String, unique: true, lowercase: true, trim: true },
+    slug:             { type: String, lowercase: true, trim: true },
     description:      { type: String, default: "" },
     courseId:         { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
     instructorName:   { type: String, required: [true, "Instructor name is required"], trim: true },
@@ -36,6 +36,7 @@ const batchSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+batchSchema.index({ slug: 1 }, { unique: true, sparse: true });
 batchSchema.index({ courseId: 1 });
 batchSchema.index({ isActive: 1, startDate: 1 });
 

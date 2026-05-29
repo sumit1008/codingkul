@@ -9,7 +9,6 @@ const contestSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      unique: true,
       lowercase: true,
       trim: true,
     },
@@ -79,6 +78,7 @@ const contestSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+contestSchema.index({ slug: 1 }, { unique: true, sparse: true });
 contestSchema.index({ status: 1, startTime: 1 });
 contestSchema.index({ codeforcesContestId: 1 }, { unique: true });
 
