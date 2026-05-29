@@ -53,6 +53,15 @@ export function errorResponse(message: string, status = 400) {
   return Response.json({ success: false, error: message }, { status });
 }
 
+/**
+ * Convert a Mongoose lean() result (or any object containing BSON types) into
+ * a plain JSON-safe value. BSON ObjectId.toJSON() returns the hex string, so
+ * running through JSON.parse(JSON.stringify()) forces that conversion.
+ */
+export function serializeMongo<T>(data: T): T {
+  return JSON.parse(JSON.stringify(data)) as T;
+}
+
 export function successResponse(data: unknown, message?: string) {
-  return Response.json({ success: true, data, ...(message ? { message } : {}) });
+  return Response.json({ success: true, data: serializeMongo(data), ...(message ? { message } : {}) });
 }

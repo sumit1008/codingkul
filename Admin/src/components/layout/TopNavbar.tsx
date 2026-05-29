@@ -12,6 +12,8 @@ const BREADCRUMBS: Record<string, string> = {
   "/dashboard":           "Dashboard",
   "/dashboard/sheets":    "Sheets",
   "/dashboard/problems":  "Problems",
+  "/dashboard/batches":   "Batches",
+  "/dashboard/contests":  "Contests",
   "/dashboard/analytics": "Analytics",
   "/dashboard/settings":  "Settings",
 };
@@ -129,6 +131,8 @@ export default function TopNavbar() {
                 { label: "Dashboard", href: "/dashboard" },
                 { label: "Sheets", href: "/dashboard/sheets" },
                 { label: "Problems", href: "/dashboard/problems" },
+                { label: "Batches", href: "/dashboard/batches" },
+                { label: "Contests", href: "/dashboard/contests" },
                 { label: "Analytics", href: "/dashboard/analytics" },
                 { label: "Settings", href: "/dashboard/settings" },
               ].map((item) => (

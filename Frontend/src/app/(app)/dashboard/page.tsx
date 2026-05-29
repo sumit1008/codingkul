@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import WelcomeTransition from "@/components/dashboard/welcome-transition";
+import BatchActivityCard from "@/components/batch/BatchActivityCard";
 
 // Seeded deterministic data (no hydration mismatch)
 function sr(seed: number) {
@@ -359,6 +360,9 @@ export default function DashboardPage() {
 
           {/* Right 1/3 */}
           <div className="space-y-5">
+
+            {/* Batch activity widget */}
+            <BatchActivityCard />
 
             {/* Daily goals — green theme */}
             <motion.div

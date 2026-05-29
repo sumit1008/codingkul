@@ -58,6 +58,19 @@ const contestSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    processingStatus: {
+      type: String,
+      enum: ["pending", "processing", "completed", "failed", "retry_pending"],
+      default: "pending",
+    },
+    processingFailures: {
+      type: Number,
+      default: 0,
+    },
+    processingFailedReason: {
+      type: String,
+      default: "",
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

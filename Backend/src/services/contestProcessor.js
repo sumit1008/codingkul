@@ -25,13 +25,35 @@ export async function processContest(contestId) {
 
   console.log(`[processor] Starting: "${contest.title}" (CF ${contest.codeforcesContestId})`);
 
+  // Mark as in-progress so parallel cron ticks don't double-process
+  await Contest.findByIdAndUpdate(contestId, { processingStatus: "processing" });
+
   // Fetch standings from Codeforces
   let standingsData;
   try {
     standingsData = await fetchContestStandings(contest.codeforcesContestId);
   } catch (err) {
-    console.error(`[processor] CF standings fetch failed: ${err.message}`);
-    // Don't mark as processed — will retry on next cron tick
+    const isPermanent = err.permanent === true;
+
+    if (isPermanent) {
+      // 4xx / API-level rejection — permanently broken, stop retrying
+      console.error(
+        `[processor] PERMANENT FAILURE "${contest.title}" (CF ${contest.codeforcesContestId}): ${err.message}`
+      );
+      await Contest.findByIdAndUpdate(contestId, {
+        processingStatus:      "failed",
+        processingFailedReason: err.message,
+        $inc: { processingFailures: 1 },
+      });
+      return { error: err.message, permanent: true };
+    }
+
+    // Transient (network / 5xx) — allow retry on next cron tick
+    console.warn(`[processor] Transient failure "${contest.title}": ${err.message}`);
+    await Contest.findByIdAndUpdate(contestId, {
+      processingStatus: "retry_pending",
+      $inc: { processingFailures: 1 },
+    });
     return { error: err.message };
   }
 
@@ -41,7 +63,7 @@ export async function processContest(contestId) {
 
   if (totalParticipants === 0) {
     console.warn(`[processor] No participants found for contest ${contest.codeforcesContestId}`);
-    await Contest.findByIdAndUpdate(contestId, { processedResults: true });
+    await Contest.findByIdAndUpdate(contestId, { processedResults: true, processingStatus: "completed" });
     return { processed: 0 };
   }
 
@@ -136,8 +158,11 @@ export async function processContest(contestId) {
     await User.bulkWrite(bulkUserOps, { ordered: false });
   }
 
-  // Mark contest as processed
-  await Contest.findByIdAndUpdate(contestId, { processedResults: true });
+  // Mark contest as fully processed
+  await Contest.findByIdAndUpdate(contestId, {
+    processedResults:  true,
+    processingStatus:  "completed",
+  });
 
   console.log(`[processor] Done: "${contest.title}" — ${matched} users processed`);
   return { processed: matched, total: totalParticipants };

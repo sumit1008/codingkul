@@ -129,6 +129,68 @@ export const DIFFICULTIES: Difficulty[] = ["Easy", "Medium", "Hard"];
 
 export const CONTEST_DIFFICULTIES: ContestDifficulty[] = ["Beginner", "Intermediate", "Advanced"];
 
+// ── Batch types ──────────────────────────────────────────────────────────────
+
+export type HwDifficulty = "Easy" | "Medium" | "Hard";
+export type HwPlatform   = "LeetCode" | "Codeforces" | "GeeksforGeeks" | "CodingNinjas" | "AtCoder" | "Other";
+
+export interface AdminBatch {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+  courseId?: string;
+  instructorName: string;
+  meetLink?: string;
+  bannerImage?: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  enrolledStudents: string[];
+  lectureCount?: number;
+  hwCount?: number;
+  studentCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminLecture {
+  _id: string;
+  title: string;
+  slug: string;
+  batchId: string;
+  module: string;
+  description: string;
+  youtubeVideoId: string;
+  duration: number;
+  order: number;
+  attachments: { name: string; url: string }[];
+  unlockAt?: string;
+  isLiveClassRecording: boolean;
+  createdAt: string;
+}
+
+export interface AdminHomework {
+  _id: string;
+  title: string;
+  description: string;
+  batchId: string;
+  lectureId?: string;
+  dueDate: string;
+  problems: {
+    _id?: string;
+    title: string;
+    platform: HwPlatform;
+    link: string;
+    tags: string[];
+    difficulty: HwDifficulty;
+  }[];
+  difficulty: HwDifficulty;
+  xpReward: number;
+  isMandatory: boolean;
+  createdAt: string;
+}
+
 export const COMPANIES = [
   "Google", "Amazon", "Microsoft", "Meta", "Apple", "Netflix", "Uber",
   "Airbnb", "Adobe", "Goldman Sachs", "Morgan Stanley", "Flipkart",

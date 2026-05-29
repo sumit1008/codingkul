@@ -22,29 +22,62 @@ function setCache(key, data) {
   cache.set(key, { data, ts: Date.now() });
 }
 
+/**
+ * Error classification — determines if a CF error is permanent (not retryable).
+ * 4xx responses (e.g., 400 Bad Request, 404 Not Found) indicate bad requests;
+ * retrying them will always fail and causes infinite cron loops.
+ */
+function isPermanentError(err) {
+  const status = err.response?.status;
+  return typeof status === "number" && status >= 400 && status < 500;
+}
+
 async function cfRequest(endpoint, params = {}, attempt = 0) {
   const cacheKey = `${endpoint}:${JSON.stringify(params)}`;
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
+  const url = `${CF_BASE}/${endpoint}`;
+
   try {
-    const { data } = await axios.get(`${CF_BASE}/${endpoint}`, {
-      params,
-      timeout: TIMEOUT_MS,
-    });
+    const { data } = await axios.get(url, { params, timeout: TIMEOUT_MS });
 
     if (data.status !== "OK") {
-      throw new Error(`Codeforces API error: ${data.comment ?? "Unknown error"}`);
+      const cfErr = new Error(`Codeforces API error: ${data.comment ?? "Unknown error"}`);
+      cfErr.permanent = true;
+      throw cfErr;
     }
 
     setCache(cacheKey, data.result);
     return data.result;
   } catch (err) {
+    const status     = err.response?.status ?? null;
+    const bodyPreview = err.response?.data
+      ? JSON.stringify(err.response.data).slice(0, 200)
+      : "(no body)";
+
+    // Structured diagnostic log on every failure
+    console.error(
+      `[CF API ERROR] endpoint=${endpoint} attempt=${attempt + 1}/${MAX_RETRIES}` +
+      ` status=${status ?? "network"} params=${JSON.stringify(params)} body=${bodyPreview} msg=${err.message}`
+    );
+
+    // 4xx = permanent failure — do not retry
+    if (isPermanentError(err) || err.permanent) {
+      const wrapped = new Error(
+        `CF ${endpoint} permanent error (HTTP ${status ?? "n/a"}): ${err.message}`
+      );
+      wrapped.permanent = true;
+      throw wrapped;
+    }
+
+    // Network / 5xx — retry with exponential back-off
     if (attempt < MAX_RETRIES - 1) {
       const delay = 1000 * Math.pow(2, attempt); // 1s, 2s, 4s
       await new Promise((r) => setTimeout(r, delay));
       return cfRequest(endpoint, params, attempt + 1);
     }
+
     throw new Error(`CF ${endpoint} failed after ${MAX_RETRIES} attempts: ${err.message}`);
   }
 }
@@ -56,6 +89,7 @@ async function cfRequest(endpoint, params = {}, attempt = 0) {
 export async function fetchContestStandings(cfContestId, count = 5000) {
   return cfRequest("contest.standings", {
     contestId: cfContestId,
+    from: 1,
     showUnofficial: false,
     count,
   });

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
+    "seed:batches": "node seed/seedBatches.js",
     "seed:master": "node seed/importMasterSheet.js",
     "seed:new-topics": "node seed/importMasterDsaSheet.js",
     "seed:final": "node seed/importAndReorder.js",

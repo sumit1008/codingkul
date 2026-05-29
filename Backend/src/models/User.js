@@ -105,6 +105,25 @@ const userSchema = new mongoose.Schema(
         date: { type: Date, default: Date.now },
       },
     ],
+
+    // ── Batch / Learning fields (added in S5) ──────────────────────────
+    batches: [{ type: mongoose.Schema.Types.ObjectId, ref: "Batch" }],
+    batchProgress: [
+      {
+        batchId:         { type: mongoose.Schema.Types.ObjectId, ref: "Batch" },
+        watchedLectures: [{ type: mongoose.Schema.Types.ObjectId, ref: "Lecture" }],
+        lastAccessedAt:  { type: Date, default: Date.now },
+        xpEarned:        { type: Number, default: 0 },
+      },
+    ],
+    homeworkProgress: [
+      {
+        homeworkId:  { type: mongoose.Schema.Types.ObjectId, ref: "Homework" },
+        status:      { type: String, enum: ["pending", "in-progress", "completed", "overdue"], default: "pending" },
+        solvedCount: { type: Number, default: 0 },
+        completedAt: { type: Date },
+      },
+    ],
   },
   { timestamps: true }
 );

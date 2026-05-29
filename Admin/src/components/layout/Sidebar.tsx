@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard, FileSpreadsheet, Code2, BarChart2,
-  Settings, ChevronRight, Layers, Swords,
+  Settings, ChevronRight, Layers, Swords, Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,7 @@ const NAV = [
   { label: "Dashboard",  href: "/dashboard",           icon: LayoutDashboard },
   { label: "Sheets",     href: "/dashboard/sheets",    icon: FileSpreadsheet },
   { label: "Problems",   href: "/dashboard/problems",  icon: Code2 },
+  { label: "Batches",    href: "/dashboard/batches",   icon: Users },
   { label: "Contests",   href: "/dashboard/contests",  icon: Swords },
   { label: "Analytics",  href: "/dashboard/analytics", icon: BarChart2 },
   { label: "Settings",   href: "/dashboard/settings",  icon: Settings },

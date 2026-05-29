@@ -63,8 +63,45 @@ export const contestSchema = z.object({
   status:               z.enum(["upcoming", "running", "completed"]).default("upcoming"),
 });
 
+export const batchSchema = z.object({
+  title:          z.string().min(3, "Title must be at least 3 characters").max(200),
+  slug:           z.string().min(2).max(200).regex(/^[a-z0-9-]+$/, "Slug: lowercase, numbers, hyphens only").optional().or(z.literal("")).default(""),
+  description:    z.string().max(2000).optional().default(""),
+  courseId:       z.string().optional().default(""),
+  instructorName: z.string().min(1, "Instructor name required").max(100),
+  meetLink:       z.string().url("Must be a valid URL").optional().or(z.literal("")).default(""),
+  bannerImage:    z.string().url("Must be a valid URL").optional().or(z.literal("")).default(""),
+  startDate:      z.string().min(1, "Start date required"),
+  endDate:        z.string().min(1, "End date required"),
+  isActive:       z.boolean().default(true),
+});
+
+export const lectureSchema = z.object({
+  title:               z.string().min(2, "Title required").max(200),
+  module:              z.string().min(1, "Module required").max(100),
+  description:         z.string().max(5000).optional().default(""),
+  youtubeVideoId:      z.string().min(1, "YouTube video ID required").max(100),
+  duration:            z.coerce.number().int().min(1, "Duration must be positive").default(30),
+  order:               z.coerce.number().int().min(0).default(0),
+  unlockAt:            z.string().optional().or(z.literal("")).default(""),
+  isLiveClassRecording:z.boolean().default(false),
+});
+
+export const homeworkSchema = z.object({
+  title:       z.string().min(2, "Title required").max(200),
+  description: z.string().max(5000).optional().default(""),
+  lectureId:   z.string().optional().default(""),
+  dueDate:     z.string().min(1, "Due date required"),
+  difficulty:  z.enum(["Easy", "Medium", "Hard"]).default("Medium"),
+  xpReward:    z.coerce.number().int().min(0).max(1000).default(50),
+  isMandatory: z.boolean().default(false),
+});
+
 export type LoginInput    = z.infer<typeof loginSchema>;
 export type SheetInput    = z.infer<typeof sheetSchema>;
 export type ProblemInput  = z.infer<typeof problemSchema>;
 export type CsvRowInput   = z.infer<typeof csvRowSchema>;
 export type ContestInput  = z.infer<typeof contestSchema>;
+export type BatchInput    = z.infer<typeof batchSchema>;
+export type LectureInput  = z.infer<typeof lectureSchema>;
+export type HomeworkInput = z.infer<typeof homeworkSchema>;

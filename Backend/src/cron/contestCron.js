@@ -16,10 +16,12 @@ async function runContestJob() {
     await syncContestStatuses();
 
     // 2. Process any completed-but-unprocessed contests
+    //    Exclude permanently failed ones — they require manual investigation/fix.
     const pending = await Contest.find({
       status: "completed",
       processedResults: false,
-    }).select("_id title");
+      processingStatus: { $nin: ["failed", "processing"] },
+    }).select("_id title processingStatus processingFailures");
 
     if (pending.length === 0) return;
 
@@ -43,7 +45,20 @@ async function runContestJob() {
  * Start the contest cron job.
  * Runs every 5 minutes.
  */
-export function startContestCron() {
+export async function startContestCron() {
+  // Reset any contests stuck in "processing" from a previous server crash
+  try {
+    const stale = await Contest.updateMany(
+      { status: "completed", processedResults: false, processingStatus: "processing" },
+      { $set: { processingStatus: "retry_pending" } }
+    );
+    if (stale.modifiedCount > 0) {
+      console.log(`[cron] Reset ${stale.modifiedCount} stale "processing" contest(s) → retry_pending`);
+    }
+  } catch (err) {
+    console.error("[cron] Failed to reset stale processing states:", err.message);
+  }
+
   // Run once immediately on startup to catch missed processing
   runContestJob().catch(console.error);
 
