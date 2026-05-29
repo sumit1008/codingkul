@@ -14,6 +14,8 @@ import problemRoutes from "./routes/problemRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import contestRoutes from "./routes/contestRoutes.js";
 import adminContestRoutes from "./routes/adminContestRoutes.js";
+import batchRoutes from "./routes/batchRoutes.js";
+import adminBatchRoutes from "./routes/adminBatchRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -31,9 +33,14 @@ app.use(
 );
 
 // CORS — must be before session/passport
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? true // reflect any origin in dev (LAN + localhost)
+    : process.env.CLIENT_URL || "http://localhost:3000";
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
@@ -69,6 +76,8 @@ app.use("/api/problems", problemRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/contests", contestRoutes);
 app.use("/api/admin/contests", adminContestRoutes);
+app.use("/api/batches", batchRoutes);
+app.use("/api/admin/batches", adminBatchRoutes);
 
 // Error handling
 app.use(notFound);
