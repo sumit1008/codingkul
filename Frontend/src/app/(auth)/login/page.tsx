@@ -27,10 +27,7 @@ function GitHubIcon() {
   );
 }
 
-const BACKEND =
-  typeof window !== "undefined"
-    ? `http://${window.location.hostname}:5000`
-    : (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api").replace(/\/api$/, "");
+const BACKEND = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api").replace(/\/api$/, "");
 
 function LoginContent() {
   const router = useRouter();

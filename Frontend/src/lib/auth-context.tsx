@@ -2,10 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-const API =
-  typeof window !== "undefined"
-    ? `http://${window.location.hostname}:5000/api`
-    : process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 export type CourseTier = "NONE" | "FOUNDATION" | "ACCELERATOR" | "PLACEMENT";
 
