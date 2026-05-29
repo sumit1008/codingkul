@@ -7,7 +7,7 @@ const JWT_SECRET = new TextEncoder().encode(
 );
 const COOKIE_NAME = "ck_admin_token";
 
-const PUBLIC_PATHS = ["/login", "/api/auth/login"];
+const PUBLIC_PATHS = ["/login", "/api/auth/login", "/api/auth/logout"];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
