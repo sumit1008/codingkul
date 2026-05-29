@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
+  baseURL:
+    typeof window !== "undefined"
+      ? `http://${window.location.hostname}:5000/api`
+      : process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
   withCredentials: true,
 });
 
@@ -72,6 +75,32 @@ export interface ApiAnalytics {
     date: string;
   }[];
 }
+
+// ── Batch API ────────────────────────────────────────────────────────────────
+
+import type { BatchWithProgress, BatchActivity, BatchDetail, Lecture, Homework, HomeworkWithBatch, Announcement } from "@/types/batch";
+
+export const batchApi = {
+  getMyBatches:    () => api.get<{ success: boolean; data: BatchWithProgress[] }>("/batches").then((r) => r.data.data),
+  getActivity:     () => api.get<{ success: boolean; data: BatchActivity | null }>("/batches/activity").then((r) => r.data.data),
+  getAllHomework:   () => api.get<{ success: boolean; data: HomeworkWithBatch[] }>("/batches/homework").then((r) => r.data.data),
+  getBySlug:      (slug: string) => api.get<{ success: boolean; data: BatchDetail }>(`/batches/${slug}`).then((r) => r.data.data),
+  getLectures:    (slug: string) => api.get<{ success: boolean; data: Lecture[] }>(`/batches/${slug}/lectures`).then((r) => r.data.data),
+  getLecture:     (slug: string, lectureId: string) =>
+    api.get<{ success: boolean; data: { lecture: Lecture; prev: Lecture | null; next: Lecture | null; isCompleted: boolean } }>(
+      `/batches/${slug}/lectures/${lectureId}`
+    ).then((r) => r.data.data),
+  toggleComplete: (slug: string, lectureId: string) =>
+    api.post<{ success: boolean; data: { completed: boolean; watchedCount: number; xpGained: number } }>(
+      `/batches/${slug}/lectures/${lectureId}/complete`
+    ).then((r) => r.data.data),
+  getHomework:    (slug: string) => api.get<{ success: boolean; data: Homework[] }>(`/batches/${slug}/homework`).then((r) => r.data.data),
+  updateHomeworkProgress: (slug: string, hwId: string, status: string, solvedCount?: number) =>
+    api.post<{ success: boolean; data: { status: string; xpGained: number } }>(
+      `/batches/${slug}/homework/${hwId}/progress`, { status, solvedCount }
+    ).then((r) => r.data.data),
+  getAnnouncements: (slug: string) => api.get<{ success: boolean; data: Announcement[] }>(`/batches/${slug}/announcements`).then((r) => r.data.data),
+};
 
 export const contestApi = {
   getUpcoming:     () => api.get<{ success: boolean; data: ApiContest[] }>("/contests/upcoming").then((r) => r.data.data),
