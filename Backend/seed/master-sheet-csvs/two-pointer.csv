@@ -1,35 +1,29 @@
-title,slug,link,difficulty,platform,tags
-Two Pointer Technique â Complete Guide,two-pointer-technique-complete-guide,https://www.geeksforgeeks.org/two-pointers-technique/,,GeeksforGeeks,two-pointer
-Two Pointer Pattern Recognition,two-pointer-pattern-recognition,https://www.geeksforgeeks.org/short-notes-on-two-pointer-and-sliding-window-1/,,GeeksforGeeks,two-pointer
-Two Pointer on Sorted Arrays,two-pointer-on-sorted-arrays,https://www.geeksforgeeks.org/find-pair-with-given-sum-in-sorted-array-two-sum-ii/,,GeeksforGeeks,two-pointer
-Partitioning Using Two Pointers,partitioning-using-two-pointers,https://www.geeksforgeeks.org/segregate-even-and-odd-numbers/,,GeeksforGeeks,two-pointer
-Dutch National Flag Algorithm,dutch-national-flag-algorithm,https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/,,GeeksforGeeks,two-pointer
-Key Pair (Two Sum in Sorted Array),key-pair-two-sum-in-sorted-array,https://www.geeksforgeeks.org/problems/key-pair5616/1,,GeeksforGeeks,two-pointer
-Valid Palindrome,valid-palindrome,https://leetcode.com/problems/valid-palindrome/description/,,LeetCode,two-pointer
-Remove Duplicate Elements from Sorted Array,remove-duplicate-elements-from-sorted-array,https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1,,GeeksforGeeks,two-pointer
-Reverse String,reverse-string,https://leetcode.com/problems/reverse-string/description/,,LeetCode,two-pointer
-Reverse String with Spaces Intact,reverse-string-with-spaces-intact,https://www.geeksforgeeks.org/problems/reverse-a-string-with-spaces-intact5213/1,,GeeksforGeeks,two-pointer
-Move All Zeroes to End,move-all-zeroes-to-end,https://www.geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1,,GeeksforGeeks,two-pointer
-Remove Element,remove-element,https://leetcode.com/problems/remove-element/description/,,LeetCode,two-pointer
-Reverse Vowels of a String,reverse-vowels-of-a-string,https://leetcode.com/problems/reverse-vowels-of-a-string/description/,,LeetCode,two-pointer
-Reverse Only Letters,reverse-only-letters,https://leetcode.com/problems/reverse-only-letters/description/,,LeetCode,two-pointer
-Reverse Prefix of Word,reverse-prefix-of-word,https://leetcode.com/problems/reverse-prefix-of-word/description/,,LeetCode,two-pointer
-Reverse String II,reverse-string-ii,https://leetcode.com/problems/reverse-string-ii/description/,,LeetCode,two-pointer
-Reverse Words in a String III,reverse-words-in-a-string-iii,https://leetcode.com/problems/reverse-words-in-a-string-iii/description/,,LeetCode,two-pointer
-Flipping an Image,flipping-an-image,https://leetcode.com/problems/flipping-an-image/description/,,LeetCode,two-pointer
-Sort Array by Parity,sort-array-by-parity,https://leetcode.com/problems/sort-array-by-parity/description/,,LeetCode,two-pointer
-Sort Array by Parity II,sort-array-by-parity-ii,https://leetcode.com/problems/sort-array-by-parity-ii/description/,,LeetCode,two-pointer
-Reverse Words in a String,reverse-words-in-a-string,https://leetcode.com/problems/reverse-words-in-a-string/description/,,LeetCode,two-pointer
-Minimum Length of String After Deleting Similar Ends,minimum-length-of-string-after-deleting-similar-ends,https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/,,LeetCode,two-pointer
-Bag of Tokens,bag-of-tokens,https://leetcode.com/problems/bag-of-tokens/description/,,LeetCode,two-pointer
-Sentence Similarity III,sentence-similarity-iii,https://leetcode.com/problems/sentence-similarity-iii/description/,,LeetCode,two-pointer
-Boats to Save People,boats-to-save-people,https://leetcode.com/problems/boats-to-save-people/description/,,LeetCode,two-pointer
-Maximum Distance Between a Pair of Values,maximum-distance-between-a-pair-of-values,https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/description/,,LeetCode,two-pointer
-Sort Colors,sort-colors,https://leetcode.com/problems/sort-colors/description/,,LeetCode,two-pointer
-Minimize Maximum Pair Sum in Array,minimize-maximum-pair-sum-in-array,https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/,,LeetCode,two-pointer
-3Sum,3sum,https://leetcode.com/problems/3sum/description/,,LeetCode,two-pointer
-3Sum Closest,3sum-closest,https://leetcode.com/problems/3sum-closest/description/,,LeetCode,two-pointer
-4Sum,4sum,https://leetcode.com/problems/4sum/description/,,LeetCode,two-pointer
-Two Sum II â Input Array is Sorted,two-sum-ii-input-array-is-sorted,https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/,,LeetCode,two-pointer
-Container With Most Water,container-with-most-water,https://leetcode.com/problems/container-with-most-water/,,LeetCode,two-pointer
-Trapping Rain Water,trapping-rain-water,https://leetcode.com/problems/trapping-rain-water/,,LeetCode,two-pointer
+Problem,Link,Platform,Difficulty,Priority
+Key Pair,https://www.geeksforgeeks.org/problems/key-pair5616/1,GFG,Easy,Class
+Valid Palindrome,https://leetcode.com/problems/valid-palindrome/description/,LeetCode,Easy,Class
+Remove Duplicate Elements from Sorted Array,https://www.geeksforgeeks.org/problems/remove-duplicate-elements-from-sorted-array/1,GFG,Easy,Class
+Reverse String,https://leetcode.com/problems/reverse-string/description/,LeetCode,Easy,Class
+Reverse String with Spaces Intact,https://www.geeksforgeeks.org/problems/reverse-a-string-with-spaces-intact5213/1,GFG,Easy,Class
+Move All Zeroes to End,https://www.geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1,GFG,Easy,Class
+Remove Element,https://leetcode.com/problems/remove-element/description/,LeetCode,Easy,Class
+Reverse Vowels of a String,https://leetcode.com/problems/reverse-vowels-of-a-string/description/,LeetCode,Easy,Class
+Reverse Only Letters,https://leetcode.com/problems/reverse-only-letters/description/,LeetCode,Easy,Class
+Reverse Prefix of Word,https://leetcode.com/problems/reverse-prefix-of-word/description/,LeetCode,Easy,HW
+Reverse String II,https://leetcode.com/problems/reverse-string-ii/description/,LeetCode,Easy,HW
+Reverse Words in a String III,https://leetcode.com/problems/reverse-words-in-a-string-iii/description/,LeetCode,Easy,HW
+Flipping an Image,https://leetcode.com/problems/flipping-an-image/description/,LeetCode,Easy,Class
+Sort Array by Parity,https://leetcode.com/problems/sort-array-by-parity/description/,LeetCode,Easy,Class
+Sort Array by Parity II,https://leetcode.com/problems/sort-array-by-parity-ii/description/,LeetCode,Easy,HW
+Reverse Words in a String,https://leetcode.com/problems/reverse-words-in-a-string/description/,LeetCode,Medium,Class
+Minimum Length of String After Deleting Similar Ends,https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/,LeetCode,Medium,Class
+Bag of Tokens,https://leetcode.com/problems/bag-of-tokens/description/,LeetCode,Medium,Class
+Boats to Save People,https://leetcode.com/problems/boats-to-save-people/description/,LeetCode,Medium,Class
+Maximum Distance Between a Pair of Values,https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/description/,LeetCode,Medium,Class
+Sort Colors,https://leetcode.com/problems/sort-colors/description/,LeetCode,Medium,Class
+Minimize Maximum Pair Sum in Array,https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/,LeetCode,Medium,Class
+3Sum,https://leetcode.com/problems/3sum/description/,LeetCode,Medium,Class
+3Sum Closest,https://leetcode.com/problems/3sum-closest/description/,LeetCode,Medium,Class
+4Sum,https://leetcode.com/problems/4sum/description/,LeetCode,Medium,Class
+Two Sum II Input Array is Sorted,https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/,LeetCode,Medium,Class
+Container With Most Water,https://leetcode.com/problems/container-with-most-water/,LeetCode,Medium,Class
+Trapping Rain Water,https://leetcode.com/problems/trapping-rain-water/,LeetCode,Hard,Class

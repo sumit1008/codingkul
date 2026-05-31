@@ -1,18 +1,12 @@
-title,slug,link,difficulty,platform,tags
-String Algorithms Overview,string-algorithms-overview,https://www.geeksforgeeks.org/string-algorithms/,,GeeksforGeeks,string-algorithms
-KMP Algorithm Explanation,kmp-algorithm-explanation,https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/,,GeeksforGeeks,string-algorithms
-Z Algorithm Explanation,z-algorithm-explanation,https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/,,GeeksforGeeks,string-algorithms
-Rabin-Karp Algorithm,rabin-karp-algorithm,https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/,,GeeksforGeeks,string-algorithms
-String Hashing Guide,string-hashing-guide,https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/,,GeeksforGeeks,string-algorithms
-Manachers Algorithm,manacher-s-algorithm,https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-1/,,GeeksforGeeks,string-algorithms
-Find Index of First Occurrence,find-index-of-first-occurrence,https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/,,LeetCode,string-algorithms
-Implement strStr(),implement-strstr,https://leetcode.com/problems/implement-strstr/,,LeetCode,string-algorithms
-Count Occurrences of Pattern,count-occurrences-of-pattern,https://www.geeksforgeeks.org/problems/count-occurrences-of-a-pattern/1,,GeeksforGeeks,string-algorithms
-Check Substring,check-substring,https://www.geeksforgeeks.org/problems/check-if-a-string-is-substring-of-other/1,,GeeksforGeeks,string-algorithms
-Implement KMP Algorithm,implement-kmp-algorithm,https://www.geeksforgeeks.org/problems/kmp-algorithm/1,,GeeksforGeeks,string-algorithms
-Repeated Substring Pattern,repeated-substring-pattern,https://leetcode.com/problems/repeated-substring-pattern/,,LeetCode,string-algorithms
-Longest Prefix Suffix,longest-prefix-suffix,https://www.geeksforgeeks.org/problems/longest-prefix-suffix/1,,GeeksforGeeks,string-algorithms
-Z Algorithm Implementation,z-algorithm-implementation,https://www.geeksforgeeks.org/problems/z-algorithm/1,,GeeksforGeeks,string-algorithms
-Pattern Searching Using Z,pattern-searching-using-z,https://www.geeksforgeeks.org/problems/pattern-searching/1,,GeeksforGeeks,string-algorithms
-Rabin-Karp Implementation,rabin-karp-implementation,https://www.geeksforgeeks.org/problems/rabin-karp-algorithm/1,,GeeksforGeeks,string-algorithms
-Pattern Matching Using Hashing,pattern-matching-using-hashing,https://www.geeksforgeeks.org/problems/pattern-matching/1,,GeeksforGeeks,string-algorithms
+Problem,Link,Platform,Difficulty,Priority
+Find Index of First Occurrence,https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/,LeetCode,Easy,Class
+Implement strStr(),https://leetcode.com/problems/implement-strstr/,LeetCode,Easy,Class
+Count Occurrences of Pattern,https://www.geeksforgeeks.org/problems/count-occurrences-of-a-pattern/1,GFG,Easy,Class
+Check Substring,https://www.geeksforgeeks.org/problems/check-if-a-string-is-substring-of-other/1,GFG,Easy,HW
+Implement KMP Algorithm,https://www.geeksforgeeks.org/problems/kmp-algorithm/1,GFG,Medium,Class
+Repeated Substring Pattern,https://leetcode.com/problems/repeated-substring-pattern/,LeetCode,Easy,Class
+Longest Prefix Suffix,https://www.geeksforgeeks.org/problems/longest-prefix-suffix/1,GFG,Medium,Class
+Z Algorithm Implementation,https://www.geeksforgeeks.org/problems/z-algorithm/1,GFG,Medium,Class
+Pattern Searching Using Z,https://www.geeksforgeeks.org/problems/pattern-searching/1,GFG,Medium,Class
+Rabin-Karp Implementation,https://www.geeksforgeeks.org/problems/rabin-karp-algorithm/1,GFG,Medium,Class
+Pattern Matching Using Hashing,https://www.geeksforgeeks.org/problems/pattern-matching/1,GFG,Medium,HW

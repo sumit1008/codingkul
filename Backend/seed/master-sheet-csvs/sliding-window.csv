@@ -1,32 +1,27 @@
-title,slug,link,difficulty,platform,tags
-Sliding Window Technique â Complete Guide,sliding-window-technique-complete-guide,https://www.geeksforgeeks.org/window-sliding-technique/,,GeeksforGeeks,sliding-window
-Fixed vs Variable Sliding Window,fixed-vs-variable-sliding-window,https://www.geeksforgeeks.org/sliding-window-technique/,,GeeksforGeeks,sliding-window
-Sliding Window with Two Pointers,sliding-window-with-two-pointers,https://www.geeksforgeeks.org/two-pointers-technique/,,GeeksforGeeks,sliding-window
-At Most K / Exactly K Pattern,at-most-k-exactly-k-pattern,https://www.geeksforgeeks.org/count-subarrays-with-at-most-k-distinct-elements/,,GeeksforGeeks,sliding-window
-Monotonic Queue Concept,monotonic-queue-concept,https://www.geeksforgeeks.org/introduction-to-monotonic-queues/,,GeeksforGeeks,sliding-window
-Maximum Average Subarray I,maximum-average-subarray-i,https://leetcode.com/problems/maximum-average-subarray-i/description/,,LeetCode,sliding-window
-Maximum Sum Subarray of Size K,maximum-sum-subarray-of-size-k,https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1,,GeeksforGeeks,sliding-window
-First Negative Integer in Every Window of Size K,first-negative-integer-in-every-window-of-size-k,https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1,,GeeksforGeeks,sliding-window
-Count Occurrences of Anagrams,count-occurrences-of-anagrams,https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1,,GeeksforGeeks,sliding-window
-Find All Anagrams in a String,find-all-anagrams-in-a-string,https://leetcode.com/problems/find-all-anagrams-in-a-string/description/,,LeetCode,sliding-window
-Permutation in String,permutation-in-string,https://leetcode.com/problems/permutation-in-string/description/,,LeetCode,sliding-window
-Maximum Number of Vowels in a Substring of Given Length,maximum-number-of-vowels-in-a-substring-of-given-length,https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/,,LeetCode,sliding-window
-Longest Substring Without Repeating Characters,longest-substring-without-repeating-characters,https://leetcode.com/problems/longest-substring-without-repeating-characters/,,LeetCode,sliding-window
-Longest Repeating Character Replacement,longest-repeating-character-replacement,https://leetcode.com/problems/longest-repeating-character-replacement/description/,,LeetCode,sliding-window
-Minimum Size Subarray Sum,minimum-size-subarray-sum,https://leetcode.com/problems/minimum-size-subarray-sum/description/,,LeetCode,sliding-window
-Minimum Window Substring,minimum-window-substring,https://leetcode.com/problems/minimum-window-substring/description/,,LeetCode,sliding-window
-Binary Subarrays With Sum,binary-subarrays-with-sum,https://leetcode.com/problems/binary-subarrays-with-sum/description/,,LeetCode,sliding-window
-Subarrays With K Different Integers,subarrays-with-k-different-integers,https://leetcode.com/problems/subarrays-with-k-different-integers/description/,,LeetCode,sliding-window
-Count Number of Nice Subarrays,count-number-of-nice-subarrays,https://leetcode.com/problems/count-number-of-nice-subarrays/description/,,LeetCode,sliding-window
-Longest Subarray of 1's After Deleting One Element,longest-subarray-of-1-s-after-deleting-one-element,https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/description/,,LeetCode,sliding-window
-Maximum Points You Can Obtain from Cards,maximum-points-you-can-obtain-from-cards,https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/,,LeetCode,sliding-window
-Grumpy Bookstore Owner,grumpy-bookstore-owner,https://leetcode.com/problems/grumpy-bookstore-owner/description/,,LeetCode,sliding-window
-Defuse the Bomb,defuse-the-bomb,https://leetcode.com/problems/defuse-the-bomb/description/,,LeetCode,sliding-window
-Number of Substrings Containing All Three Characters,number-of-substrings-containing-all-three-characters,https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/,,LeetCode,sliding-window
-Longest Continuous Subarray With Absolute Diff â¤ Limit,longest-continuous-subarray-with-absolute-diff-limit,https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/,,LeetCode,sliding-window
-Max Consecutive Ones III,max-consecutive-ones-iii,https://leetcode.com/problems/max-consecutive-ones-iii/description/,,LeetCode,sliding-window
-Replace the Substring for Balanced String,replace-the-substring-for-balanced-string,https://leetcode.com/problems/replace-the-substring-for-balanced-string/description/,,LeetCode,sliding-window
-Maximum Erasure Value,maximum-erasure-value,https://leetcode.com/problems/maximum-erasure-value/description/,,LeetCode,sliding-window
-Sliding Window Maximum,sliding-window-maximum,https://leetcode.com/problems/sliding-window-maximum/,,LeetCode,sliding-window
-Fruit Into Baskets,fruit-into-baskets,https://leetcode.com/problems/fruit-into-baskets/,,LeetCode,sliding-window
-Longest Substring With At Most K Distinct Characters,longest-substring-with-at-most-k-distinct-characters,https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/,,LeetCode,sliding-window
+Problem,Link,Platform,Difficulty,Priority
+Maximum Average Subarray I,https://leetcode.com/problems/maximum-average-subarray-i/description/,LeetCode,Easy,Class
+Maximum Sum Subarray of Size K,https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1,GFG,Easy,Class
+First Negative Integer in Every Window of Size K,https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1,GFG,Easy,Class
+Count Occurrences of Anagrams,https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1,GFG,Easy,Class
+Find All Anagrams in a String,https://leetcode.com/problems/find-all-anagrams-in-a-string/description/,LeetCode,Medium,Class
+Permutation in String,https://leetcode.com/problems/permutation-in-string/description/,LeetCode,Medium,Class
+Maximum Number of Vowels in a Substring of Given Length,https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/,LeetCode,Easy,HW
+Longest Substring Without Repeating Characters,https://leetcode.com/problems/longest-substring-without-repeating-characters/,LeetCode,Medium,Class
+Longest Repeating Character Replacement,https://leetcode.com/problems/longest-repeating-character-replacement/description/,LeetCode,Medium,Class
+Minimum Size Subarray Sum,https://leetcode.com/problems/minimum-size-subarray-sum/description/,LeetCode,Medium,Class
+Minimum Window Substring,https://leetcode.com/problems/minimum-window-substring/description/,LeetCode,Hard,Class
+Binary Subarrays With Sum,https://leetcode.com/problems/binary-subarrays-with-sum/description/,LeetCode,Medium,Class
+Subarrays With K Different Integers,https://leetcode.com/problems/subarrays-with-k-different-integers/description/,LeetCode,Hard,Class
+Count Number of Nice Subarrays,https://leetcode.com/problems/count-number-of-nice-subarrays/description/,LeetCode,Medium,Class
+Longest Subarray of 1s After Deleting One Element,https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/description/,LeetCode,Medium,Class
+Maximum Points You Can Obtain from Cards,https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/,LeetCode,Medium,Class
+Grumpy Bookstore Owner,https://leetcode.com/problems/grumpy-bookstore-owner/description/,LeetCode,Medium,HW
+Defuse the Bomb,https://leetcode.com/problems/defuse-the-bomb/description/,LeetCode,Medium,HW
+Number of Substrings Containing All Three Characters,https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/,LeetCode,Medium,Class
+Longest Continuous Subarray With Absolute Diff Less Than Limit,https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/,LeetCode,Hard,Class
+Max Consecutive Ones III,https://leetcode.com/problems/max-consecutive-ones-iii/description/,LeetCode,Medium,Class
+Replace the Substring for Balanced String,https://leetcode.com/problems/replace-the-substring-for-balanced-string/description/,LeetCode,Hard,Class
+Maximum Erasure Value,https://leetcode.com/problems/maximum-erasure-value/description/,LeetCode,Medium,Class
+Sliding Window Maximum,https://leetcode.com/problems/sliding-window-maximum/,LeetCode,Hard,Class
+Fruit Into Baskets,https://leetcode.com/problems/fruit-into-baskets/,LeetCode,Medium,Class
+Longest Substring With At Most K Distinct Characters,https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/,LeetCode,Medium,Class

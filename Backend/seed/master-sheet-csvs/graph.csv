@@ -1,0 +1,43 @@
+Problem,Link,Platform,Difficulty,Priority
+Graph Representation Adj List,https://www.geeksforgeeks.org/problems/adjacency-list/1,GFG,Easy,Class
+BFS Traversal of Graph,https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1,GFG,Easy,Class
+DFS Traversal of Graph,https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1,GFG,Easy,Class
+Number of Provinces,https://leetcode.com/problems/number-of-provinces/,LeetCode,Easy,Class
+Connected Components,https://www.geeksforgeeks.org/problems/connected-components-in-an-undirected-graph/1,GFG,Easy,Class
+Find if Path Exists in Graph,https://leetcode.com/problems/find-if-path-exists-in-graph/,LeetCode,Easy,HW
+Keys and Rooms,https://leetcode.com/problems/keys-and-rooms/,LeetCode,Easy,HW
+Clone Graph,https://leetcode.com/problems/clone-graph/,LeetCode,Medium,HW
+All Paths From Source to Target,https://leetcode.com/problems/all-paths-from-source-to-target/,LeetCode,Medium,HW
+Number of Islands,https://leetcode.com/problems/number-of-islands/,LeetCode,Easy,Class
+Max Area of Island,https://leetcode.com/problems/max-area-of-island/,LeetCode,Easy,Class
+Flood Fill,https://leetcode.com/problems/flood-fill/,LeetCode,Easy,Class
+Rotten Oranges,https://leetcode.com/problems/rotting-oranges/,LeetCode,Easy,Class
+01 Matrix,https://leetcode.com/problems/01-matrix/,LeetCode,Medium,Class
+Surrounded Regions,https://leetcode.com/problems/surrounded-regions/,LeetCode,Medium,Class
+Number of Enclaves,https://leetcode.com/problems/number-of-enclaves/,LeetCode,Medium,HW
+Island Perimeter,https://leetcode.com/problems/island-perimeter/,LeetCode,Easy,HW
+Shortest Path in Binary Matrix,https://leetcode.com/problems/shortest-path-in-binary-matrix/,LeetCode,Medium,HW
+Pacific Atlantic Water Flow,https://leetcode.com/problems/pacific-atlantic-water-flow/,LeetCode,Hard,HW
+As Far from Land as Possible,https://leetcode.com/problems/as-far-from-land-as-possible/,LeetCode,Medium,HW
+Topological Sort DFS,https://www.geeksforgeeks.org/problems/topological-sort/1,GFG,Medium,Class
+Course Schedule,https://leetcode.com/problems/course-schedule/,LeetCode,Medium,Class
+Course Schedule II,https://leetcode.com/problems/course-schedule-ii/,LeetCode,Medium,Class
+Find Eventual Safe States,https://leetcode.com/problems/find-eventual-safe-states/,LeetCode,Medium,Class
+Parallel Courses,https://leetcode.com/problems/parallel-courses/,LeetCode,Medium,HW
+Minimum Height Trees,https://leetcode.com/problems/minimum-height-trees/,LeetCode,Medium,HW
+Shortest Path in Undirected Graph,https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1,GFG,Easy,Class
+Dijkstra Algorithm,https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1,GFG,Medium,Class
+Network Delay Time,https://leetcode.com/problems/network-delay-time/,LeetCode,Medium,Class
+Bellman Ford,https://www.geeksforgeeks.org/problems/bellman-ford/1,GFG,Medium,Class
+Floyd Warshall,https://www.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1,GFG,Hard,Class
+Path With Minimum Effort,https://leetcode.com/problems/path-with-minimum-effort/,LeetCode,Medium,HW
+Swim in Rising Water,https://leetcode.com/problems/swim-in-rising-water/,LeetCode,Hard,HW
+Cheapest Flights Within K Stops,https://leetcode.com/problems/cheapest-flights-within-k-stops/,LeetCode,Medium,HW
+Prim's Algorithm,https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1,GFG,Medium,Class
+Kruskal Algorithm,https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1,GFG,Medium,Class
+Disjoint Set Implementation,https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1,GFG,Medium,Class
+Number of Operations to Make Network Connected,https://leetcode.com/problems/number-of-operations-to-make-network-connected/,LeetCode,Medium,Class
+Accounts Merge,https://leetcode.com/problems/accounts-merge/,LeetCode,Medium,Class
+Redundant Connection,https://leetcode.com/problems/redundant-connection/,LeetCode,Medium,Class
+Most Stones Removed,https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/,LeetCode,Medium,HW
+Similar String Groups,https://leetcode.com/problems/similar-string-groups/,LeetCode,Hard,HW

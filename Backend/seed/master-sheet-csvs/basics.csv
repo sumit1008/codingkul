@@ -1,82 +1,74 @@
-title,slug,link,difficulty,platform,tags
-Hello World,hello-world,https://www.geeksforgeeks.org/problems/hello-world/1,,GeeksforGeeks,basics
-Input and Output Basics,input-and-output-basics,https://www.geeksforgeeks.org/problems/input-and-output/1,,GeeksforGeeks,basics
-Sum of Two Numbers,sum-of-two-numbers,https://www.geeksforgeeks.org/problems/sum-of-two-numbers/1,,GeeksforGeeks,basics
-Swap Two Numbers,swap-two-numbers,https://www.geeksforgeeks.org/problems/swap-two-numbers/1,,GeeksforGeeks,basics
-Simple Interest,simple-interest,https://www.geeksforgeeks.org/problems/simple-interest/1,,GeeksforGeeks,basics
-Even or Odd,even-or-odd,https://www.geeksforgeeks.org/problems/even-odd/1,,GeeksforGeeks,basics
-Largest of Three Numbers,largest-of-three-numbers,https://www.geeksforgeeks.org/problems/largest-of-three-numbers/1,,GeeksforGeeks,basics
-Check Leap Year,check-leap-year,https://www.geeksforgeeks.org/problems/leap-year/1,,GeeksforGeeks,basics
-Positive Negative Zero,positive-negative-zero,https://www.geeksforgeeks.org/problems/positive-negative-zero/1,,GeeksforGeeks,basics
-Triangle Validity,triangle-validity,https://www.geeksforgeeks.org/problems/check-triangle-validity/1,,GeeksforGeeks,basics
-Print Numbers 1 to N,print-numbers-1-to-n,https://www.geeksforgeeks.org/problems/print-1-to-n/1,,GeeksforGeeks,basics
-Sum of First N Numbers,sum-of-first-n-numbers,https://www.geeksforgeeks.org/problems/sum-of-first-n-numbers/1,,GeeksforGeeks,basics
-Factorial of Number,factorial-of-number,https://www.geeksforgeeks.org/problems/factorial/1,,GeeksforGeeks,basics
-Reverse Number,reverse-number,https://www.geeksforgeeks.org/problems/reverse-digit/1,,GeeksforGeeks,basics
-Count Digits,count-digits,https://www.geeksforgeeks.org/problems/count-digits/1,,GeeksforGeeks,basics
-Palindrome Number,palindrome-number,https://www.geeksforgeeks.org/problems/palindrome-number/1,,GeeksforGeeks,basics
-Armstrong Number,armstrong-number,https://www.geeksforgeeks.org/problems/armstrong-number/1,,GeeksforGeeks,basics
-Sum of Series,sum-of-series,http://geeksforgeeks.org/problems/sum-of-series2811/1,,GeeksforGeeks,basics
-Check for Binary,check-for-binary,https://www.geeksforgeeks.org/problems/check-for-binary/1,,GeeksforGeeks,basics
-Odd or Even,odd-or-even,https://www.geeksforgeeks.org/problems/odd-or-even3618/1,,GeeksforGeeks,basics
-Swap the Numbers,swap-the-numbers,https://www.geeksforgeeks.org/problems/swap-the-numbers/1,,GeeksforGeeks,basics
-Sum of Digits,sum-of-digits,https://www.geeksforgeeks.org/problems/sum-of-digits1742/1,,GeeksforGeeks,basics
-Vowel or Not,vowel-or-not,https://www.geeksforgeeks.org/problems/vowel-or-not0831/1,,GeeksforGeeks,basics
-Greatest of Three Numbers,greatest-of-three-numbers,https://www.geeksforgeeks.org/problems/greatest-of-three-numbers2520/1,,GeeksforGeeks,basics
-Lower Case to Upper Case,lower-case-to-upper-case,https://www.geeksforgeeks.org/problems/lower-case-to-upper-case3410/1,,GeeksforGeeks,basics
-Binary Representation,binary-representation,https://www.geeksforgeeks.org/problems/binary-representation5003/1,,GeeksforGeeks,basics
-Sum of Odd and Even Elements,sum-of-odd-and-even-elements,https://www.geeksforgeeks.org/problems/sum-of-odd-and-even-elements3033/1,,GeeksforGeeks,basics
-Square Star Pattern,square-star-pattern,https://www.geeksforgeeks.org/program-to-print-square-star-patterns/,,GeeksforGeeks,basics
-Rectangle Star Pattern,rectangle-star-pattern,https://www.geeksforgeeks.org/c-program-to-print-rectangle-star-pattern/,,GeeksforGeeks,basics
-Right Triangle Star Pattern,right-triangle-star-pattern,https://www.geeksforgeeks.org/programs-print-triangle-star-patterns/#right-triangle,,GeeksforGeeks,basics
-Inverted Right Triangle,inverted-right-triangle,https://www.geeksforgeeks.org/programs-print-triangle-star-patterns/#inverted-right-triangle,,GeeksforGeeks,basics
-Left-Aligned Triangle,left-aligned-triangle,https://www.geeksforgeeks.org/cpp-program-to-print-left-half-pyramid-pattern/,,GeeksforGeeks,basics
-Number Triangle Pattern,number-triangle-pattern,https://www.geeksforgeeks.org/cpp-program-to-print-number-pattern/,,GeeksforGeeks,basics
-Floyd’s Triangle,floyds-triangle,https://www.geeksforgeeks.org/program-print-floyds-triangle/,,GeeksforGeeks,basics
-0–1 Triangle Pattern,0-1-triangle-pattern,https://www.geeksforgeeks.org/0-1-triangle-pattern/,,GeeksforGeeks,basics
-Pyramid Star Pattern,pyramid-star-pattern,https://www.geeksforgeeks.org/programs-print-triangle-star-patterns/#pyramid,,GeeksforGeeks,basics
-Inverted Pyramid,inverted-pyramid,https://www.geeksforgeeks.org/programs-print-triangle-star-patterns/#inverted-pyramid,,GeeksforGeeks,basics
-Diamond Pattern,diamond-pattern,https://www.geeksforgeeks.org/program-to-print-diamond-pattern/,,GeeksforGeeks,basics
-Hollow Square Pattern,hollow-square-pattern,https://www.geeksforgeeks.org/hollow-square-pattern/,,GeeksforGeeks,basics
-Hollow Pyramid Pattern,hollow-pyramid-pattern,https://www.geeksforgeeks.org/program-to-print-hollow-pyramid-pattern/,,GeeksforGeeks,basics
-Pascal’s Triangle,pascals-triangle,https://www.geeksforgeeks.org/pascal-triangle/,,GeeksforGeeks,basics
-Butterfly Pattern,butterfly-pattern,https://www.geeksforgeeks.org/butterfly-pattern-program/,,GeeksforGeeks,basics
-Print Array Elements,print-array-elements,https://www.geeksforgeeks.org/problems/print-array-elements/1,,GeeksforGeeks,basics
-Sum of Array,sum-of-array,https://www.geeksforgeeks.org/problems/sum-of-array-elements/1,,GeeksforGeeks,basics
-Largest Element in Array,largest-element-in-array,https://www.geeksforgeeks.org/problems/largest-element-in-array/1,,GeeksforGeeks,basics
-Minimum Element in Array,minimum-element-in-array,https://www.geeksforgeeks.org/problems/minimum-element-in-array/1,,GeeksforGeeks,basics
-Linear Search,linear-search,https://www.geeksforgeeks.org/problems/linear-search/1,,GeeksforGeeks,basics
-Reverse Array,reverse-array,https://www.geeksforgeeks.org/problems/reverse-an-array/1,,GeeksforGeeks,basics
-Second Largest Element,second-largest-element,https://www.geeksforgeeks.org/problems/second-largest-element/1,,GeeksforGeeks,basics
-Reverse String,reverse-string,https://www.geeksforgeeks.org/problems/reverse-a-string/1,,GeeksforGeeks,basics
-Palindrome String,palindrome-string,https://www.geeksforgeeks.org/problems/palindrome-string/1,,GeeksforGeeks,basics
-Count Vowels,count-vowels,https://www.geeksforgeeks.org/problems/count-vowels/1,,GeeksforGeeks,basics
-Toggle Case,toggle-case,https://www.geeksforgeeks.org/problems/toggle-case/1,,GeeksforGeeks,basics
-Remove Spaces,remove-spaces,https://www.geeksforgeeks.org/problems/remove-spaces/1,,GeeksforGeeks,basics
-Vector Basics,vector-basics,https://www.geeksforgeeks.org/problems/vector-basics/1,,GeeksforGeeks,basics
-Sum of Vector Elements,sum-of-vector-elements,https://www.geeksforgeeks.org/problems/sum-of-elements-in-vector/1,,GeeksforGeeks,basics
-Pair Basics,pair-basics,https://www.geeksforgeeks.org/problems/pair-basics/1,,GeeksforGeeks,basics
-Maximum in Vector,maximum-in-vector,https://www.geeksforgeeks.org/problems/maximum-in-vector/1,,GeeksforGeeks,basics
-Count Elements,count-elements,https://www.geeksforgeeks.org/problems/count-elements-in-vector/1,,GeeksforGeeks,basics
-Frequency Using Map,frequency-using-map,https://www.geeksforgeeks.org/problems/frequency-of-array-elements/1,,GeeksforGeeks,basics
-Remove Duplicates Using Set,remove-duplicates-using-set,https://www.geeksforgeeks.org/problems/remove-duplicates/1,,GeeksforGeeks,basics
-Implement Stack,implement-stack,https://www.geeksforgeeks.org/problems/implement-stack/1,,GeeksforGeeks,basics
-Implement Queue,implement-queue,https://www.geeksforgeeks.org/problems/implement-queue/1,,GeeksforGeeks,basics
-Valid Parentheses,valid-parentheses,https://leetcode.com/problems/valid-parentheses/,,LeetCode,basics
-Sort an Array,sort-an-array,https://www.geeksforgeeks.org/problems/sort-an-array/1,,GeeksforGeeks,basics
-Sort 0s 1s 2s,sort-0s-1s-2s,https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/1,,GeeksforGeeks,basics
-Sorting by Frequency,sorting-by-frequency,https://www.geeksforgeeks.org/problems/sorting-elements-of-an-array-by-frequency/1,,GeeksforGeeks,basics
-Kth Smallest Element,kth-smallest-element,https://www.geeksforgeeks.org/problems/kth-smallest-element/1,,GeeksforGeeks,basics
-Factorial,factorial,https://www.geeksforgeeks.org/problems/factorial5739/1,,GeeksforGeeks,basics
-Nth Fibonacci Number,nth-fibonacci-number,https://www.geeksforgeeks.org/problems/nth-fibonacci-number1335/1,,GeeksforGeeks,basics
-Prime Number,prime-number,https://www.geeksforgeeks.org/problems/prime-number2314/1,,GeeksforGeeks,basics
-All Divisors of Number,all-divisors-of-number,https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1,,GeeksforGeeks,basics
-LCM and GCD,lcm-and-gcd,https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1,,GeeksforGeeks,basics
-Modular Exponentiation,modular-exponentiation,https://www.geeksforgeeks.org/problems/modular-exponentiation-for-large-numbers5537/1,,GeeksforGeeks,basics
-Extended Euclidean Algorithm,extended-euclidean-algorithm,https://www.geeksforgeeks.org/problems/extended-euclidean-algorithm3848/1,,GeeksforGeeks,basics
-"Pow(x, n)",pow-x-n,https://leetcode.com/problems/powx-n/,,LeetCode,basics
-Sqrt(x),sqrt-x,https://leetcode.com/problems/sqrtx/,,LeetCode,basics
-Count Primes,count-primes,https://leetcode.com/problems/count-primes/,,LeetCode,basics
-Power of Two,power-of-two,https://leetcode.com/problems/power-of-two/,,LeetCode,basics
-Power of Three,power-of-three,https://leetcode.com/problems/power-of-three/,,LeetCode,basics
-Power of Four,power-of-four,https://leetcode.com/problems/power-of-four/,,LeetCode,basics
+Problem (IP/OP),Link,Platform,Difficulty
+Hello World,https://www.geeksforgeeks.org/problems/hello-world/1,GFG,Easy
+Input and Output Basics,https://www.geeksforgeeks.org/problems/input-and-output/1,GFG,Easy
+Sum of Two Numbers,https://www.geeksforgeeks.org/problems/sum-of-two-numbers/1,GFG,Easy
+Swap Two Numbers,https://www.geeksforgeeks.org/problems/swap-two-numbers/1,GFG,Easy
+Simple Interest,https://www.geeksforgeeks.org/problems/simple-interest/1,GFG,Easy
+Problem (IF/ELSE),Link,Platform,Difficulty
+Even or Odd,https://www.geeksforgeeks.org/problems/even-odd/1,GFG,Easy
+Largest of Three Numbers,https://www.geeksforgeeks.org/problems/largest-of-three-numbers/1,GFG,Easy
+Check Leap Year,https://www.geeksforgeeks.org/problems/leap-year/1,GFG,Easy
+Positive Negative Zero,https://www.geeksforgeeks.org/problems/positive-negative-zero/1,GFG,Easy
+Triangle Validity,https://www.geeksforgeeks.org/problems/check-triangle-validity/1,GFG,Easy
+Problem (LOOPS),Link,Platform,Difficulty
+Print Numbers 1 to N,https://www.geeksforgeeks.org/problems/print-1-to-n/1,GFG,Easy
+Sum of First N Numbers,https://www.geeksforgeeks.org/problems/sum-of-first-n-numbers/1,GFG,Easy
+Factorial of Number,https://www.geeksforgeeks.org/problems/factorial/1,GFG,Easy
+Reverse Number,https://www.geeksforgeeks.org/problems/reverse-digit/1,GFG,Easy
+Count Digits,https://www.geeksforgeeks.org/problems/count-digits/1,GFG,Easy
+Palindrome Number,https://www.geeksforgeeks.org/problems/palindrome-number/1,GFG,Easy
+Armstrong Number,https://www.geeksforgeeks.org/problems/armstrong-number/1,GFG,Medium
+Sum of Series,http://geeksforgeeks.org/problems/sum-of-series2811/1,GFG,Easy
+Check for Binary,https://www.geeksforgeeks.org/problems/check-for-binary/1,GFG,Easy
+Odd or Even,https://www.geeksforgeeks.org/problems/odd-or-even3618/1,GFG,Easy
+Swap the Numbers,https://www.geeksforgeeks.org/problems/swap-the-numbers/1,GFG,Easy
+Sum of Digits,https://www.geeksforgeeks.org/problems/sum-of-digits1742/1,GFG,Easy
+Vowel or Not,https://www.geeksforgeeks.org/problems/vowel-or-not0831/1,GFG,Easy
+Greatest of Three Numbers,https://www.geeksforgeeks.org/problems/greatest-of-three-numbers2520/1,GFG,Easy
+Lower Case to Upper Case,https://www.geeksforgeeks.org/problems/lower-case-to-upper-case3410/1,GFG,Easy
+Binary Representation,https://www.geeksforgeeks.org/problems/binary-representation5003/1,GFG,Easy
+Sum of Odd and Even Elements,https://www.geeksforgeeks.org/problems/sum-of-odd-and-even-elements3033/1,GFG,Easy
+Problem (ARRAYS BEGINNER),Link,Platform,Difficulty
+Print Array Elements,https://www.geeksforgeeks.org/problems/print-array-elements/1,GFG,Easy
+Sum of Array,https://www.geeksforgeeks.org/problems/sum-of-array-elements/1,GFG,Easy
+Largest Element in Array,https://www.geeksforgeeks.org/problems/largest-element-in-array/1,GFG,Easy
+Minimum Element in Array,https://www.geeksforgeeks.org/problems/minimum-element-in-array/1,GFG,Easy
+Linear Search,https://www.geeksforgeeks.org/problems/linear-search/1,GFG,Easy
+Reverse Array,https://www.geeksforgeeks.org/problems/reverse-an-array/1,GFG,Easy
+Second Largest Element,https://www.geeksforgeeks.org/problems/second-largest-element/1,GFG,Easy
+Problem (STRING BASIC),Link,Platform,Difficulty
+Reverse String,https://www.geeksforgeeks.org/problems/reverse-a-string/1,GFG,Easy
+Palindrome String,https://www.geeksforgeeks.org/problems/palindrome-string/1,GFG,Easy
+Count Vowels,https://www.geeksforgeeks.org/problems/count-vowels/1,GFG,Easy
+Toggle Case,https://www.geeksforgeeks.org/problems/toggle-case/1,GFG,Easy
+Remove Spaces,https://www.geeksforgeeks.org/problems/remove-spaces/1,GFG,Easy
+Problem (STL),Link,Platform,Difficulty
+Vector Basics,https://www.geeksforgeeks.org/problems/vector-basics/1,GFG,Easy
+Sum of Vector Elements,https://www.geeksforgeeks.org/problems/sum-of-elements-in-vector/1,GFG,Easy
+Pair Basics,https://www.geeksforgeeks.org/problems/pair-basics/1,GFG,Easy
+Maximum in Vector,https://www.geeksforgeeks.org/problems/maximum-in-vector/1,GFG,Easy
+Count Elements,https://www.geeksforgeeks.org/problems/count-elements-in-vector/1,GFG,Easy
+Frequency Using Map,https://www.geeksforgeeks.org/problems/frequency-of-array-elements/1,GFG,Easy
+Remove Duplicates Using Set,https://www.geeksforgeeks.org/problems/remove-duplicates/1,GFG,Easy
+Implement Stack,https://www.geeksforgeeks.org/problems/implement-stack/1,GFG,Easy
+Implement Queue,https://www.geeksforgeeks.org/problems/implement-queue/1,GFG,Easy
+Valid Parentheses,https://leetcode.com/problems/valid-parentheses/,LeetCode,Easy
+Problem (SORTING BASICS),Link,Platform,Difficulty
+Sort an Array,https://www.geeksforgeeks.org/problems/sort-an-array/1,GFG,Easy
+Sort 0s 1s 2s,https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s/1,GFG,Medium
+Sorting by Frequency,https://www.geeksforgeeks.org/problems/sorting-elements-of-an-array-by-frequency/1,GFG,Medium
+Kth Smallest Element,https://www.geeksforgeeks.org/problems/kth-smallest-element/1,GFG,Medium
+Problem (MATH),Link,Platform,Difficulty
+Factorial,https://www.geeksforgeeks.org/problems/factorial5739/1,GFG,Easy
+Nth Fibonacci Number,https://www.geeksforgeeks.org/problems/nth-fibonacci-number1335/1,GFG,Easy
+Prime Number,https://www.geeksforgeeks.org/problems/prime-number2314/1,GFG,Easy
+All Divisors of Number,https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1,GFG,Easy
+LCM and GCD,https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1,GFG,Easy
+Modular Exponentiation,https://www.geeksforgeeks.org/problems/modular-exponentiation-for-large-numbers5537/1,GFG,Medium
+Extended Euclidean Algorithm,https://www.geeksforgeeks.org/problems/extended-euclidean-algorithm3848/1,GFG,Medium
+Pow(x n),https://leetcode.com/problems/powx-n/,LeetCode,Medium
+Sqrt(x),https://leetcode.com/problems/sqrtx/,LeetCode,Easy
+Count Primes,https://leetcode.com/problems/count-primes/,LeetCode,Medium
+Power of Two,https://leetcode.com/problems/power-of-two/,LeetCode,Easy
+Power of Three,https://leetcode.com/problems/power-of-three/,LeetCode,Easy
+Power of Four,https://leetcode.com/problems/power-of-four/,LeetCode,Easy

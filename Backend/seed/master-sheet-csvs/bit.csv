@@ -1,0 +1,28 @@
+Problem,Link,Platform,Difficulty,Priority
+Number of 1 Bits,https://leetcode.com/problems/number-of-1-bits/description/,LeetCode,Easy,Class
+Counting Bits,https://leetcode.com/problems/counting-bits/description/,LeetCode,Easy,Class
+Set Bits Count,https://www.geeksforgeeks.org/problems/set-bits0143/1,GFG,Easy,Class
+Power of Two,https://leetcode.com/problems/power-of-two/description/,LeetCode,Easy,Class
+Power of Four,https://leetcode.com/problems/power-of-four/description/,LeetCode,Easy,Class
+Reverse Bits,https://leetcode.com/problems/reverse-bits/description/,LeetCode,Easy,Class
+Find XOR from L to R,https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1,GFG,Easy,Class
+Missing Number,https://leetcode.com/problems/missing-number/description/,LeetCode,Easy,Class
+Single Number,https://leetcode.com/problems/single-number/description/,LeetCode,Easy,Class
+Find the Difference,https://leetcode.com/problems/find-the-difference/description/,LeetCode,Easy,Class
+Sum of Two Integers,https://leetcode.com/problems/sum-of-two-integers/description/,LeetCode,Medium,Class
+Single Number II,https://leetcode.com/problems/single-number-ii/description/,LeetCode,Medium,Class
+Single Number III,https://leetcode.com/problems/single-number-iii/description/,LeetCode,Medium,Class
+Bitwise AND of Numbers Range,https://leetcode.com/problems/bitwise-and-of-numbers-range/description/,LeetCode,Medium,Class
+Minimum Flips to Make a OR b Equal to c,https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/,LeetCode,Medium,Class
+Total Hamming Distance,https://leetcode.com/problems/total-hamming-distance/description/,LeetCode,Medium,Class
+Subsets,https://leetcode.com/problems/subsets/description/,LeetCode,Medium,Class
+Subsets II,https://leetcode.com/problems/subsets-ii/description/,LeetCode,Medium,Class
+Maximum Product of Word Lengths,https://leetcode.com/problems/maximum-product-of-word-lengths/description/,LeetCode,Medium,Class
+Count Triplets That Can Form Two Arrays of Equal XOR,https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/,LeetCode,Medium,Class
+Maximum XOR of Two Numbers in an Array,https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/,LeetCode,Hard,Class
+Beautiful Arrangement,https://leetcode.com/problems/beautiful-arrangement/description/,LeetCode,Hard,HW
+Find Position of Only Set Bit,https://www.geeksforgeeks.org/problems/find-position-of-set-bit3706/1,GFG,Easy,Class
+Check Whether K-th Bit is Set,https://www.geeksforgeeks.org/problems/check-whether-k-th-bit-is-set-or-not-1587115620/1,GFG,Easy,Class
+Toggle Bits Given Range,https://www.geeksforgeeks.org/problems/toggle-bits-given-range0952/1,GFG,Medium,HW
+Count Total Set Bits,https://www.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1,GFG,Medium,Class
+Maximum XOR Subarray,https://www.geeksforgeeks.org/problems/maximum-xor-subarray/1,GFG,Hard,Class
