@@ -43,14 +43,15 @@ if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_CALLBACK_URL) {
             username = `${baseName}${suffix++}`;
           }
 
+          const displayName = profile.displayName || baseName;
           user = await User.create({
-            fullName: profile.displayName || baseName,
+            fullName: displayName,
             username,
             email,
             googleId: profile.id,
             authProvider: "google",
             isVerified: true,
-            avatar: profile.photos?.[0]?.value || profile.displayName?.slice(0, 2).toUpperCase() || "G",
+            avatar: displayName.slice(0, 2).toUpperCase(),
           });
 
           return done(null, user);

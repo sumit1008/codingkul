@@ -48,7 +48,11 @@ function mapUser(u: any): User {
     name: u.fullName || u.name || "",
     username: u.username || "",
     email: u.email || "",
-    avatar: u.avatar || (u.fullName || u.name || "U").slice(0, 2).toUpperCase(),
+    avatar: (() => {
+      const raw = u.avatar || "";
+      const initials = (u.fullName || u.name || "U").slice(0, 2).toUpperCase();
+      return raw.startsWith("http") ? initials : (raw || initials);
+    })(),
     level,
     xp: u.xp ?? 0,
     xpMax: level * 1000,
