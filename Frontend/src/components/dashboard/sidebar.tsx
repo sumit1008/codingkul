@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, BookOpen, ClipboardList, FileText,
-  Swords, Trophy, Cpu, BookMarked, Settings, Code2, Zap, X,
+  Swords, Trophy, Cpu, BookMarked, Code2, Zap, X,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
@@ -99,19 +99,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         })}
       </nav>
 
-      {/* Settings */}
+      {/* Bottom section */}
       <div className="px-3 pb-3 border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        <Link
-          href="/settings"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150"
-          style={{ color: "#8888aa" }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#e8e8f0"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#8888aa"; }}
-        >
-          <Settings className="w-4 h-4 flex-shrink-0" />
-          Settings
-        </Link>
-
         {/* Upgrade card — free users only */}
         {isFreeUser && (
           <div
