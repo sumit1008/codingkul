@@ -7,7 +7,7 @@ import {
   LayoutDashboard, BookOpen, ClipboardList, FileText,
   Swords, Trophy, Cpu, Code2, Zap, X,
 } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
+import { useAuth, hasPaidAccess } from "@/lib/auth-context";
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
@@ -26,8 +26,8 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const { user } = useAuth();
-  const isFreeUser = !user || user.courseTier === "NONE";
+  const { user, isLoading } = useAuth();
+  const showUpgradeCard = !isLoading && !hasPaidAccess(user);
 
   const content = (
     <div className="flex flex-col h-full" style={{ background: "rgba(8,8,20,0.98)" }}>
@@ -100,8 +100,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Bottom section */}
       <div className="px-3 pb-3 border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        {/* Upgrade card — free users only */}
-        {isFreeUser && (
+        {/* Upgrade card — free users only, never during auth loading */}
+        {showUpgradeCard && (
           <div
             className="mt-3 rounded-2xl p-4"
             style={{

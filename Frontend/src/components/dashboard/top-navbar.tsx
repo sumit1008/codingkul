@@ -96,20 +96,12 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             onClick={() => setProfileOpen((o) => !o)}
             className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-xl transition-colors hover:bg-white/5"
           >
-            {user?.avatar?.startsWith("http") ? (
-              <img
-                src={user.avatar}
-                alt={user.name ?? "avatar"}
-                className="w-7 h-7 rounded-lg shrink-0 object-cover"
-              />
-            ) : (
-              <div
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shrink-0"
-                style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
-              >
-                {user?.avatar ?? "?"}
-              </div>
-            )}
+            <div
+              className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shrink-0"
+              style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+            >
+              {user?.avatar ?? "?"}
+            </div>
             <span className="hidden md:block text-sm font-medium text-white">
               {user?.name?.split(" ")[0]}
             </span>
@@ -131,13 +123,9 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             >
               {/* User info */}
               <div className="px-4 py-3.5 border-b flex items-center gap-3" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-                {user?.avatar?.startsWith("http") ? (
-                  <img src={user.avatar} alt={user.name ?? "avatar"} className="w-9 h-9 rounded-xl object-cover shrink-0" />
-                ) : (
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}>
-                    {user?.avatar ?? "?"}
-                  </div>
-                )}
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}>
+                  {user?.avatar ?? "?"}
+                </div>
                 <div>
                 <p className="text-sm font-semibold text-white">{user?.name}</p>
                 <p className="text-xs mt-0.5" style={{ color: "#8888aa" }}>@{user?.username}</p>

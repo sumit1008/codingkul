@@ -30,6 +30,17 @@ export interface User {
   role: string;
   courseTier: CourseTier;
   purchasedCourses: string[];
+  enrolledBatches: number;
+}
+
+/** Single source of truth for paid-access checks across the entire app */
+export function hasPaidAccess(user: User | null): boolean {
+  if (!user) return false;
+  return (
+    user.courseTier !== "NONE" ||
+    user.purchasedCourses.length > 0 ||
+    user.enrolledBatches > 0
+  );
 }
 
 interface AuthContextType {
@@ -64,6 +75,7 @@ function mapUser(u: any): User {
     role: u.role || "student",
     courseTier: u.courseTier || "NONE",
     purchasedCourses: u.purchasedCourses || [],
+    enrolledBatches: u.enrolledBatches ?? 0,
   };
 }
 
