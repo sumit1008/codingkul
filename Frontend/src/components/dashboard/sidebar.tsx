@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, BookOpen, ClipboardList, FileText,
-  Swords, Trophy, Cpu, BookMarked, Code2, Zap, X,
+  Swords, Trophy, Cpu, Code2, Zap, X,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
@@ -17,7 +17,6 @@ const NAV_ITEMS = [
   { icon: Swords, label: "Contests", href: "/contests" },
   { icon: Trophy, label: "Rankings", href: "/rankings" },
   { icon: Cpu, label: "Core Subjects", href: "/subjects" },
-  { icon: BookMarked, label: "Notes", href: "/notes" },
 ];
 
 interface SidebarProps {
