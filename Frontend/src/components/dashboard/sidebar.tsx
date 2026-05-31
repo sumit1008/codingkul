@@ -7,6 +7,7 @@ import {
   LayoutDashboard, BookOpen, ClipboardList, FileText,
   Swords, Trophy, Cpu, BookMarked, Settings, Code2, Zap, X,
 } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
@@ -26,6 +27,8 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const { user } = useAuth();
+  const isFreeUser = !user || user.courseTier === "NONE";
 
   const content = (
     <div className="flex flex-col h-full" style={{ background: "rgba(8,8,20,0.98)" }}>
@@ -109,31 +112,33 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           Settings
         </Link>
 
-        {/* Upgrade card */}
-        <div
-          className="mt-3 rounded-2xl p-4"
-          style={{
-            background: "linear-gradient(135deg, rgba(99,102,241,0.12), rgba(168,85,247,0.08))",
-            border: "1px solid rgba(99,102,241,0.22)",
-          }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Zap className="w-4 h-4 text-yellow-400" />
-            <span className="text-xs font-bold text-white">Upgrade to Pro</span>
-          </div>
-          <p className="text-[10px] mb-3 leading-relaxed" style={{ color: "#8888aa" }}>
-            Unlock all 450+ problems, live classes & mock interviews.
-          </p>
-          <button
-            className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"
+        {/* Upgrade card — free users only */}
+        {isFreeUser && (
+          <div
+            className="mt-3 rounded-2xl p-4"
             style={{
-              background: "linear-gradient(135deg, #6366f1, #a855f7)",
-              boxShadow: "0 0 16px rgba(99,102,241,0.35)",
+              background: "linear-gradient(135deg, rgba(99,102,241,0.12), rgba(168,85,247,0.08))",
+              border: "1px solid rgba(99,102,241,0.22)",
             }}
           >
-            Upgrade — ₹999/mo
-          </button>
-        </div>
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-4 h-4 text-yellow-400" />
+              <span className="text-xs font-bold text-white">Upgrade to Pro</span>
+            </div>
+            <p className="text-[10px] mb-3 leading-relaxed" style={{ color: "#8888aa" }}>
+              Unlock all 450+ problems, live classes & mock interviews.
+            </p>
+            <button
+              className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"
+              style={{
+                background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                boxShadow: "0 0 16px rgba(99,102,241,0.35)",
+              }}
+            >
+              Upgrade — ₹999/mo
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
