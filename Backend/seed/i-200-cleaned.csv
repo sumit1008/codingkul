@@ -50,9 +50,13 @@ Encode and Decode Strings,encode-and-decode-strings,https://leetcode.com/problem
 Count and Say,count-and-say,https://leetcode.com/problems/count-and-say/,,LeetCode,i-200
 Text Justification,text-justification,https://leetcode.com/problems/text-justification/,,LeetCode,i-200
 Maximum Sum Subarray of Size K,maximum-sum-subarray-of-size-k,https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1,,GeeksforGeeks,i-200
+Subarray Product Less Than K,subarray-product-less-than-k,https://leetcode.com/problems/subarray-product-less-than-k/,,LeetCode,i-200
+Longest Subarray of 1s After Deleting One Element,longest-subarray-of-1s-after-deleting-one-element,https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/,,LeetCode,i-200
+Number of Subarrays with Bounded Maximum,number-of-subarrays-with-bounded-maximum,https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/,,LeetCode,i-200
 Permutation in String,permutation-in-string,https://leetcode.com/problems/permutation-in-string/,,LeetCode,i-200
 Find All Anagrams in a String,find-all-anagrams-in-a-string,https://leetcode.com/problems/find-all-anagrams-in-a-string/,,LeetCode,i-200
 Sliding Window Maximum,sliding-window-maximum,https://leetcode.com/problems/sliding-window-maximum/,,LeetCode,i-200
+Maximum Erasure Value,maximum-erasure-value,https://leetcode.com/problems/maximum-erasure-value/,,LeetCode,i-200
 Fruit Into Baskets,fruit-into-baskets,https://leetcode.com/problems/fruit-into-baskets/,,LeetCode,i-200
 Subarrays with K Distinct,subarrays-with-k-distinct,https://leetcode.com/problems/subarrays-with-k-different-integers/,,LeetCode,i-200
 Binary Subarrays With Sum,binary-subarrays-with-sum,https://leetcode.com/problems/binary-subarrays-with-sum/,,LeetCode,i-200
@@ -65,9 +69,14 @@ Two Sum II - Input Array Is Sorted,two-sum-ii-input-array-is-sorted,https://leet
 4Sum,4sum,https://leetcode.com/problems/4sum/,,LeetCode,i-200
 Remove Duplicates from Sorted Array,remove-duplicates-from-sorted-array,https://leetcode.com/problems/remove-duplicates-from-sorted-array/,,LeetCode,i-200
 Remove Element,remove-element,https://leetcode.com/problems/remove-element/,,LeetCode,i-200
+3Sum Closest,3sum-closest,https://leetcode.com/problems/3sum-closest/,,LeetCode,i-200
+Boats to Save People,boats-to-save-people,https://leetcode.com/problems/boats-to-save-people/,,LeetCode,i-200
+Sum of Square Numbers,sum-of-square-numbers,https://leetcode.com/problems/sum-of-square-numbers/,,LeetCode,i-200
+Number of Subsequences That Satisfy the Given Sum Condition,number-of-subsequences-that-satisfy-the-given-sum-condition,https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/,,LeetCode,i-200
 Merge Sorted Array,merge-sorted-array,https://leetcode.com/problems/merge-sorted-array/,,LeetCode,i-200
 Intersection of Two Arrays II,intersection-of-two-arrays-ii,https://leetcode.com/problems/intersection-of-two-arrays-ii/,,LeetCode,i-200
 Squares of a Sorted Array,squares-of-a-sorted-array,https://leetcode.com/problems/squares-of-a-sorted-array/,,LeetCode,i-200
+Shortest Unsorted Continuous Subarray,shortest-unsorted-continuous-subarray,https://leetcode.com/problems/shortest-unsorted-continuous-subarray/,,LeetCode,i-200
 Backspace String Compare,backspace-string-compare,https://leetcode.com/problems/backspace-string-compare/,,LeetCode,i-200
 Partition Labels,partition-labels,https://leetcode.com/problems/partition-labels/,,LeetCode,i-200
 Binary Search,binary-search,https://leetcode.com/problems/binary-search/,,LeetCode,i-200
@@ -98,6 +107,7 @@ Next Greater Element I,next-greater-element-i,https://leetcode.com/problems/next
 Next Greater Element II,next-greater-element-ii,https://leetcode.com/problems/next-greater-element-ii/,,LeetCode,i-200
 Daily Temperatures,daily-temperatures,https://leetcode.com/problems/daily-temperatures/,,LeetCode,i-200
 Largest Rectangle in Histogram,largest-rectangle-in-histogram,https://leetcode.com/problems/largest-rectangle-in-histogram/,,LeetCode,i-200
+Remove K Digits,remove-k-digits,https://leetcode.com/problems/remove-k-digits/,,LeetCode,i-200
 Evaluate Reverse Polish Notation,evaluate-reverse-polish-notation,https://leetcode.com/problems/evaluate-reverse-polish-notation/,,LeetCode,i-200
 Decode String,decode-string,https://leetcode.com/problems/decode-string/,,LeetCode,i-200
 Generate Parentheses,generate-parentheses,https://leetcode.com/problems/generate-parentheses/,,LeetCode,i-200
@@ -181,8 +191,11 @@ Unique Paths II,unique-paths-ii,https://leetcode.com/problems/unique-paths-ii/,,
 Minimum Path Sum,minimum-path-sum,https://leetcode.com/problems/minimum-path-sum/,,LeetCode,i-200
 Triangle,triangle,https://leetcode.com/problems/triangle/,,LeetCode,i-200
 Word Break,word-break,https://leetcode.com/problems/word-break/,,LeetCode,i-200
-Palindromic Substrings,palindromic-substrings,https://leetcode.com/problems/palindromic-substrings/,,LeetCode,i-200
 Longest Palindromic Subsequence,longest-palindromic-subsequence,https://leetcode.com/problems/longest-palindromic-subsequence/,,LeetCode,i-200
 Decode Ways,decode-ways,https://leetcode.com/problems/decode-ways/,,LeetCode,i-200
+Perfect Squares,perfect-squares,https://leetcode.com/problems/perfect-squares/,,LeetCode,i-200
 Best Time to Buy and Sell Stock with Cooldown,best-time-to-buy-and-sell-stock-with-cooldown,https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/,,LeetCode,i-200
+Combination Sum IV,combination-sum-iv,https://leetcode.com/problems/combination-sum-iv/,,LeetCode,i-200
+Number of Longest Increasing Subsequences,number-of-lis,https://leetcode.com/problems/number-of-longest-increasing-subsequences/,,LeetCode,i-200
+Russian Doll Envelopes,russian-doll-envelopes,https://leetcode.com/problems/russian-doll-envelopes/,,LeetCode,i-200
 Minimum Cost Climbing Stairs,minimum-cost-climbing-stairs,https://leetcode.com/problems/min-cost-climbing-stairs/,,LeetCode,i-200
