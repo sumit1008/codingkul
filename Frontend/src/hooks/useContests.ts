@@ -1,12 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { contestApi, type ApiContest, type ApiLeaderboardUser, type ApiAnalytics } from "@/lib/api";
-import {
-  ratingHistory as staticRatingHistory,
-  xpHistory as staticXpHistory,
-  type Contest,
-  type PreviousContest,
-  type LeaderboardUser,
-} from "@/lib/data/contests";
+import type { Contest, PreviousContest, LeaderboardUser } from "@/lib/data/contests";
 
 // ── Transform helpers ─────────────────────────────────────────────────────────
 
@@ -115,18 +109,18 @@ export function useContestAnalytics() {
   });
 }
 
-/** Combined hero stats derived from analytics, with static fallback values */
+/** Combined hero stats derived from the user's analytics from the API */
 export function useContestStats() {
   const { data } = useContestAnalytics();
   return {
-    rating:        data?.stats.rating      ?? 1542,
-    rankTitle:     data?.stats.rankTitle   ?? "Specialist",
-    totalXP:       data?.stats.totalXP     ?? 12450,
-    participated:  data?.stats.participated ?? 23,
-    bestRank:      data?.stats.bestRank    ?? 12,
-    avgRank:       data?.stats.avgRank     ?? 24,
-    winRate:       data?.stats.winRate     ?? 34.8,
-    ratingHistory: data?.ratingHistory?.length ? data.ratingHistory : staticRatingHistory,
-    xpHistory:     data?.xpHistory?.length     ? data.xpHistory     : staticXpHistory,
+    rating:        data?.stats.rating       ?? 1200,
+    rankTitle:     data?.stats.rankTitle    ?? "Pupil",
+    totalXP:       data?.stats.totalXP      ?? 0,
+    participated:  data?.stats.participated ?? 0,
+    bestRank:      data?.stats.bestRank     ?? null,
+    avgRank:       data?.stats.avgRank      ?? null,
+    winRate:       data?.stats.winRate      ?? 0,
+    ratingHistory: data?.ratingHistory      ?? [],
+    xpHistory:     data?.xpHistory          ?? [],
   };
 }

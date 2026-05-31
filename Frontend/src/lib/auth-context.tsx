@@ -42,20 +42,21 @@ interface AuthContextType {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapUser(u: any): User {
+  const level = u.level ?? 1;
   return {
     id: u._id || u.id || "",
     name: u.fullName || u.name || "",
     username: u.username || "",
     email: u.email || "",
     avatar: u.avatar || (u.fullName || u.name || "U").slice(0, 2).toUpperCase(),
-    level: u.level ?? 1,
+    level,
     xp: u.xp ?? 0,
-    xpMax: 5000,
+    xpMax: level * 1000,
     streak: u.streak ?? 0,
     rank: u.rank ?? 0,
-    rating: u.rating ?? 0,
-    solved: u.solved ?? 0,
-    title: "Algorithm Apprentice",
+    rating: u.rating ?? u.academyRating ?? 1200,
+    solved: u.solved ?? u.problemsSolved ?? 0,
+    title: u.rankTitle ?? u.academyRankTitle ?? "Pupil",
     role: u.role || "student",
     courseTier: u.courseTier || "NONE",
     purchasedCourses: u.purchasedCourses || [],

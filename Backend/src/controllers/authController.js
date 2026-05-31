@@ -16,6 +16,11 @@ const safeUser = (user) => ({
   isVerified: user.isVerified,
   courseTier: user.courseTier || "NONE",
   purchasedCourses: user.purchasedCourses || [],
+  // Progress fields — mapped to standard client keys
+  rating: user.academyRating ?? 1200,
+  rankTitle: user.academyRankTitle ?? "Pupil",
+  solved: user.problemsSolved ?? 0,
+  contestsParticipated: user.contestsParticipated ?? 0,
 });
 
 // POST /api/auth/signup

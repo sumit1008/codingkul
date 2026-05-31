@@ -124,6 +124,15 @@ const userSchema = new mongoose.Schema(
         completedAt: { type: Date },
       },
     ],
+
+    // ── Progress tracking fields ───────────────────────────────────────────────
+    problemsSolved: { type: Number, default: 0, min: 0 },
+    activityLog: [
+      {
+        date:  { type: String }, // "YYYY-MM-DD"
+        count: { type: Number, default: 1 },
+      },
+    ],
   },
   { timestamps: true }
 );

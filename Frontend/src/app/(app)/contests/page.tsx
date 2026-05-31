@@ -11,10 +11,6 @@ import {
   useUpcomingContests,
   usePreviousContests,
 } from "@/hooks/useContests";
-import {
-  upcomingContests as staticUpcoming,
-  previousContests as staticPrevious,
-} from "@/lib/data/contests";
 
 function SectionHeader({
   icon: Icon,
@@ -73,9 +69,8 @@ export default function ContestsPage() {
   const { data: upcoming, isLoading: upcomingLoading } = useUpcomingContests();
   const { data: previous, isLoading: previousLoading } = usePreviousContests();
 
-  // Use live data when available, fall back to static
-  const displayUpcoming = upcoming?.length ? upcoming : staticUpcoming;
-  const displayPrevious = previous?.length ? previous : staticPrevious;
+  const displayUpcoming = upcoming ?? [];
+  const displayPrevious = previous ?? [];
 
   return (
     <div className="min-h-screen" style={{ background: "#05050f" }}>
@@ -110,6 +105,15 @@ export default function ContestsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <ContestCardSkeleton />
                 <ContestCardSkeleton />
+              </div>
+            ) : displayUpcoming.length === 0 ? (
+              <div
+                className="rounded-2xl p-8 text-center"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
+              >
+                <Trophy className="w-10 h-10 mx-auto mb-3" style={{ color: "#333355" }} />
+                <p className="text-sm font-medium" style={{ color: "#555577" }}>No upcoming contests scheduled</p>
+                <p className="text-xs mt-1" style={{ color: "#444466" }}>Check back soon for the next contest announcement</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

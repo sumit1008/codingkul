@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Crown, Star, Zap, Trophy } from "lucide-react";
-import { globalLeaderboard, batchLeaderboard } from "@/lib/data/contests";
+import { useLeaderboard } from "@/hooks/useContests";
 import type { LeaderboardUser } from "@/lib/data/contests";
 
 const PODIUM_CONFIG = [
@@ -13,10 +13,13 @@ const PODIUM_CONFIG = [
 ];
 
 const BADGE_COLOR: Record<string, { color: string; bg: string }> = {
-  Grandmaster: { color: "#f87171", bg: "rgba(239,68,68,0.1)" },
-  Master:      { color: "#c084fc", bg: "rgba(168,85,247,0.1)" },
-  Expert:      { color: "#60a5fa", bg: "rgba(96,165,250,0.1)" },
-  Specialist:  { color: "#4ade80", bg: "rgba(34,197,94,0.1)" },
+  Grandmaster:       { color: "#f87171", bg: "rgba(239,68,68,0.1)" },
+  "Candidate Master":{ color: "#d946ef", bg: "rgba(217,70,239,0.1)" },
+  Master:            { color: "#c084fc", bg: "rgba(168,85,247,0.1)" },
+  Expert:            { color: "#60a5fa", bg: "rgba(96,165,250,0.1)" },
+  Specialist:        { color: "#4ade80", bg: "rgba(34,197,94,0.1)"  },
+  Pupil:             { color: "#94a3b8", bg: "rgba(148,163,184,0.1)" },
+  Beginner:          { color: "#6b7280", bg: "rgba(107,114,128,0.1)" },
 };
 
 function Avatar({ initials, size = "md", color }: { initials: string; size?: "sm" | "md" | "lg"; color: string }) {
@@ -36,7 +39,7 @@ function Avatar({ initials, size = "md", color }: { initials: string; size?: "sm
 }
 
 function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PODIUM_CONFIG[0] }) {
-  const badge = BADGE_COLOR[user.badge] ?? BADGE_COLOR.Specialist;
+  const badge = BADGE_COLOR[user.badge] ?? BADGE_COLOR.Pupil;
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -44,7 +47,6 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
       transition={{ duration: 0.5, delay: config.order * 0.1 }}
       className={`flex flex-col items-center gap-3 ${config.mt}`}
     >
-      {/* Crown for #1 */}
       {config.pos === 1 && (
         <motion.div
           animate={{ y: [0, -4, 0] }}
@@ -54,14 +56,13 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
         </motion.div>
       )}
 
-      {/* Avatar with glow ring */}
       <div className="relative">
         <div
           className="absolute inset-0 rounded-full blur-md"
           style={{ background: config.glow, transform: "scale(1.3)" }}
         />
         <div
-          className={`relative rounded-full p-0.5`}
+          className="relative rounded-full p-0.5"
           style={{ border: `2px solid ${config.border}` }}
         >
           <Avatar initials={user.initials} size="lg" color={config.color} />
@@ -78,7 +79,6 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
         </div>
       </div>
 
-      {/* Name + badge */}
       <div className="text-center">
         <p className="font-bold text-sm text-white">{user.name}</p>
         <span
@@ -89,7 +89,6 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
         </span>
       </div>
 
-      {/* Stats */}
       <div className="flex flex-col items-center gap-1 text-xs">
         <div className="flex items-center gap-1 font-bold" style={{ color: "#e2e8f0" }}>
           <Star className="w-3 h-3" style={{ color: config.color }} />
@@ -102,7 +101,6 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
         <div style={{ color: "#8888aa" }}>{user.solved} solved</div>
       </div>
 
-      {/* Podium base */}
       <div
         className={`w-20 ${config.height} rounded-t-xl flex items-end justify-center pb-2`}
         style={{
@@ -118,7 +116,7 @@ function PodiumCard({ user, config }: { user: LeaderboardUser; config: typeof PO
 }
 
 function RankRow({ user, index }: { user: LeaderboardUser; index: number }) {
-  const badge = BADGE_COLOR[user.badge] ?? BADGE_COLOR.Specialist;
+  const badge = BADGE_COLOR[user.badge] ?? BADGE_COLOR.Pupil;
   return (
     <motion.div
       initial={{ opacity: 0, x: -16 }}
@@ -128,18 +126,13 @@ function RankRow({ user, index }: { user: LeaderboardUser; index: number }) {
       className="flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200"
       style={{ border: "1px solid rgba(255,255,255,0.05)" }}
     >
-      {/* Rank number */}
       <div
         className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0"
         style={{ background: "rgba(255,255,255,0.05)", color: "#8888aa" }}
       >
         #{user.rank}
       </div>
-
-      {/* Avatar */}
       <Avatar initials={user.initials} size="sm" color="#6366f1" />
-
-      {/* Name + badge */}
       <div className="flex-1 min-w-0">
         <p className="font-semibold text-sm text-white truncate">{user.name}</p>
         <span
@@ -149,8 +142,6 @@ function RankRow({ user, index }: { user: LeaderboardUser; index: number }) {
           {user.badge}
         </span>
       </div>
-
-      {/* Stats */}
       <div className="hidden sm:flex items-center gap-5 text-xs">
         <div className="text-center">
           <p className="font-bold" style={{ color: "#e2e8f0" }}>{user.rating}</p>
@@ -169,15 +160,27 @@ function RankRow({ user, index }: { user: LeaderboardUser; index: number }) {
   );
 }
 
+function EmptyLeaderboard() {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 text-center">
+      <Trophy className="w-12 h-12 mb-4" style={{ color: "#333355" }} />
+      <p className="text-sm font-medium" style={{ color: "#555577" }}>No rankings yet</p>
+      <p className="text-xs mt-1" style={{ color: "#444466" }}>Be the first to join a contest and claim the top spot</p>
+    </div>
+  );
+}
+
 export default function Leaderboard() {
   const [tab, setTab] = useState<"global" | "batch">("global");
-  const users = tab === "global" ? globalLeaderboard : batchLeaderboard;
-  const podiumUsers = [users[1], users[0], users[2]]; // 2, 1, 3 order for visual podium
+  const { data: users = [], isLoading } = useLeaderboard();
+
+  const podiumUsers = users.length >= 3
+    ? [users[1], users[0], users[2]]
+    : [];
   const rowUsers = users.slice(3);
 
   return (
     <div>
-      {/* Tabs */}
       <div
         className="inline-flex p-1 rounded-xl mb-8"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
@@ -204,33 +207,47 @@ export default function Leaderboard() {
         ))}
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={tab}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.25 }}
-        >
-          {/* Podium — top 3 */}
-          <div
-            className="flex items-end justify-center gap-4 sm:gap-8 mb-8 pb-6 pt-4"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+      {isLoading ? (
+        <div className="space-y-3">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div
+              key={i}
+              className="h-16 rounded-xl animate-pulse"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+            />
+          ))}
+        </div>
+      ) : users.length === 0 ? (
+        <EmptyLeaderboard />
+      ) : (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25 }}
           >
-            {PODIUM_CONFIG.map((config) => {
-              const user = podiumUsers[config.order];
-              return user ? <PodiumCard key={config.pos} user={user} config={config} /> : null;
-            })}
-          </div>
+            {podiumUsers.length === 3 && (
+              <div
+                className="flex items-end justify-center gap-4 sm:gap-8 mb-8 pb-6 pt-4"
+                style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+              >
+                {PODIUM_CONFIG.map((config) => {
+                  const user = podiumUsers[config.order];
+                  return user ? <PodiumCard key={config.pos} user={user} config={config} /> : null;
+                })}
+              </div>
+            )}
 
-          {/* Rank rows — #4, #5 */}
-          <div className="flex flex-col gap-2">
-            {rowUsers.map((u, i) => (
-              <RankRow key={u.rank} user={u} index={i} />
-            ))}
-          </div>
-        </motion.div>
-      </AnimatePresence>
+            <div className="flex flex-col gap-2">
+              {(podiumUsers.length === 3 ? rowUsers : users).map((u, i) => (
+                <RankRow key={u.rank} user={u} index={i} />
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 }

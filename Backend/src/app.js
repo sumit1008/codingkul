@@ -18,6 +18,7 @@ import contestRoutes from "./routes/contestRoutes.js";
 import adminContestRoutes from "./routes/adminContestRoutes.js";
 import batchRoutes from "./routes/batchRoutes.js";
 import adminBatchRoutes from "./routes/adminBatchRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -102,6 +103,7 @@ app.use("/api/contests", contestRoutes);
 app.use("/api/admin/contests", adminContestRoutes);
 app.use("/api/batches", batchRoutes);
 app.use("/api/admin/batches", adminBatchRoutes);
+app.use("/api/users", userRoutes);
 
 // Error handling
 app.use(notFound);

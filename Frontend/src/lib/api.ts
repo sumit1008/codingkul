@@ -99,6 +99,63 @@ export const batchApi = {
   getAnnouncements: (slug: string) => api.get<{ success: boolean; data: Announcement[] }>(`/batches/${slug}/announcements`).then((r) => r.data.data),
 };
 
+// ── Dashboard API ────────────────────────────────────────────────────────────
+
+export interface DashboardStats {
+  xp: number;
+  level: number;
+  streak: number;
+  rank: number;
+  rating: number;
+  rankTitle: string;
+  solved: number;
+  hwCompleted: number;
+  hwTotal: number;
+  hwPct: number;
+  contestsParticipated: number;
+  enrolledBatches: number;
+  activeDays: number;
+}
+
+export interface DashboardLeaderboardEntry {
+  rank: number;
+  name: string;
+  avatar: string;
+  xp: number;
+  isCurrentUser: boolean;
+}
+
+export interface DashboardHeatmapCell {
+  date: string;
+  count: number;
+  intensity: 0 | 1 | 2 | 3;
+}
+
+export interface DashboardAchievement {
+  id: string;
+  title: string;
+  desc: string;
+  colorKey: "green" | "indigo" | "purple" | "cyan";
+  earned: boolean;
+  progress: number;
+  total: number;
+}
+
+export interface DashboardData {
+  stats: DashboardStats;
+  leaderboard: DashboardLeaderboardEntry[];
+  heatmap: DashboardHeatmapCell[];
+  achievements: DashboardAchievement[];
+  recentActivity: unknown[];
+}
+
+export const dashboardApi = {
+  get: () =>
+    api
+      .get<{ success: boolean; data: DashboardData }>("/users/dashboard")
+      .then((r) => r.data.data),
+};
+
 export const contestApi = {
   getUpcoming:     () => api.get<{ success: boolean; data: ApiContest[] }>("/contests/upcoming").then((r) => r.data.data),
   getPrevious:     () => api.get<{ success: boolean; data: (ApiContest & { userResult: ApiContestResult | null })[] }>("/contests/previous").then((r) => r.data.data),
