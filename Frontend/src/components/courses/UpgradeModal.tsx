@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Sparkles, ArrowRight, Lock, Loader2 } from "lucide-react";
-import { Course } from "@/types/course";
-import {
-  useAuth,
-  getHighestPurchasedTier,
-  PRODUCT_TIER_LABELS,
-} from "@/lib/auth-context";
-import { initiateProductPurchase } from "@/services/payment";
+import { X, Check, Sparkles, ArrowRight, Lock } from "lucide-react";
+import { Course, CourseTier, COURSE_PRICES } from "@/types/course";
+
+const TIER_LABELS: Record<CourseTier, string> = {
+  NONE: "Free Plan",
+  FOUNDATION: "Foundation Program",
+  ACCELERATOR: "Accelerator Program",
+  PLACEMENT: "Placement Mastery Program",
+};
 
 const UPGRADE_HIGHLIGHTS: Record<string, string[]> = {
   foundation: [
@@ -62,54 +62,25 @@ const SLUG_COLORS: Record<string, { border: string; btn: string; badge: string; 
 
 interface Props {
   course: Course;
+  userTier: CourseTier;
   onClose: () => void;
 }
 
-export default function UpgradeModal({ course, onClose }: Props) {
-  const router = useRouter();
-  const { user, refreshUser } = useAuth();
-  const [paying, setPaying] = useState(false);
-
+export default function UpgradeModal({ course, userTier, onClose }: Props) {
   const c = SLUG_COLORS[course.slug] ?? SLUG_COLORS.foundation;
   const highlights = UPGRADE_HIGHLIGHTS[course.slug] ?? [];
 
-  const highestTier = getHighestPurchasedTier(user);
-  const isUpgrade = highestTier !== null && !course.hasAccess;
-  const currentPlanLabel = highestTier ? (PRODUCT_TIER_LABELS[highestTier] ?? "Free Plan") : "Free Plan";
-  const targetPlanLabel = PRODUCT_TIER_LABELS[course.slug] ?? course.title;
+  const isUpgrade = userTier !== "NONE" && !course.hasAccess;
+  const currentPrice = COURSE_PRICES[userTier] ?? 0;
+  const finalPrice = course.upgradePrice ?? course.price;
+  const saved = isUpgrade ? currentPrice : 0;
 
-  // upgradePrice = discounted price (set by backend); price = full price
-  const displayPrice = course.upgradePrice ?? course.price;
-  const savings = course.upgradePrice !== null ? course.price - course.upgradePrice : 0;
-
-  const handlePurchase = async () => {
-    if (!user || paying) return;
-    setPaying(true);
-    await initiateProductPurchase({
-      productId:  course.slug,
-      userName:   user.name,
-      userEmail:  user.email,
-      onSuccess:  async () => {
-        await refreshUser();
-        onClose();
-        router.push(`/payment/success?product=${course.slug}`);
-      },
-      onFailure:  (reason) => {
-        setPaying(false);
-        if (reason !== "Payment cancelled") {
-          router.push(`/payment/failed?reason=${encodeURIComponent(reason)}`);
-          onClose();
-        }
-      },
-    });
-    setPaying(false);
-  };
-
+  // Close on Escape
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape" && !paying) onClose(); };
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose, paying]);
+  }, [onClose]);
 
   return (
     <AnimatePresence>
@@ -134,7 +105,7 @@ export default function UpgradeModal({ course, onClose }: Props) {
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Color top bar */}
+          {/* Shimmer top bar */}
           <div className="h-1 w-full" style={{ background: c.btn }} />
 
           {/* Close */}
@@ -157,66 +128,63 @@ export default function UpgradeModal({ course, onClose }: Props) {
               </div>
               <div>
                 <h2 className="text-lg font-bold text-white">
-                  {isUpgrade ? "Upgrade Your Plan" : "Unlock Course"}
+                  {course.hasAccess ? "Already Enrolled" : isUpgrade ? "Upgrade Your Plan" : "Unlock Course"}
                 </h2>
-                <p className="text-xs" style={{ color: "#8888aa" }}>{course.title}</p>
+                <p className="text-xs" style={{ color: "#8888aa" }}>
+                  {course.title}
+                </p>
               </div>
             </div>
 
-            {/* Plan flow */}
+            {/* Tier flow */}
             <div
               className="flex items-center gap-2 mb-5 p-3 rounded-xl"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
             >
+              {/* Current */}
               <div className="flex-1 text-center">
                 <p className="text-xs mb-1" style={{ color: "#555577" }}>Current Plan</p>
-                <p className="text-sm font-semibold text-white">{currentPlanLabel}</p>
+                <p className="text-sm font-semibold text-white">{TIER_LABELS[userTier]}</p>
               </div>
               <ArrowRight className="w-4 h-4 shrink-0" style={{ color: c.badge }} />
+              {/* Target */}
               <div className="flex-1 text-center">
-                <p className="text-xs mb-1" style={{ color: c.badge }}>
-                  {isUpgrade ? "Upgrading To" : "Enrolling In"}
-                </p>
-                <p className="text-sm font-semibold text-white">{targetPlanLabel}</p>
+                <p className="text-xs mb-1" style={{ color: c.badge }}>Upgrading To</p>
+                <p className="text-sm font-semibold text-white">{TIER_LABELS[course.tier]}</p>
               </div>
             </div>
 
             {/* Pricing */}
             <div
               className="rounded-xl p-4 mb-5"
-              style={{ background: c.gradFrom, border: `1px solid ${c.border}` }}
+              style={{ background: `${c.gradFrom}`, border: `1px solid ${c.border}` }}
             >
-              {isUpgrade && savings > 0 ? (
+              {isUpgrade ? (
                 <>
-                  <p className="text-xs mb-2" style={{ color: "#8888aa" }}>
-                    Upgrading from <span style={{ color: c.badge }}>{currentPlanLabel}</span>
+                  <p className="text-xs mb-1" style={{ color: "#8888aa" }}>
+                    You already own <span style={{ color: c.badge }}>{TIER_LABELS[userTier]}</span>
                   </p>
-                  <div className="flex items-baseline gap-2 mb-1">
-                    <p className="text-2xl font-bold" style={{ color: c.badge }}>
-                      ₹{displayPrice.toLocaleString()}
-                    </p>
-                    <p className="text-base line-through" style={{ color: "#555577" }}>
+                  <p className="text-2xl font-bold mb-1" style={{ color: c.badge }}>
+                    ₹{finalPrice.toLocaleString()}
+                    <span className="text-sm font-normal ml-2 line-through" style={{ color: "#555577" }}>
                       ₹{course.price.toLocaleString()}
-                    </p>
-                  </div>
-                  <div
-                    className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full"
-                    style={{ background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)", color: "#22c55e" }}
-                  >
-                    You save ₹{savings.toLocaleString()}
-                  </div>
+                    </span>
+                  </p>
+                  <p className="text-xs" style={{ color: "#22c55e" }}>
+                    You save ₹{saved.toLocaleString()} with your current plan
+                  </p>
                 </>
               ) : (
                 <>
+                  <p className="text-xs mb-1" style={{ color: "#8888aa" }}>One-time payment</p>
                   <p className="text-2xl font-bold" style={{ color: c.badge }}>
-                    ₹{displayPrice.toLocaleString()}
+                    ₹{finalPrice.toLocaleString()}
                   </p>
-                  <p className="text-xs mt-1" style={{ color: "#555577" }}>One-time payment · Lifetime access</p>
                 </>
               )}
             </div>
 
-            {/* Features */}
+            {/* Features unlocked */}
             <div className="mb-6">
               <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#555577" }}>
                 What you unlock
@@ -226,7 +194,7 @@ export default function UpgradeModal({ course, onClose }: Props) {
                   <div key={h} className="flex items-center gap-2.5 text-sm">
                     <div
                       className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                      style={{ background: c.gradFrom, border: `1px solid ${c.border}` }}
+                      style={{ background: `${c.gradFrom}`, border: `1px solid ${c.border}` }}
                     >
                       <Check className="w-3 h-3" style={{ color: c.badge }} />
                     </div>
@@ -236,7 +204,7 @@ export default function UpgradeModal({ course, onClose }: Props) {
               </div>
             </div>
 
-            {/* Lock note */}
+            {/* Locked note */}
             <div
               className="flex items-center gap-2 text-xs mb-5 p-3 rounded-xl"
               style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
@@ -249,29 +217,22 @@ export default function UpgradeModal({ course, onClose }: Props) {
 
             {/* CTA */}
             <button
-              disabled={paying}
-              className="w-full h-11 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+              className="w-full h-11 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
               style={{ background: c.btn, boxShadow: `0 0 20px ${c.glow}` }}
-              onClick={handlePurchase}
+              onClick={() => {
+                // Payment flow would go here
+                onClose();
+              }}
             >
-              {paying ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing…
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-4 h-4" />
-                  {isUpgrade && savings > 0
-                    ? `Upgrade — ₹${displayPrice.toLocaleString()}`
-                    : `Enroll — ₹${displayPrice.toLocaleString()}`}
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
+              <Sparkles className="w-4 h-4" />
+              {isUpgrade
+                ? `Upgrade for ₹${finalPrice.toLocaleString()}`
+                : `Enroll for ₹${finalPrice.toLocaleString()}`}
+              <ArrowRight className="w-4 h-4" />
             </button>
 
             <p className="text-center text-xs mt-3" style={{ color: "#555577" }}>
-              Secure payment · Powered by Razorpay
+              Secure payment · Lifetime access
             </p>
           </div>
         </motion.div>

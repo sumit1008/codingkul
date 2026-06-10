@@ -1,6 +1,5 @@
 import express from "express";
-import { protect } from "../middleware/authMiddleware.js";
-import { requireAnyProduct } from "../middleware/requirePurchasedProduct.js";
+import { protect, requireTier } from "../middleware/authMiddleware.js";
 import {
   getMyBatches,
   getBatchActivity,
@@ -16,8 +15,9 @@ import {
 
 const router = express.Router();
 
-// All batch routes require authentication AND at least one purchased product.
-router.use(protect, requireAnyProduct);
+// All batch routes require authentication AND at least FOUNDATION tier.
+// FREE (NONE) users are blocked here centrally — no per-route duplication needed.
+router.use(protect, requireTier("FOUNDATION"));
 
 // Summary routes (before /:slug to avoid conflicts)
 router.get("/",          getMyBatches);

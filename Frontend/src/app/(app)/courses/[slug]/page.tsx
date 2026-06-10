@@ -7,7 +7,7 @@ import {
   ArrowLeft, Lock, Play, FileText, ChevronDown, ChevronUp,
   Check, Sparkles, BookOpen, Clock, Users, Star,
 } from "lucide-react";
-import { Course } from "@/types/course";
+import { Course, CourseTier } from "@/types/course";
 import UpgradeModal from "@/components/courses/UpgradeModal";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
@@ -45,6 +45,7 @@ export default function CourseDetailPage() {
   const router = useRouter();
 
   const [course, setCourse] = useState<Course | null>(null);
+  const [userTier, setUserTier] = useState<CourseTier>("NONE");
   const [isLoading, setIsLoading] = useState(true);
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set([0]));
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -56,6 +57,8 @@ export default function CourseDetailPage() {
       const data = await res.json();
       if (data.success) {
         setCourse(data.data.course);
+        setUserTier(data.data.userTier);
+        // Expand first module by default
         setExpandedModules(new Set([0]));
       }
     } catch {
@@ -375,6 +378,7 @@ export default function CourseDetailPage() {
       {showUpgradeModal && course && (
         <UpgradeModal
           course={course}
+          userTier={userTier}
           onClose={() => setShowUpgradeModal(false)}
         />
       )}

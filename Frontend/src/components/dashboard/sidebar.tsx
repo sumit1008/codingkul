@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, BookOpen, ClipboardList, FileText,
-  Swords, Trophy, Cpu, Code2, Zap, X, Package,
+  Swords, Trophy, Cpu, Code2, Zap, X,
 } from "lucide-react";
 import { useAuth, hasPaidAccess } from "@/lib/auth-context";
 
@@ -17,7 +17,6 @@ const NAV_ITEMS = [
   { icon: Swords, label: "Contests", href: "/contests" },
   { icon: Trophy, label: "Rankings", href: "/rankings" },
   { icon: Cpu, label: "Core Subjects", href: "/subjects" },
-  { icon: Package, label: "My Purchases", href: "/my-purchases" },
 ];
 
 interface SidebarProps {
@@ -27,7 +26,6 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const router = useRouter();
   const { user, isLoading } = useAuth();
   const showUpgradeCard = !isLoading && !hasPaidAccess(user);
 
@@ -40,7 +38,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         <Link href="/" className="flex items-center gap-2.5">
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+            className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
             style={{
               background: "linear-gradient(135deg, #6366f1, #a855f7)",
               boxShadow: "0 0 14px rgba(99,102,241,0.45)",
@@ -85,7 +83,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               }}
             >
               <Icon
-                className="w-4 h-4 shrink-0"
+                className="w-4 h-4 flex-shrink-0"
                 style={{ color: active ? "#6366f1" : "inherit" }}
               />
               {label}
@@ -102,7 +100,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Bottom section */}
       <div className="px-3 pb-3 border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        {/* Explore courses card — shown to users without any purchase */}
+        {/* Upgrade card — free users only, never during auth loading */}
         {showUpgradeCard && (
           <div
             className="mt-3 rounded-2xl p-4"
@@ -113,20 +111,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           >
             <div className="flex items-center gap-2 mb-2">
               <Zap className="w-4 h-4 text-yellow-400" />
-              <span className="text-xs font-bold text-white">Unlock Premium Access</span>
+              <span className="text-xs font-bold text-white">Upgrade to Pro</span>
             </div>
             <p className="text-[10px] mb-3 leading-relaxed" style={{ color: "#8888aa" }}>
-              Enroll in a batch to access live classes, DSA sheets & more.
+              Unlock all 750+ problems, live classes & mock interviews.
             </p>
             <button
-              onClick={() => { router.push("/courses"); onClose(); }}
-              className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-center gap-1.5"
+              className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"
               style={{
                 background: "linear-gradient(135deg, #6366f1, #a855f7)",
                 boxShadow: "0 0 16px rgba(99,102,241,0.35)",
               }}
             >
-              Explore Courses
+              Upgrade — ₹999/mo
             </button>
           </div>
         )}
