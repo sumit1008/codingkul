@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Code2, TrendingUp, Trophy, Users, CheckCircle2 } from "lucide-react";
 
 const FEATURES = [
-  "450+ handpicked DSA problems with video editorials",
+  "750+ handpicked DSA problems with video editorials",
   "Weekly rated contests & real leaderboards",
   "Mock interviews & placement guarantee",
 ];
@@ -101,7 +101,7 @@ export default function AuthLeftPanel() {
               </span>
             </h1>
             <p className="text-base leading-relaxed mb-8" style={{ color: "#8888aa" }}>
-              Join 50,000+ students who cracked top tech companies with our structured DSA
+              Join 5,000+ students who cracked top tech companies with our structured DSA
               roadmap, live contests, and 1-on-1 mentorship.
             </p>
           </motion.div>
@@ -129,9 +129,9 @@ export default function AuthLeftPanel() {
             </div>
             <div className="grid grid-cols-3 gap-4 text-center">
               {[
-                { value: "50K+", label: "Students" },
-                { value: "2,000+", label: "Problems" },
-                { value: "5K+", label: "Placements" },
+                { value: "5K+", label: "Students" },
+                { value: "750+", label: "Problems" },
+                { value: "2K+", label: "Placements" },
               ].map((s) => (
                 <div key={s.label}>
                   <div className="text-xl font-bold text-white">{s.value}</div>
@@ -168,7 +168,7 @@ export default function AuthLeftPanel() {
           style={{ borderColor: "rgba(255,255,255,0.06)" }}
         >
           {[
-            { icon: Users, value: "50K+", label: "Active students" },
+            { icon: Users, value: "5K+", label: "Active students" },
             { icon: Trophy, value: "4.9/5", label: "Platform rating" },
           ].map(({ icon: Icon, value, label }) => (
             <div key={label} className="flex items-center gap-2">

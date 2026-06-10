@@ -51,7 +51,7 @@ const PLANS = [
       "Monthly One-on-One Reviews",
     ],
     validity: "6 Months Live · 1 Year Platform Access",
-    outcome: "Solve 500+ Interview-ready problems with mentorship.",
+    outcome: "Solve 750+ Interview-ready problems with mentorship.",
     color: "#eab308",
     border: "rgba(234,179,8,0.4)",
     glow: "rgba(234,179,8,0.08)",

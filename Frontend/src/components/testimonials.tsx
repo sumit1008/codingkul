@@ -5,64 +5,59 @@ import { Star } from "lucide-react";
 
 const TESTIMONIALS = [
   {
-    name: "Aryan Mehta",
-    role: "SDE @ Google",
-    avatar: "AM",
+    name: "Jai Prakash",
+    role: "SDE @ Formcept",
+    avatar: "JP",
     avatarColor: "#6366f1",
     review:
-      "Codingkul's structured roadmap was a game changer. I went from struggling with arrays to solving hard DP problems in 3 months. Got my Google offer in 4 months flat.",
-    company: "Google",
+      "My DSA journey at CodingKul Academy played a major role in shaping my problem-solving skills and interview confidence. The structured roadmap, regular coding practice, and concept-focused teaching helped me strengthen my fundamentals and approach technical interviews more confidently. The mentorship and disciplined environment made a huge difference in my preparation.",
+    company: "Formcept",
     rating: 5,
+    linkedin: "https://www.linkedin.com/in/jay-prakash17423/",
   },
   {
-    name: "Priya Sharma",
-    role: "SDE-2 @ Amazon",
-    avatar: "PS",
+    name: "Yash Arya",
+    role: "SDE @ Fastenal",
+    avatar: "YA",
     avatarColor: "#f59e0b",
     review:
-      "The live contests kept me consistent and competitive. The editorial explanations are top-notch — better than anything else I've found online.",
-    company: "Amazon",
+      "CodingKul Academy provided me with a strong foundation in Data Structures & Algorithms through a very well-structured curriculum. What stood out most was the interview-focused preparation, regular practice sessions, and consistent guidance throughout the journey. The academy helped me improve my coding skills and build confidence for placements.",
+    company: "Fastenal",
     rating: 5,
+    linkedin: "https://www.linkedin.com/in/yasharya007/",
   },
   {
-    name: "Rahul Gupta",
-    role: "SDE @ Microsoft",
-    avatar: "RG",
+    name: "Prem Roshan",
+    role: "SRE @ Texas Instruments",
+    avatar: "PR",
     avatarColor: "#10b981",
     review:
-      "Placement mentorship here is unreal. Mock interviews with actual FAANG engineers, resume reviews, and offer negotiation help. Landed Microsoft at 40 LPA.",
-    company: "Microsoft",
+      "Studying DSA at CodingKul Academy significantly improved my analytical thinking and coding ability. The step-by-step approach to concepts, carefully designed problem sheets, and continuous practice sessions made learning much more effective. The guidance I received helped me approach technical interviews with confidence and clarity.",
+    company: "Texas Instruments",
     rating: 5,
+    linkedin: "https://www.linkedin.com/in/jay-prakash17423/",
   },
   {
-    name: "Sneha Joshi",
-    role: "SDE @ Flipkart",
-    avatar: "SJ",
+    name: "Vishal Devasis",
+    role: "SRE @ Texas Instruments",
+    avatar: "VD",
     avatarColor: "#a855f7",
     review:
-      "I had zero DSA foundation. The beginner roadmap is incredibly well paced. Never felt overwhelmed. Cleared Flipkart in my first ever attempt.",
-    company: "Flipkart",
+      "CodingKul Academy made DSA learning structured, practical, and engaging. The topic-wise roadmap, doubt support, and consistent coding practice helped me build strong fundamentals in problem-solving. The interview preparation approach and focus on concept clarity were extremely valuable in my placement journey.",
+    company: "Texas Instruments",
     rating: 5,
+    linkedin: "https://www.linkedin.com/in/vishaldevasics/",
   },
   {
-    name: "Vikram Singh",
-    role: "SDE @ Uber",
-    avatar: "VS",
+    name: "Nitesh Kumar",
+    role: "SDE @ Mphasis",
+    avatar: "NK",
     avatarColor: "#22d3ee",
     review:
-      "The analytics dashboard showed exactly where I was weak. Focused my last 2 weeks on graphs and cleared every interview round. Best investment I made.",
-    company: "Uber",
+      "My experience with CodingKul Academy was excellent. The academy focuses not only on solving problems but also on building strong logical thinking and coding fundamentals. Regular practice, mentorship, and placement-oriented preparation helped me improve tremendously and feel prepared for real technical interviews.",
+    company: "Mphasis",
     rating: 5,
-  },
-  {
-    name: "Meera Patel",
-    role: "SDE @ Razorpay",
-    avatar: "MP",
-    avatarColor: "#ec4899",
-    review:
-      "The community and doubt solving is incredible. Never waited more than 15 minutes for a clear answer. It feels like having a senior engineer on call 24/7.",
-    company: "Razorpay",
-    rating: 5,
+    linkedin: "https://www.linkedin.com/in/nitesh0017/",
   },
 ];
 
@@ -102,7 +97,7 @@ export default function Testimonials() {
             className="text-4xl md:text-5xl font-bold text-white mb-4"
             style={{ letterSpacing: "-0.03em" }}
           >
-            5,000+ placements and counting
+            2,000+ placements and counting
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#8888aa" }}>
             Real students. Real companies. Real results.
@@ -110,7 +105,7 @@ export default function Testimonials() {
         </motion.div>
 
         {/* Cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="flex flex-wrap justify-center gap-5">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={t.name}
@@ -119,7 +114,7 @@ export default function Testimonials() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-2xl p-6 flex flex-col gap-4 cursor-default transition-all duration-300"
+              className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] rounded-2xl p-6 flex flex-col gap-4 cursor-default transition-all duration-300"
               style={{
                 background: "rgba(255,255,255,0.02)",
                 border: "1px solid rgba(255,255,255,0.07)",
@@ -149,12 +144,32 @@ export default function Testimonials() {
                 >
                   {t.avatar}
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="text-sm font-semibold text-white">{t.name}</div>
                   <div className="text-[11px]" style={{ color: "#8888aa" }}>
                     {t.role}
                   </div>
                 </div>
+                <a
+                  href={t.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 p-1.5 rounded-lg transition-colors duration-200"
+                  style={{ color: "#8888aa" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#0a66c2";
+                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(10,102,194,0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#8888aa";
+                    (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
               </div>
             </motion.div>
           ))}

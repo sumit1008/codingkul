@@ -6,6 +6,7 @@ import FeatureSection from "@/components/feature-section";
 import DashboardPreview from "@/components/dashboard-preview";
 import DsaSheetSection from "@/components/dsa-sheet-section";
 import Testimonials from "@/components/testimonials";
+import PlacedAt from "@/components/placed-at";
 import PricingSection from "@/components/pricing-section";
 import Footer from "@/components/footer";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <DashboardPreview />
       <DsaSheetSection />
       <Testimonials />
+      <PlacedAt />
       <PricingSection />
       <Footer />
     </main>

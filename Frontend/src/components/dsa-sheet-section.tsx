@@ -113,7 +113,7 @@ export default function DsaSheetSection() {
             DSA Sheet — Zero to Hero
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "#8888aa" }}>
-            450+ handpicked problems organized by topic and difficulty. Track
+            750+ handpicked problems organized by topic and difficulty. Track
             every problem, unlock the next chapter.
           </p>
         </motion.div>

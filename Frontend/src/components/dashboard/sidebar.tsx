@@ -114,7 +114,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <span className="text-xs font-bold text-white">Upgrade to Pro</span>
             </div>
             <p className="text-[10px] mb-3 leading-relaxed" style={{ color: "#8888aa" }}>
-              Unlock all 450+ problems, live classes & mock interviews.
+              Unlock all 750+ problems, live classes & mock interviews.
             </p>
             <button
               className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"

@@ -74,7 +74,7 @@ export default function HeroSection() {
           >
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
             <span className="text-indigo-300">Trusted by</span>
-            <span className="text-white font-semibold">50,000+ students</span>
+            <span className="text-white font-semibold">5,000+ students</span>
           </div>
         </motion.div>
 
@@ -189,9 +189,9 @@ export default function HeroSection() {
           className="flex flex-wrap items-center justify-center gap-8 mt-16 text-sm"
         >
           {[
-            { label: "Problems", value: "2,000+" },
+            { label: "Problems", value: "750+" },
             { label: "Live Contests", value: "Weekly" },
-            { label: "Placements", value: "5,000+" },
+            { label: "Placements", value: "2,000+" },
             { label: "Rating", value: "4.9 / 5" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
