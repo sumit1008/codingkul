@@ -9,20 +9,18 @@ import {
   TrendingUp, Trophy, FileText, ExternalLink, Bookmark,
   BookmarkCheck, Target, Award, Loader2, Folder, Lock, Crown,
 } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
+import { useAuth, getHighestPurchasedRank, PRODUCT_TIER_RANK } from "@/lib/auth-context";
 import { loadSolved, saveSolved, loadBookmarks, saveBookmarks } from "@/lib/progress";
 import api from "@/lib/api";
 import type { SheetDetail, TopicMeta, APIProblem } from "@/types/sheet";
-import type { CourseTier } from "@/types/course";
-import { TIER_LEVELS } from "@/types/course";
 
 function isI200Sheet(slug: string, isPremium: boolean): boolean {
   return isPremium || /i.?200/i.test(slug);
 }
 
-function canAccessSheet(userTier: CourseTier, isPremium: boolean, slug: string): boolean {
-  if (isI200Sheet(slug, isPremium)) return userTier === "PLACEMENT";
-  return TIER_LEVELS[userTier] >= TIER_LEVELS["FOUNDATION"];
+function canAccessSheet(userRank: number, isPremium: boolean, slug: string): boolean {
+  if (isI200Sheet(slug, isPremium)) return userRank >= PRODUCT_TIER_RANK["placement"]; // rank 3
+  return userRank >= 1; // any paid plan
 }
 
 const DIFF: Record<string, { text: string; bg: string; border: string }> = {
@@ -616,8 +614,8 @@ export default function SheetPage() {
   }
 
   // ── Access gate ──────────────────────────────────────────────────────────────
-  const userTier: CourseTier = user?.courseTier ?? "NONE";
-  const hasAccess = canAccessSheet(userTier, sheet.isPremium, slug);
+  const userRank = getHighestPurchasedRank(user);
+  const hasAccess = canAccessSheet(userRank, sheet.isPremium, slug);
 
   if (!hasAccess) {
     const needsPlacement = isI200Sheet(slug, sheet.isPremium);

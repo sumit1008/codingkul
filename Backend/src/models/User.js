@@ -63,6 +63,17 @@ const userSchema = new mongoose.Schema(
     },
     purchasedCourses: [{ type: String }],
 
+    // ── Per-product purchases ─────────────────────────────────────────────────
+    purchasedProducts: [
+      {
+        productId:   { type: String, required: true },
+        productType: { type: String, default: "batch" },
+        purchasedAt: { type: Date, default: Date.now },
+        paymentId:   { type: String, required: true },
+        orderId:     { type: String, required: true },
+      },
+    ],
+
     // ── Contest / competitive fields (added in S4) ──────────────────
     codeforcesHandle: {
       type: String,

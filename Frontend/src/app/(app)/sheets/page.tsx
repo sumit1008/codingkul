@@ -6,22 +6,20 @@ import { motion } from "framer-motion";
 import {
   CheckCircle2, TrendingUp, Star, Zap, Flame, BookOpen, Lock, ArrowRight, Crown,
 } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
+import { useAuth, getHighestPurchasedRank, PRODUCT_TIER_RANK } from "@/lib/auth-context";
 import { loadSolved } from "@/lib/progress";
 import api from "@/lib/api";
 import type { SheetMeta } from "@/types/sheet";
-import type { CourseTier } from "@/types/course";
-import { TIER_LEVELS } from "@/types/course";
 
-// ── Access logic ────────────────────────────────────────────────────────────
+// ── Access logic (product-purchase based) ───────────────────────────────────
 
 function isI200Sheet(slug: string, isPremium: boolean): boolean {
   return isPremium || /i.?200/i.test(slug);
 }
 
-function canAccessSheet(userTier: CourseTier, isPremium: boolean, slug: string): boolean {
-  if (isI200Sheet(slug, isPremium)) return userTier === "PLACEMENT"; // I-200: Placement only
-  return TIER_LEVELS[userTier] >= TIER_LEVELS["FOUNDATION"];          // others: any paid tier
+function canAccessSheet(userRank: number, isPremium: boolean, slug: string): boolean {
+  if (isI200Sheet(slug, isPremium)) return userRank >= PRODUCT_TIER_RANK["placement"]; // rank 3
+  return userRank >= 1; // any paid plan
 }
 
 function requiredTierLabel(isPremium: boolean, slug: string): string {
@@ -63,7 +61,6 @@ function SheetCard({
   sheet: SheetMeta;
   solved: number;
   hasAccess: boolean;
-  userTier: CourseTier;
   onLockedClick: () => void;
 }) {
   const router = useRouter();
@@ -252,7 +249,7 @@ export default function SheetsPage() {
   const [sheets, setSheets] = useState<SheetMeta[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const userTier: CourseTier = user?.courseTier ?? "NONE";
+  const userRank = getHighestPurchasedRank(user);
 
   useEffect(() => {
     api
@@ -296,8 +293,8 @@ export default function SheetsPage() {
           Choose your learning path and start solving
         </p>
 
-        {/* Tier banner */}
-        {userTier === "NONE" && (
+        {/* Tier banner — shown when no product purchased */}
+        {userRank === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -330,7 +327,7 @@ export default function SheetsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {sheets.map((sheet, i) => {
-            const hasAccess = canAccessSheet(userTier, sheet.isPremium, sheet.slug);
+            const hasAccess = canAccessSheet(userRank, sheet.isPremium, sheet.slug);
             return (
               <motion.div
                 key={sheet.slug}
@@ -342,7 +339,6 @@ export default function SheetsPage() {
                   sheet={sheet}
                   solved={solvedCounts[sheet.slug] ?? 0}
                   hasAccess={hasAccess}
-                  userTier={userTier}
                   onLockedClick={() => router.push("/courses")}
                 />
               </motion.div>

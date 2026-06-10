@@ -7,18 +7,17 @@ import {
   Zap, Flame, Star, Check, X, Lock, Eye, ArrowRight,
   Trophy, Target, Sparkles, ChevronDown, ChevronUp,
 } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
-import { Course, CourseTier, TIER_LEVELS, TIER_LABELS } from "@/types/course";
+import {
+  useAuth,
+  getHighestPurchasedTier,
+  PRODUCT_TIER_RANK,
+  PRODUCT_TIER_LABELS,
+} from "@/lib/auth-context";
+import { Course } from "@/types/course";
 import UpgradeModal from "@/components/courses/UpgradeModal";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
-const TIER_LABEL_MAP: Record<CourseTier, string> = {
-  NONE: "Free User",
-  FOUNDATION: "Foundation Student",
-  ACCELERATOR: "Accelerator Student",
-  PLACEMENT: "Placement Student",
-};
 
 const ROADMAP = [
   { month: 1, title: "Fundamentals", tags: ["Arrays", "Strings", "Mathematics"], advanced: false },
@@ -44,16 +43,30 @@ const COMPARE_ROWS = [
   { feature: "SQL Interview Prep", foundation: false, accelerator: false, placement: true },
 ];
 
+/**
+ * Returns only the courses that should be visible for the user's tier:
+ * - No purchase    → all 3 cards
+ * - Foundation     → Foundation (Purchased) + Accelerator (Upgrade)
+ * - Accelerator    → Accelerator (Purchased) + Placement (Upgrade)
+ * - Placement      → Placement (Purchased) only
+ */
+function getVisibleCourses(courses: Course[], highestTier: string | null): Course[] {
+  if (!highestTier) return courses;
+  const rank = PRODUCT_TIER_RANK[highestTier] ?? 0;
+  return courses.filter((c) => {
+    const cr = PRODUCT_TIER_RANK[c.slug] ?? 0;
+    return cr === rank || cr === rank + 1;
+  });
+}
+
 interface CourseCardProps {
   course: Course;
-  userTier: CourseTier;
   onUpgrade: (course: Course) => void;
 }
 
-function CourseCard({ course, userTier, onUpgrade }: CourseCardProps) {
+function CourseCard({ course, onUpgrade }: CourseCardProps) {
   const router = useRouter();
-  const hasAccess = course.hasAccess;
-  const isEnrolled = hasAccess;
+  const isEnrolled = course.hasAccess;
 
   const tierColor: Record<string, { border: string; glow: string; badge: string; btn: string; btnText: string }> = {
     foundation: {
@@ -115,34 +128,30 @@ function CourseCard({ course, userTier, onUpgrade }: CourseCardProps) {
               className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full mb-2"
               style={{ background: `${c.glow}`, border: `1px solid ${c.border}`, color: c.badge }}
             >
-              <Check className="w-3.5 h-3.5" /> Enrolled
+              <Check className="w-3.5 h-3.5" /> Purchased
             </div>
-          ) : course.upgradePrice !== null && course.upgradePrice !== course.price ? (
+          ) : course.upgradePrice !== null && course.upgradePrice < course.price ? (
             <div
               className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full mb-2"
-              style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", color: "#a5b4fc" }}
+              style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)", color: "#22c55e" }}
             >
-              <Sparkles className="w-3 h-3" /> Upgrade Available
+              <Sparkles className="w-3 h-3" />
+              Save ₹{(course.price - course.upgradePrice).toLocaleString()} on upgrade
             </div>
           ) : null}
-          <div className="flex items-baseline gap-1.5 mt-1">
-            {isEnrolled ? null : course.upgradePrice !== null && course.upgradePrice !== course.price ? (
-              <>
-                <span className="text-3xl font-bold" style={{ color: c.badge }}>
-                  ₹{course.upgradePrice.toLocaleString()}
-                </span>
-                <span className="text-sm line-through" style={{ color: "#555577" }}>₹{course.price.toLocaleString()}</span>
-                <span className="text-sm" style={{ color: "#8888aa" }}>upgrade</span>
-              </>
-            ) : (
-              <>
-                <span className="text-3xl font-bold" style={{ color: c.badge }}>
+          {!isEnrolled && (
+            <div className="flex items-baseline gap-1.5 mt-1">
+              <span className="text-3xl font-bold" style={{ color: c.badge }}>
+                ₹{(course.upgradePrice ?? course.price).toLocaleString()}
+              </span>
+              {course.upgradePrice !== null && course.upgradePrice < course.price && (
+                <span className="text-base line-through" style={{ color: "#555577" }}>
                   ₹{course.price.toLocaleString()}
                 </span>
-                <span className="text-sm" style={{ color: "#8888aa" }}>one-time</span>
-              </>
-            )}
-          </div>
+              )}
+              <span className="text-sm" style={{ color: "#8888aa" }}>one-time</span>
+            </div>
+          )}
         </div>
 
         {/* Target */}
@@ -205,9 +214,9 @@ function CourseCard({ course, userTier, onUpgrade }: CourseCardProps) {
                 className="w-full h-10 rounded-xl text-sm font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
                 style={{ background: c.btn }}
               >
-                {course.upgradePrice !== null && course.upgradePrice !== course.price
-                  ? `Upgrade for ₹${course.upgradePrice.toLocaleString()}`
-                  : `Enroll Now`}
+                {course.upgradePrice !== null && course.upgradePrice < course.price
+                  ? `Upgrade — ₹${course.upgradePrice.toLocaleString()}`
+                  : `Enroll — ₹${course.price.toLocaleString()}`}
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
@@ -225,8 +234,9 @@ function CourseCard({ course, userTier, onUpgrade }: CourseCardProps) {
   );
 }
 
-function RightSidebar({ userTier }: { userTier: CourseTier }) {
+function RightSidebar() {
   const { user } = useAuth();
+  const highestTier = getHighestPurchasedTier(user);
 
   const xpToNext = (user?.xpMax ?? 5000) - (user?.xp ?? 0);
 
@@ -317,7 +327,7 @@ function RightSidebar({ userTier }: { userTier: CourseTier }) {
         <p className="text-xs mt-1" style={{ color: "#8888aa" }}>days in a row 🔥</p>
       </div>
 
-      {/* Current Plan */}
+      {/* Subscription Status */}
       <div
         className="rounded-2xl p-5"
         style={{
@@ -327,16 +337,17 @@ function RightSidebar({ userTier }: { userTier: CourseTier }) {
       >
         <div className="flex items-center gap-2 mb-2">
           <Trophy className="w-4 h-4" style={{ color: "#a5b4fc" }} />
-          <span className="text-sm font-bold text-white">Current Plan</span>
+          <span className="text-sm font-bold text-white">Subscription</span>
         </div>
-        <p className="text-base font-semibold" style={{ color: "#a5b4fc" }}>
-          {TIER_LABEL_MAP[userTier]}
-        </p>
-        {userTier !== "PLACEMENT" && (
-          <p className="text-xs mt-1" style={{ color: "#555577" }}>Upgrade to unlock more</p>
-        )}
-        {userTier === "PLACEMENT" && (
-          <p className="text-xs mt-1" style={{ color: "#22c55e" }}>Premium Access Active ✓</p>
+        {!highestTier ? (
+          <p className="text-xs mt-1" style={{ color: "#555577" }}>No active plan — browse below to enroll</p>
+        ) : (
+          <>
+            <p className="text-base font-semibold" style={{ color: "#a5b4fc" }}>
+              {PRODUCT_TIER_LABELS[highestTier]}
+            </p>
+            <p className="text-xs mt-1" style={{ color: "#22c55e" }}>Active ✓</p>
+          </>
         )}
       </div>
     </div>
@@ -346,26 +357,25 @@ function RightSidebar({ userTier }: { userTier: CourseTier }) {
 export default function CoursesPage() {
   const { user } = useAuth();
   const [courses, setCourses] = useState<Course[]>([]);
-  const [userTier, setUserTier] = useState<CourseTier>("NONE");
   const [isLoading, setIsLoading] = useState(true);
   const [upgradeTarget, setUpgradeTarget] = useState<Course | null>(null);
   const [showRoadmap, setShowRoadmap] = useState(true);
+
+  // Derived from auth context — no extra state needed
+  const highestTier = getHighestPurchasedTier(user);
+  const visible = getVisibleCourses(courses, highestTier);
 
   const fetchCourses = useCallback(async () => {
     try {
       const res = await fetch(`${API}/courses`, { credentials: "include" });
       const data = await res.json();
-      if (data.success) {
-        setCourses(data.data.courses);
-        setUserTier(data.data.userTier);
-      }
+      if (data.success) setCourses(data.data.courses);
     } catch {
-      // fallback: use user's tier from auth context
-      if (user) setUserTier(user.courseTier || "NONE");
+      // courses remain empty; loading ends
     } finally {
       setIsLoading(false);
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => { fetchCourses(); }, [fetchCourses]);
 
@@ -410,26 +420,21 @@ export default function CoursesPage() {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_280px] gap-6">
           {/* Left: Content */}
           <div className="space-y-10">
-            {/* Course cards — only show tiers at or above user's current tier */}
+            {/* Course cards — visibility driven by tier hierarchy */}
             {(() => {
-              const visible = courses.filter((c) => TIER_LEVELS[c.tier] >= TIER_LEVELS[userTier]);
               const count = visible.length;
+              const maxW = count === 1 ? "520px" : count === 2 ? "420px" : "360px";
               return (
                 <div
                   className="flex flex-wrap justify-center gap-6 pt-4"
-                  style={{ "--card-max": count === 1 ? "520px" : count === 2 ? "420px" : "360px" } as React.CSSProperties}
                 >
                   {visible.map((course) => (
                     <div
                       key={course.slug}
                       className="flex-1"
-                      style={{ minWidth: "280px", maxWidth: count === 1 ? "520px" : count === 2 ? "420px" : "360px" }}
+                      style={{ minWidth: "280px", maxWidth: maxW }}
                     >
-                      <CourseCard
-                        course={course}
-                        userTier={userTier}
-                        onUpgrade={setUpgradeTarget}
-                      />
+                      <CourseCard course={course} onUpgrade={setUpgradeTarget} />
                     </div>
                   ))}
                 </div>
@@ -624,7 +629,7 @@ export default function CoursesPage() {
           {/* Right sidebar */}
           <div className="hidden xl:block">
             <div className="sticky top-6">
-              <RightSidebar userTier={userTier} />
+              <RightSidebar />
             </div>
           </div>
         </div>
@@ -634,7 +639,6 @@ export default function CoursesPage() {
       {upgradeTarget && (
         <UpgradeModal
           course={upgradeTarget}
-          userTier={userTier}
           onClose={() => setUpgradeTarget(null)}
         />
       )}

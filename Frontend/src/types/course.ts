@@ -1,5 +1,13 @@
 export type CourseTier = "NONE" | "FOUNDATION" | "ACCELERATOR" | "PLACEMENT";
 
+export interface PurchasedProduct {
+  productId: string;
+  productType: string;
+  purchasedAt: string;
+  paymentId: string;
+  orderId: string;
+}
+
 export interface CourseLecture {
   title: string;
   duration: string;
@@ -34,7 +42,6 @@ export interface CoursesApiResponse {
   success: boolean;
   data: {
     courses: Course[];
-    userTier: CourseTier;
   };
 }
 
@@ -42,7 +49,6 @@ export interface CourseApiResponse {
   success: boolean;
   data: {
     course: Course;
-    userTier: CourseTier;
   };
 }
 
