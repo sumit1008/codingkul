@@ -9,8 +9,9 @@ const generateToken = (res, userId) => {
 
   res.cookie("ck_token", token, {
     httpOnly: true,
-    secure: isProd,                    // true on Railway (HTTPS)
-    sameSite: isProd ? "none" : "lax", // "none" required for cross-domain (Vercel → Railway)
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
+    domain: isProd ? ".codingkul.in" : undefined, // share cookie across *.codingkul.in subdomains
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 

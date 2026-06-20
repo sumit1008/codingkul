@@ -111,6 +111,7 @@ export const logout = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: isProd,
     sameSite: isProd ? "none" : "lax",
+    domain: isProd ? ".codingkul.in" : undefined,
     expires: new Date(0),
   });
   res.json({ success: true, message: "Logged out" });
