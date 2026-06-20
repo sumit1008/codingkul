@@ -110,7 +110,7 @@ export const logout = asyncHandler(async (req, res) => {
   res.cookie("ck_token", "", {
     httpOnly: true,
     secure: isProd,
-    sameSite: isProd ? "none" : "lax",
+    sameSite: "lax",
     domain: isProd ? ".codingkul.in" : undefined,
     expires: new Date(0),
   });

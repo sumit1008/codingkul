@@ -10,8 +10,8 @@ const generateToken = (res, userId) => {
   res.cookie("ck_token", token, {
     httpOnly: true,
     secure: isProd,
-    sameSite: isProd ? "none" : "lax",
-    domain: isProd ? ".codingkul.in" : undefined, // share cookie across *.codingkul.in subdomains
+    sameSite: "lax",
+    domain: isProd ? ".codingkul.in" : undefined,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
