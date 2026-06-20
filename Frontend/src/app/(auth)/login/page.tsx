@@ -27,8 +27,6 @@ function GitHubIcon() {
   );
 }
 
-const BACKEND = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api").replace(/\/api$/, "");
-
 function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -53,7 +51,7 @@ function LoginContent() {
   }, [searchParams]);
 
   const handleGoogleLogin = useCallback(() => {
-    window.location.href = `${BACKEND}/api/auth/google`;
+    window.location.href = "/api/auth/google";
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
