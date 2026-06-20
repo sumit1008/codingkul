@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Sparkles, ArrowRight, Lock } from "lucide-react";
+import { X, Check, Sparkles, ArrowRight, Lock, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Course, CourseTier, COURSE_PRICES } from "@/types/course";
+import { useAuth } from "@/lib/auth-context";
+import { useRazorpay } from "@/hooks/useRazorpay";
 
 const TIER_LABELS: Record<CourseTier, string> = {
   NONE: "Free Plan",
@@ -36,13 +39,14 @@ const UPGRADE_HIGHLIGHTS: Record<string, string[]> = {
   ],
 };
 
-const SLUG_COLORS: Record<string, { border: string; btn: string; badge: string; glow: string; gradFrom: string }> = {
+const SLUG_COLORS: Record<string, { border: string; btn: string; badge: string; glow: string; gradFrom: string; accent: string }> = {
   foundation: {
     border: "rgba(34,197,94,0.35)",
     btn: "linear-gradient(135deg, #15803d, #16a34a)",
     badge: "#22c55e",
     glow: "rgba(34,197,94,0.08)",
     gradFrom: "rgba(34,197,94,0.06)",
+    accent: "#16a34a",
   },
   accelerator: {
     border: "rgba(234,179,8,0.4)",
@@ -50,6 +54,7 @@ const SLUG_COLORS: Record<string, { border: string; btn: string; badge: string; 
     badge: "#eab308",
     glow: "rgba(234,179,8,0.08)",
     gradFrom: "rgba(234,179,8,0.06)",
+    accent: "#b45309",
   },
   placement: {
     border: "rgba(168,85,247,0.35)",
@@ -57,6 +62,7 @@ const SLUG_COLORS: Record<string, { border: string; btn: string; badge: string; 
     badge: "#a855f7",
     glow: "rgba(168,85,247,0.08)",
     gradFrom: "rgba(168,85,247,0.06)",
+    accent: "#7c3aed",
   },
 };
 
@@ -69,18 +75,42 @@ interface Props {
 export default function UpgradeModal({ course, userTier, onClose }: Props) {
   const c = SLUG_COLORS[course.slug] ?? SLUG_COLORS.foundation;
   const highlights = UPGRADE_HIGHLIGHTS[course.slug] ?? [];
+  const { user, refreshUser } = useAuth();
+  const { initiatePayment } = useRazorpay();
+  const [isPaying, setIsPaying] = useState(false);
 
   const isUpgrade = userTier !== "NONE" && !course.hasAccess;
   const currentPrice = COURSE_PRICES[userTier] ?? 0;
   const finalPrice = course.upgradePrice ?? course.price;
   const saved = isUpgrade ? currentPrice : 0;
 
-  // Close on Escape
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape" && !isPaying) onClose(); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, isPaying]);
+
+  const handlePayment = async () => {
+    if (!user || isPaying) return;
+
+    setIsPaying(true);
+    const result = await initiatePayment({
+      tier: course.tier as Exclude<CourseTier, "NONE">,
+      amount: finalPrice,
+      userName: user.name,
+      userEmail: user.email,
+      accentColor: c.accent,
+    });
+    setIsPaying(false);
+
+    if (result.success) {
+      await refreshUser();
+      toast.success("Payment successful! Your tier has been upgraded.");
+      onClose();
+    } else if (result.error && result.error !== "cancelled") {
+      toast.error(result.error);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -90,7 +120,7 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
         style={{ background: "rgba(0,0,8,0.85)", backdropFilter: "blur(12px)" }}
-        onClick={onClose}
+        onClick={() => { if (!isPaying) onClose(); }}
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.93, y: 20 }}
@@ -110,8 +140,9 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
 
           {/* Close */}
           <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/5"
+            onClick={() => { if (!isPaying) onClose(); }}
+            disabled={isPaying}
+            className="absolute top-4 right-4 p-1.5 rounded-lg transition-colors hover:bg-white/5 disabled:opacity-40"
             style={{ color: "#8888aa" }}
           >
             <X className="w-4 h-4" />
@@ -141,13 +172,11 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
               className="flex items-center gap-2 mb-5 p-3 rounded-xl"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
             >
-              {/* Current */}
               <div className="flex-1 text-center">
                 <p className="text-xs mb-1" style={{ color: "#555577" }}>Current Plan</p>
                 <p className="text-sm font-semibold text-white">{TIER_LABELS[userTier]}</p>
               </div>
               <ArrowRight className="w-4 h-4 shrink-0" style={{ color: c.badge }} />
-              {/* Target */}
               <div className="flex-1 text-center">
                 <p className="text-xs mb-1" style={{ color: c.badge }}>Upgrading To</p>
                 <p className="text-sm font-semibold text-white">{TIER_LABELS[course.tier]}</p>
@@ -184,7 +213,7 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
               )}
             </div>
 
-            {/* Features unlocked */}
+            {/* Features */}
             <div className="mb-6">
               <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#555577" }}>
                 What you unlock
@@ -217,22 +246,29 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
 
             {/* CTA */}
             <button
-              className="w-full h-11 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+              className="w-full h-11 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               style={{ background: c.btn, boxShadow: `0 0 20px ${c.glow}` }}
-              onClick={() => {
-                // Payment flow would go here
-                onClose();
-              }}
+              onClick={handlePayment}
+              disabled={isPaying || course.hasAccess}
             >
-              <Sparkles className="w-4 h-4" />
-              {isUpgrade
-                ? `Upgrade for ₹${finalPrice.toLocaleString()}`
-                : `Enroll for ₹${finalPrice.toLocaleString()}`}
-              <ArrowRight className="w-4 h-4" />
+              {isPaying ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Processing…
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4" />
+                  {isUpgrade
+                    ? `Upgrade for ₹${finalPrice.toLocaleString()}`
+                    : `Enroll for ₹${finalPrice.toLocaleString()}`}
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
 
             <p className="text-center text-xs mt-3" style={{ color: "#555577" }}>
-              Secure payment · Lifetime access
+              Secure payment via Razorpay · Lifetime access
             </p>
           </div>
         </motion.div>
