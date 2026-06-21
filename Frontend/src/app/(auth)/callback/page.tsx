@@ -20,7 +20,13 @@ function CallbackContent() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
     })
-      .then(() => router.push("/dashboard"))
+      .then((res) => {
+        if (!res.ok) throw new Error("set-auth failed");
+        // Full page reload so AuthProvider remounts and re-fetches /api/auth/me
+        // with the new cookie. router.push() keeps AuthProvider alive with
+        // stale user=null state, causing AppLayout to redirect back to /login.
+        window.location.href = "/dashboard";
+      })
       .catch(() => router.push("/login?error=google_failed"));
   }, [params, router]);
 
