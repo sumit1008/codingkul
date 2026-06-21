@@ -12,6 +12,8 @@ export async function POST(req: NextRequest) {
     sameSite: "lax",
     maxAge: 7 * 24 * 60 * 60,
     path: "/",
+    // Match domain to generateToken.js so logout (which clears .codingkul.in) works
+    domain: isProd ? ".codingkul.in" : undefined,
   });
   return res;
 }

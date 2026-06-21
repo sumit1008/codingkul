@@ -133,12 +133,10 @@ export const googleCallback = (req, res) => {
 // POST /api/auth/logout
 export const logout = asyncHandler(async (req, res) => {
   const isProd = process.env.NODE_ENV === "production";
-  res.cookie("ck_token", "", {
-    httpOnly: true,
-    secure: isProd,
-    sameSite: "lax",
-    domain: isProd ? ".codingkul.in" : undefined,
-    expires: new Date(0),
-  });
+  const clearOpts = { httpOnly: true, secure: isProd, sameSite: "lax", expires: new Date(0) };
+  // Clear domain-scoped cookie (email/password + post-fix Google OAuth)
+  res.cookie("ck_token", "", { ...clearOpts, domain: isProd ? ".codingkul.in" : undefined });
+  // Also clear host-scoped cookie (Google OAuth logins before the domain fix)
+  if (isProd) res.cookie("ck_token", "", clearOpts);
   res.json({ success: true, message: "Logged out" });
 });
