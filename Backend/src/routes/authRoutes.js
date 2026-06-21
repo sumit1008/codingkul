@@ -27,6 +27,8 @@ router.get(
     console.log("[OAUTH:CALLBACK] session keys:", Object.keys(req.session || {}));
     console.log("[OAUTH:CALLBACK] query code present:", !!req.query.code);
     console.log("[OAUTH:CALLBACK] query state present:", !!req.query.state);
+    console.log("[OAUTH:CALLBACK] query prompt:", req.query.prompt || "(none)");
+    console.log("[OAUTH:CALLBACK] query error:", req.query.error || "(none)");
     next();
   },
   passport.authenticate("google", {

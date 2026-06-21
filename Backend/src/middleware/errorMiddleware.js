@@ -5,8 +5,11 @@ export const notFound = (req, res, next) => {
 };
 
 export const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+  console.error("[ERROR]", req.method, req.originalUrl, "→", err.message);
+  if (err.oauthError) console.error("[ERROR] oauthError:", JSON.stringify(err.oauthError));
+  if (err.code) console.error("[ERROR] code:", err.code);
 
+  const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode).json({
     success: false,
     message: err.message,
