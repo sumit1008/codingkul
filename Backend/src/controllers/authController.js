@@ -96,17 +96,39 @@ export const checkUsername = asyncHandler(async (req, res) => {
 });
 
 // GET /api/auth/google/callback (called after passport processes Google response)
-export const googleCallback = asyncHandler(async (req, res) => {
-  // Generate JWT without setting a cookie — cookie is set on the frontend domain
-  // via /auth/callback page to avoid cross-domain cookie issues
-  const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  });
+export const googleCallback = (req, res) => {
+  console.log("[OAUTH:DONE] googleCallback entered");
+  console.log("[OAUTH:DONE] req.user present:", !!req.user);
 
-  req.session.destroy(() => {
-    res.redirect(`${process.env.CLIENT_URL}/callback?token=${token}`);
+  // Passport should always set req.user here, but guard against edge cases
+  if (!req.user) {
+    console.error("[OAUTH:DONE] req.user is null — redirecting to failure");
+    return res.redirect(`${process.env.CLIENT_URL}/login?error=google_failed`);
+  }
+
+  const userId = req.user._id;
+  console.log("[OAUTH:DONE] userId:", userId.toString());
+
+  let token;
+  try {
+    token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+    });
+    console.log("[OAUTH:DONE] JWT generated successfully");
+  } catch (err) {
+    console.error("[OAUTH:DONE] JWT sign failed:", err.message);
+    return res.redirect(`${process.env.CLIENT_URL}/login?error=google_failed`);
+  }
+
+  const redirectTarget = `${process.env.CLIENT_URL}/callback?token=${token}`;
+  console.log("[OAUTH:DONE] redirecting to:", process.env.CLIENT_URL + "/callback?token=<JWT>");
+
+  // Destroy the OAuth session after extracting the token — ignore destroy errors
+  req.session.destroy((err) => {
+    if (err) console.error("[OAUTH:DONE] session.destroy error (non-fatal):", err.message);
+    res.redirect(redirectTarget);
   });
-});
+};
 
 // POST /api/auth/logout
 export const logout = asyncHandler(async (req, res) => {

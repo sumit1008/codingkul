@@ -78,16 +78,26 @@ app.use(cookieParser());
 
 // Session — only needed for OAuth handshake state (not persistent auth)
 // MongoStore keeps sessions alive across Railway restarts and cold starts
+const mongoUri = process.env.MONGO_URI;
+console.log("[SESSION] MONGO_URI present:", !!mongoUri);
+
+const sessionStore = MongoStore.create({
+  mongoUrl: mongoUri,
+  ttl: 10 * 60, // 10 minutes — matches cookie maxAge
+  touchAfter: 0,
+  collectionName: "oauth_sessions",
+});
+
+sessionStore.on("error", (err) => {
+  console.error("[SESSION] MongoStore error:", err.message);
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || "fallback_session_secret",
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
-      ttl: 10 * 60, // 10 minutes — matches cookie maxAge
-      touchAfter: 0,
-    }),
+    store: sessionStore,
     cookie: {
       maxAge: 10 * 60 * 1000,
       httpOnly: true,

@@ -12,16 +12,26 @@ router.post("/login", login);
 router.get("/me", protect, getMe);
 router.post("/logout", logout);
 
-// Google OAuth
-router.get(
-  "/google",
-  passport.authenticate("google", { scope: ["profile", "email"], prompt: "select_account" })
-);
+// Google OAuth — initiation
+router.get("/google", (req, res, next) => {
+  console.log("[OAUTH:START] Initiating Google OAuth — session ID:", req.sessionID);
+  next();
+}, passport.authenticate("google", { scope: ["profile", "email"], prompt: "select_account" }));
 
+// Google OAuth — callback from Google
 router.get(
   "/google/callback",
+  (req, res, next) => {
+    console.log("[OAUTH:CALLBACK] Google callback received");
+    console.log("[OAUTH:CALLBACK] session ID:", req.sessionID);
+    console.log("[OAUTH:CALLBACK] session keys:", Object.keys(req.session || {}));
+    console.log("[OAUTH:CALLBACK] query code present:", !!req.query.code);
+    console.log("[OAUTH:CALLBACK] query state present:", !!req.query.state);
+    next();
+  },
   passport.authenticate("google", {
     failureRedirect: `${process.env.CLIENT_URL}/login?error=google_failed`,
+    failureMessage: false,
     session: true,
   }),
   googleCallback
