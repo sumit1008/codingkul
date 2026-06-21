@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
 import asyncHandler from "../middleware/asyncHandler.js";
@@ -96,11 +97,14 @@ export const checkUsername = asyncHandler(async (req, res) => {
 
 // GET /api/auth/google/callback (called after passport processes Google response)
 export const googleCallback = asyncHandler(async (req, res) => {
-  generateToken(res, req.user._id);
+  // Generate JWT without setting a cookie — cookie is set on the frontend domain
+  // via /auth/callback page to avoid cross-domain cookie issues
+  const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
 
-  // Destroy OAuth session — we have JWT now
   req.session.destroy(() => {
-    res.redirect(`${process.env.CLIENT_URL}/dashboard`);
+    res.redirect(`${process.env.CLIENT_URL}/callback?token=${token}`);
   });
 });
 

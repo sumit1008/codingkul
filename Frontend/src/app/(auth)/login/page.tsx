@@ -51,7 +51,8 @@ function LoginContent() {
   }, [searchParams]);
 
   const handleGoogleLogin = useCallback(() => {
-    window.location.href = "/api/auth/google";
+    const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+    window.location.href = `${backend}/api/auth/google`;
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
