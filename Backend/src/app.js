@@ -6,6 +6,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import "./config/passport.js";
 import passport from "passport";
 
@@ -76,11 +77,17 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 
 // Session — only needed for OAuth handshake state (not persistent auth)
+// MongoStore keeps sessions alive across Railway restarts and cold starts
 app.use(
   session({
     secret: process.env.SESSION_SECRET || process.env.JWT_SECRET || "fallback_session_secret",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      ttl: 10 * 60, // 10 minutes — matches cookie maxAge
+      touchAfter: 0,
+    }),
     cookie: {
       maxAge: 10 * 60 * 1000,
       httpOnly: true,
