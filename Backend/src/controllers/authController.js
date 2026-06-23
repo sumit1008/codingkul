@@ -120,8 +120,11 @@ export const googleCallback = (req, res) => {
     return res.redirect(`${process.env.CLIENT_URL}/login?error=google_failed`);
   }
 
-  const redirectTarget = `${process.env.CLIENT_URL}/callback?token=${token}`;
-  console.log("[OAUTH:DONE] redirecting to:", process.env.CLIENT_URL + "/callback?token=<JWT>");
+  // Use /api/auth-redirect (server-side Next.js route) instead of /callback (React page).
+  // Server-side sets the cookie in one HTTP hop (~100ms) vs React page approach (~2s).
+  // This ensures auth completes before Google Workspace sends its second callback redirect.
+  const redirectTarget = `${process.env.CLIENT_URL}/api/auth-redirect?token=${token}`;
+  console.log("[OAUTH:DONE] redirecting to:", process.env.CLIENT_URL + "/api/auth-redirect?token=<JWT>");
 
   // Destroy the OAuth session after extracting the token — ignore destroy errors
   req.session.destroy((err) => {
