@@ -31,7 +31,7 @@ const ROADMAP = [
 
 const COMPARE_ROWS = [
   { feature: "Live DSA Classes", foundation: true, accelerator: true, placement: true },
-  { feature: "240+ Hours Content", foundation: true, accelerator: true, placement: true },
+  { feature: "250+ Hours Content", foundation: true, accelerator: true, placement: true },
   { feature: "DSA Sheet Access", foundation: true, accelerator: true, placement: true },
   { feature: "Weekly Assignments", foundation: true, accelerator: true, placement: true },
   { feature: "Ranked Contests", foundation: false, accelerator: true, placement: true },

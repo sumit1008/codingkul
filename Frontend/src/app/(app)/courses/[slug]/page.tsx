@@ -181,8 +181,8 @@ export default function CourseDetailPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
           {[
             { icon: <BookOpen className="w-4 h-4" />, label: "Modules", value: course.modules.length, color: c.badge },
-            { icon: <Clock className="w-4 h-4" />, label: "Total Hours", value: course.modules.reduce((acc, m) => acc + parseInt(m.duration), 0) + "+", color: "#22d3ee" },
-            { icon: <FileText className="w-4 h-4" />, label: "Lectures", value: course.modules.reduce((acc, m) => acc + m.lectures.length, 0), color: "#a855f7" },
+            { icon: <Clock className="w-4 h-4" />, label: "Total Hours", value: (course.totalHours ?? course.modules.reduce((acc, m) => acc + parseInt(m.duration), 0)) + "+", color: "#22d3ee" },
+            { icon: <FileText className="w-4 h-4" />, label: "Lectures", value: (course.totalLectures ?? course.modules.reduce((acc, m) => acc + m.lectures.length, 0)) + "+", color: "#a855f7" },
             { icon: <Users className="w-4 h-4" />, label: "Validity", value: course.validity[0].split(" ").slice(0, 2).join(" "), color: "#22c55e" },
           ].map((stat) => (
             <div
@@ -243,7 +243,7 @@ export default function CourseDetailPage() {
                   {/* Module header */}
                   <button
                     onClick={() => toggleModule(mIdx)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-left transition-colors hover:bg-white/[0.02]"
+                    className="w-full flex items-center justify-between px-5 py-4 text-left transition-colors hover:bg-white/2"
                   >
                     <div>
                       <h3 className="text-base font-semibold text-white">{module.title}</h3>
@@ -279,7 +279,7 @@ export default function CourseDetailPage() {
                           {module.lectures.map((lecture, lIdx) => (
                             <div
                               key={lecture.title}
-                              className={`flex items-center gap-3 px-5 py-3 transition-colors ${hasAccess ? "cursor-pointer hover:bg-white/[0.03]" : "cursor-pointer hover:bg-white/[0.02]"}`}
+                              className={`flex items-center gap-3 px-5 py-3 transition-colors ${hasAccess ? "cursor-pointer hover:bg-white/3" : "cursor-pointer hover:bg-white/2"}`}
                               style={{
                                 borderBottom: lIdx < module.lectures.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
                               }}

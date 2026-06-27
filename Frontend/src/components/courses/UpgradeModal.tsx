@@ -18,7 +18,7 @@ const TIER_LABELS: Record<CourseTier, string> = {
 const UPGRADE_HIGHLIGHTS: Record<string, string[]> = {
   foundation: [
     "Regular Live DSA Classes",
-    "240 Hours Content",
+    "250+ Hours Content",
     "Complete DSA Sheet",
     "Weekly Assignments",
     "Structured Learning Roadmap",

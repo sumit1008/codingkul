@@ -26,6 +26,8 @@ export interface Course {
   validity: string[];
   outcome: string;
   modules: CourseModule[];
+  totalHours?: number;
+  totalLectures?: number;
   hasAccess: boolean;
   upgradePrice: number | null;
 }

@@ -16,7 +16,7 @@ const PLANS = [
     target: "Students in 1st or 2nd year who want to build strong DSA fundamentals.",
     features: [
       "Regular Live DSA Classes",
-      "240 Hours Content",
+      "250+ Hours Content",
       "Complete DSA Sheet",
       "Weekly Assignments",
       "Topic-wise Practice Sets",
