@@ -1,11 +1,30 @@
 "use client";
 
+import Link from "next/link";
 import { Code2, GitBranch, X, Link2, Play } from "lucide-react";
 
-const LINKS = {
-  Product: ["Problems", "DSA Sheets", "Live Classes", "Contests", "Pricing"],
-  Resources: ["Blog", "Editorials", "Roadmaps", "Cheat Sheets", "Interview Q&A"],
-  Company: ["About", "Careers", "Contact", "Press Kit", "Privacy Policy"],
+const LINKS: Record<string, { label: string; href: string }[]> = {
+  Product: [
+    { label: "Problems", href: "#" },
+    { label: "DSA Sheets", href: "#" },
+    { label: "Live Classes", href: "#" },
+    { label: "Contests", href: "#" },
+    { label: "Pricing", href: "#" },
+  ],
+  Resources: [
+    { label: "Blog", href: "#" },
+    { label: "Editorials", href: "#" },
+    { label: "Roadmaps", href: "#" },
+    { label: "Cheat Sheets", href: "#" },
+    { label: "Interview Q&A", href: "#" },
+  ],
+  Company: [
+    { label: "About", href: "#" },
+    { label: "Careers", href: "#" },
+    { label: "Contact", href: "/contact" },
+    { label: "Press Kit", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+  ],
 };
 
 const SOCIALS = [
@@ -76,10 +95,10 @@ export default function Footer() {
                 {category}
               </h4>
               <ul className="space-y-2.5">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                {links.map(({ label, href }) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
                       className="text-sm transition-colors duration-200"
                       style={{ color: "#8888aa" }}
                       onMouseEnter={(e) => {
@@ -89,8 +108,8 @@ export default function Footer() {
                         (e.currentTarget as HTMLAnchorElement).style.color = "#8888aa";
                       }}
                     >
-                      {link}
-                    </a>
+                      {label}
+                    </Link>
                   </li>
                 ))}
               </ul>
