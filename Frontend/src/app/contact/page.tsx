@@ -129,7 +129,7 @@ export default function ContactPage() {
 
           {/* Phone */}
           <a
-            href="tel:+919336613514"
+            href="tel:+919250270453"
             className="group block rounded-2xl p-6 transition-all duration-200"
             style={{
               background: "rgba(14,14,30,0.8)",
@@ -158,7 +158,7 @@ export default function ContactPage() {
               Phone
             </p>
             <p className="text-base font-medium text-white group-hover:text-indigo-300 transition-colors duration-200">
-              +91 9336613514
+              +91 9250270453
             </p>
           </a>
         </div>
