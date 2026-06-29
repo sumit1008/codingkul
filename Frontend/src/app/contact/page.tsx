@@ -128,20 +128,11 @@ export default function ContactPage() {
           </a>
 
           {/* Phone */}
-          <a
-            href="tel:+919250270453"
-            className="group block rounded-2xl p-6 transition-all duration-200"
+          <div
+            className="rounded-2xl p-6"
             style={{
               background: "rgba(14,14,30,0.8)",
               border: "1px solid rgba(255,255,255,0.07)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(99,102,241,0.35)";
-              (e.currentTarget as HTMLAnchorElement).style.background = "rgba(99,102,241,0.06)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.07)";
-              (e.currentTarget as HTMLAnchorElement).style.background = "rgba(14,14,30,0.8)";
             }}
           >
             <div
@@ -154,13 +145,24 @@ export default function ContactPage() {
             >
               <Phone className="w-5 h-5" />
             </div>
-            <p className="text-xs font-semibold tracking-wider uppercase mb-1.5" style={{ color: "#555577" }}>
+            <p className="text-xs font-semibold tracking-wider uppercase mb-3" style={{ color: "#555577" }}>
               Phone
             </p>
-            <p className="text-base font-medium text-white group-hover:text-indigo-300 transition-colors duration-200">
-              +91 9250270453
-            </p>
-          </a>
+            <div className="space-y-2">
+              {[
+                { display: "+91 9250270453", href: "tel:+919250270453" },
+                { display: "+91 9005147626", href: "tel:+919005147626" },
+              ].map(({ display, href }) => (
+                <a
+                  key={href}
+                  href={href}
+                  className="group flex items-center text-base font-medium text-white hover:text-indigo-300 transition-colors duration-200"
+                >
+                  {display}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Response note */}
