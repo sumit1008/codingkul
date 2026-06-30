@@ -100,7 +100,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Bottom section */}
       <div className="px-3 pb-3 border-t pt-3" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-        {/* Upgrade card — free users only, never during auth loading */}
+        {/* Upgrade card — free users only, never during auth loading.
+            No fixed price shown here since pricing varies by tier; the CTA
+            sends users to My Courses to see actual upgrade options/cost. */}
         {showUpgradeCard && (
           <div
             className="mt-3 rounded-2xl p-4"
