@@ -18,7 +18,7 @@ interface CfApiResponse<T> {
 async function cfFetch<T>(endpoint: string): Promise<T> {
   const res = await fetch(`${CF_BASE}${endpoint}`, {
     cache: "no-store",
-    headers: { "User-Agent": "AlgoShashtra-Admin/1.0" },
+    headers: { "User-Agent": "CodingKul-Admin/1.0" },
   });
   if (!res.ok) throw new Error(`CF API HTTP ${res.status}`);
   const json: CfApiResponse<T> = await res.json();

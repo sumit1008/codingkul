@@ -26,7 +26,7 @@ export const cfHandleSchema = z.object({
 export function validateBody(schema, body) {
   const result = schema.safeParse(body);
   if (!result.success) {
-    const messages = result.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`);
+    const messages = result.error.issues.map((e) => `${e.path.join(".")}: ${e.message}`);
     const err = new Error(messages.join("; "));
     err.statusCode = 400;
     throw err;

@@ -97,7 +97,27 @@ export const homeworkSchema = z.object({
   isMandatory: z.boolean().default(false),
 });
 
+export const couponObjectSchema = z.object({
+  code:              z.string().min(3, "Code must be at least 3 characters").max(40).regex(/^[A-Za-z0-9_-]+$/, "Code: letters, numbers, hyphens, underscores only"),
+  description:       z.string().max(500).optional().default(""),
+  discountType:      z.enum(["PERCENTAGE", "FIXED"]),
+  discountValue:     z.coerce.number().positive("Must be a positive number"),
+  applicableCourses: z.array(z.enum(["FOUNDATION", "ACCELERATOR", "PLACEMENT"])).min(1, "Select at least one course"),
+  validityDays:      z.coerce.number().int().min(1, "Must be at least 1 day"),
+  maxUsageCount:     z.coerce.number().int().min(1, "Must be at least 1"),
+  isDisabled:        z.boolean().optional().default(false),
+});
+
+function refinePercentageCap(data: { discountType?: string; discountValue?: number }) {
+  return data.discountType !== "PERCENTAGE" || (data.discountValue ?? 0) <= 100;
+}
+const percentageCapIssue = { message: "Percentage discount cannot exceed 100", path: ["discountValue"] };
+
+export const couponSchema = couponObjectSchema.refine(refinePercentageCap, percentageCapIssue);
+export const couponUpdateSchema = couponObjectSchema.partial().refine(refinePercentageCap, percentageCapIssue);
+
 export type LoginInput    = z.infer<typeof loginSchema>;
+export type CouponInput   = z.infer<typeof couponSchema>;
 export type SheetInput    = z.infer<typeof sheetSchema>;
 export type ProblemInput  = z.infer<typeof problemSchema>;
 export type CsvRowInput   = z.infer<typeof csvRowSchema>;

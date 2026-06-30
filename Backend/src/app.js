@@ -21,6 +21,7 @@ import batchRoutes from "./routes/batchRoutes.js";
 import adminBatchRoutes from "./routes/adminBatchRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -123,6 +124,7 @@ app.use("/api/batches", batchRoutes);
 app.use("/api/admin/batches", adminBatchRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/payment", paymentRoutes);
+app.use("/api/profile", profileRoutes);
 
 // Error handling
 app.use(notFound);

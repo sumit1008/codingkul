@@ -18,6 +18,7 @@ const safeUser = (user) => ({
   courseTier: user.courseTier || "NONE",
   purchasedCourses: user.purchasedCourses || [],
   enrolledBatches: user.batches?.length ?? 0,
+  avatarPresetId: user.profile?.personal?.avatarPresetId ?? null,
   // Progress fields — mapped to standard client keys
   rating: user.academyRating ?? 1200,
   rankTitle: user.academyRankTitle ?? "Pupil",

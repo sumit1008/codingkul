@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Course, CourseTier, COURSE_PRICES } from "@/types/course";
 import { useAuth } from "@/lib/auth-context";
 import { useRazorpay } from "@/hooks/useRazorpay";
+import { useCoupon } from "@/hooks/useCoupon";
+import CouponInput from "./CouponInput";
 
 const TIER_LABELS: Record<CourseTier, string> = {
   NONE: "Free Plan",
@@ -78,10 +80,13 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
   const { user, refreshUser } = useAuth();
   const { initiatePayment } = useRazorpay();
   const [isPaying, setIsPaying] = useState(false);
+  const { appliedCoupon, applying, error: couponError, apply: applyCoupon, remove: removeCoupon } =
+    useCoupon(course.tier as Exclude<CourseTier, "NONE">);
 
   const isUpgrade = userTier !== "NONE" && !course.hasAccess;
   const currentPrice = COURSE_PRICES[userTier] ?? 0;
-  const finalPrice = course.upgradePrice ?? course.price;
+  const basePrice = course.upgradePrice ?? course.price;
+  const finalPrice = appliedCoupon ? appliedCoupon.finalAmount : basePrice;
   const saved = isUpgrade ? currentPrice : 0;
 
   useEffect(() => {
@@ -100,6 +105,7 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
       userName: user.name,
       userEmail: user.email,
       accentColor: c.accent,
+      couponCode: appliedCoupon?.code,
     });
     setIsPaying(false);
 
@@ -211,7 +217,33 @@ export default function UpgradeModal({ course, userTier, onClose }: Props) {
                   </p>
                 </>
               )}
+
+              {appliedCoupon && (
+                <div className="mt-3 pt-3 space-y-1" style={{ borderTop: `1px solid ${c.border}` }}>
+                  <div className="flex items-center justify-between text-xs">
+                    <span style={{ color: "#8888aa" }}>Original Price</span>
+                    <span style={{ color: "#8888aa" }}>₹{appliedCoupon.originalPrice.toLocaleString()}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span style={{ color: "#22c55e" }}>Coupon Discount ({appliedCoupon.code})</span>
+                    <span style={{ color: "#22c55e" }}>−₹{appliedCoupon.discountAmount.toLocaleString()}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm font-semibold pt-1">
+                    <span className="text-white">Final Payable</span>
+                    <span style={{ color: c.badge }}>₹{appliedCoupon.finalAmount.toLocaleString()}</span>
+                  </div>
+                </div>
+              )}
             </div>
+
+            <CouponInput
+              appliedCoupon={appliedCoupon}
+              applying={applying}
+              error={couponError}
+              onApply={applyCoupon}
+              onRemove={removeCoupon}
+              accentColor={c.accent}
+            />
 
             {/* Features */}
             <div className="mb-6">

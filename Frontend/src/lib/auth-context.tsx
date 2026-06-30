@@ -31,6 +31,7 @@ export interface User {
   courseTier: CourseTier;
   purchasedCourses: string[];
   enrolledBatches: number;
+  avatarPresetId: number | null;
 }
 
 /** Single source of truth for paid-access checks across the entire app */
@@ -77,6 +78,7 @@ function mapUser(u: any): User {
     courseTier: u.courseTier || "NONE",
     purchasedCourses: u.purchasedCourses || [],
     enrolledBatches: u.enrolledBatches ?? 0,
+    avatarPresetId: u.avatarPresetId ?? null,
   };
 }
 

@@ -45,6 +45,7 @@ export interface InitiatePaymentParams {
   userName: string;
   userEmail: string;
   accentColor?: string;
+  couponCode?: string;
 }
 
 const RAZORPAY_SCRIPT_SRC = "https://checkout.razorpay.com/v1/checkout.js";
@@ -67,7 +68,7 @@ export function useRazorpay() {
   const busy = useRef(false);
 
   const initiatePayment = useCallback(
-    async ({ tier, amount, userName, userEmail, accentColor = "#7c3aed" }: InitiatePaymentParams): Promise<PaymentResult> => {
+    async ({ tier, amount, userName, userEmail, accentColor = "#7c3aed", couponCode }: InitiatePaymentParams): Promise<PaymentResult> => {
       if (busy.current) return { success: false, error: "Payment already in progress" };
       busy.current = true;
 
@@ -79,7 +80,10 @@ export function useRazorpay() {
 
         let orderData: { order_id: string; amount: number; currency: string };
         try {
-          const res = await api.post<{ success: boolean; data: typeof orderData }>("/payment/create-order", { tier });
+          const res = await api.post<{ success: boolean; data: typeof orderData }>("/payment/create-order", {
+            tier,
+            ...(couponCode ? { couponCode } : {}),
+          });
           if (!res.data.success) return { success: false, error: "Failed to create payment order" };
           orderData = res.data.data;
         } catch (err: unknown) {
@@ -101,7 +105,7 @@ export function useRazorpay() {
             amount: orderData.amount,
             currency: orderData.currency,
             order_id: orderData.order_id,
-            name: "AlgoShashtra",
+            name: "CodingKul",
             description: `${tier.charAt(0) + tier.slice(1).toLowerCase()} Program`,
             prefill: { name: userName, email: userEmail },
             theme: { color: accentColor },

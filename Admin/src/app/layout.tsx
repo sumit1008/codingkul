@@ -3,7 +3,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "AlgoShashtra Admin",
+  title: "CodingKul Admin",
   description: "DSA Sheets CMS — Admin Panel",
 };
 

@@ -63,7 +63,7 @@ export default function LoginPage() {
           >
             <Code2 className="w-7 h-7 text-white" strokeWidth={2.5} />
           </div>
-          <h1 className="text-2xl font-bold text-text tracking-tight">AlgoShashtra Admin</h1>
+          <h1 className="text-2xl font-bold text-text tracking-tight">CodingKul Admin</h1>
           <p className="text-sm text-text-muted mt-1">Sign in to manage your DSA content</p>
         </div>
 
@@ -133,7 +133,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-xs text-text-faint mt-6">
-          AlgoShashtra CMS · Restricted access
+          CodingKul CMS · Restricted access
         </p>
       </motion.div>
     </div>

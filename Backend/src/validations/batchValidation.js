@@ -70,7 +70,7 @@ export const homeworkProgressSchema = z.object({
 export function validateBody(schema, body) {
   const result = schema.safeParse(body);
   if (!result.success) {
-    const err = new Error(result.error.errors[0].message);
+    const err = new Error(result.error.issues[0].message);
     err.statusCode = 400;
     throw err;
   }

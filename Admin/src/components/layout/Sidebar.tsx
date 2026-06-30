@@ -5,18 +5,20 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard, FileSpreadsheet, Code2, BarChart2,
-  Settings, ChevronRight, Layers, Swords, Users,
+  Settings, ChevronRight, Layers, Swords, Users, TicketPercent, History,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { label: "Dashboard",  href: "/dashboard",           icon: LayoutDashboard },
-  { label: "Sheets",     href: "/dashboard/sheets",    icon: FileSpreadsheet },
-  { label: "Problems",   href: "/dashboard/problems",  icon: Code2 },
-  { label: "Batches",    href: "/dashboard/batches",   icon: Users },
-  { label: "Contests",   href: "/dashboard/contests",  icon: Swords },
-  { label: "Analytics",  href: "/dashboard/analytics", icon: BarChart2 },
-  { label: "Settings",   href: "/dashboard/settings",  icon: Settings },
+  { label: "Dashboard",        href: "/dashboard",            icon: LayoutDashboard },
+  { label: "Sheets",           href: "/dashboard/sheets",     icon: FileSpreadsheet },
+  { label: "Problems",         href: "/dashboard/problems",   icon: Code2 },
+  { label: "Batches",          href: "/dashboard/batches",    icon: Users },
+  { label: "Contests",         href: "/dashboard/contests",   icon: Swords },
+  { label: "Coupons",          href: "/dashboard/coupons",    icon: TicketPercent },
+  { label: "Expired Coupons",  href: "/dashboard/coupons/expired", icon: History },
+  { label: "Analytics",        href: "/dashboard/analytics",  icon: BarChart2 },
+  { label: "Settings",         href: "/dashboard/settings",   icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -39,7 +41,7 @@ export default function Sidebar() {
           <Layers className="w-4 h-4 text-white" strokeWidth={2.5} />
         </div>
         <div>
-          <p className="text-sm font-bold text-text tracking-tight leading-none">AlgoShashtra</p>
+          <p className="text-sm font-bold text-text tracking-tight leading-none">CodingKul</p>
           <p className="text-[10px] text-text-faint mt-0.5">Admin CMS</p>
         </div>
       </div>
@@ -81,7 +83,7 @@ export default function Sidebar() {
         className="px-5 py-4 border-t"
         style={{ borderColor: "rgba(255,255,255,0.07)" }}
       >
-        <p className="text-[10px] text-text-faint">v0.1.0 · AlgoShashtra CMS</p>
+        <p className="text-[10px] text-text-faint">v0.1.0 · CodingKul CMS</p>
       </div>
     </aside>
   );

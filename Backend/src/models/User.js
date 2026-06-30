@@ -133,6 +133,51 @@ const userSchema = new mongoose.Schema(
         count: { type: Number, default: 1 },
       },
     ],
+
+    // ── Student profile (added in S8) ───────────────────────────────────────────
+    // Codeforces username intentionally lives at the top level (codeforcesHandle) —
+    // not duplicated here — since the contest system already reads/writes it.
+    profile: {
+      personal: {
+        mobileNumber:   { type: String, trim: true, default: "" },
+        dateOfBirth:    { type: Date, default: null },
+        gender:         { type: String, enum: ["male", "female", "other", ""], default: "" },
+        parentName:     { type: String, trim: true, default: "" },
+        parentContact:  { type: String, trim: true, default: "" },
+        avatarPresetId: { type: Number, min: 1, max: 12, default: () => 1 + Math.floor(Math.random() * 12) },
+      },
+      academic: {
+        collegeName:     { type: String, trim: true, default: "" },
+        university:      { type: String, trim: true, default: "" },
+        degree:          { type: String, trim: true, default: "" },
+        branch:          { type: String, trim: true, default: "" },
+        currentYear:     { type: String, trim: true, default: "" },
+        graduationYear:  { type: Number, default: null },
+      },
+      career: {
+        resumeUrl:         { type: String, trim: true, default: "" },
+        targetRole:        { type: String, trim: true, default: "" },
+        preferredLocation: { type: String, trim: true, default: "" },
+        currentCompany:    { type: String, trim: true, default: "" },
+        currentPackage:    { type: String, trim: true, default: "" },
+        targetPackage:     { type: String, trim: true, default: "" },
+      },
+      codingProfiles: {
+        leetcodeUsername: { type: String, trim: true, default: "" },
+        codechefUsername: { type: String, trim: true, default: "" },
+        gfgUsername:      { type: String, trim: true, default: "" },
+        githubUsername:   { type: String, trim: true, default: "" },
+        linkedinUrl:      { type: String, trim: true, default: "" },
+        portfolioUrl:     { type: String, trim: true, default: "" },
+      },
+      address: {
+        addressLine: { type: String, trim: true, default: "" },
+        city:        { type: String, trim: true, default: "" },
+        state:       { type: String, trim: true, default: "" },
+        country:     { type: String, trim: true, default: "" },
+        pinCode:     { type: String, trim: true, default: "" },
+      },
+    },
   },
   { timestamps: true }
 );

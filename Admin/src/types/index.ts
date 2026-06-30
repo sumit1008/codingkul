@@ -191,6 +191,60 @@ export interface AdminHomework {
   createdAt: string;
 }
 
+// ── Coupon types ─────────────────────────────────────────────────────────────
+
+export type CouponCourse = "FOUNDATION" | "ACCELERATOR" | "PLACEMENT";
+export type CouponDiscountType = "PERCENTAGE" | "FIXED";
+export type CouponStatusLabel = "ACTIVE" | "DISABLED" | "EXPIRED" | "DELETED";
+
+export interface AdminCoupon {
+  _id: string;
+  code: string;
+  description: string;
+  discountType: CouponDiscountType;
+  discountValue: number;
+  applicableCourses: CouponCourse[];
+  validityDays: number;
+  expiresAt: string;
+  maxUsageCount: number;
+  usageCount: number;
+  isDisabled: boolean;
+  isDeleted: boolean;
+  status: CouponStatusLabel;
+  expiryReason?: string;
+  createdByName: string;
+  createdByEmail: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminCouponRedemption {
+  _id: string;
+  couponId: string;
+  couponCode: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  courseTier: CouponCourse;
+  originalPrice: number;
+  discountAmount: number;
+  finalAmount: number;
+  razorpayOrderId: string;
+  razorpayPaymentId: string;
+  paymentStatus: "SUCCESS" | "FAILED";
+  note: string;
+  createdAt: string;
+}
+
+export interface CouponStats {
+  totalPurchases: number;
+  totalRevenue: number;
+  totalDiscountGiven: number;
+  remainingUses: number;
+}
+
+export const COURSE_TIERS: CouponCourse[] = ["FOUNDATION", "ACCELERATOR", "PLACEMENT"];
+
 export const COMPANIES = [
   "Google", "Amazon", "Microsoft", "Meta", "Apple", "Netflix", "Uber",
   "Airbnb", "Adobe", "Goldman Sachs", "Morgan Stanley", "Flipkart",

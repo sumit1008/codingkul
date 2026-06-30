@@ -24,7 +24,7 @@ export default function ContestManager() {
       <div className="section-header">
         <div>
           <h1 className="page-title">Contest Arena</h1>
-          <p className="text-text-muted text-sm mt-1">Manage AlgoShashtra contests and results</p>
+          <p className="text-text-muted text-sm mt-1">Manage CodingKul contests and results</p>
         </div>
         <button onClick={handleCreate} className="btn-primary flex items-center gap-2">
           <Plus className="w-4 h-4" /> New Contest

@@ -124,7 +124,7 @@ export default function TopNavbar() {
               <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg,#6366f1,#a855f7)" }}>
                 <Layers className="w-4 h-4 text-white" />
               </div>
-              <p className="text-sm font-bold text-text">AlgoShashtra Admin</p>
+              <p className="text-sm font-bold text-text">CodingKul Admin</p>
             </div>
             <nav className="flex-1 py-5 px-3 space-y-0.5">
               {[

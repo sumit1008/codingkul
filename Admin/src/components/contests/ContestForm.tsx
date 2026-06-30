@@ -97,14 +97,14 @@ export default function ContestForm({ contest, onClose, onSaved }: Props) {
             {/* Title */}
             <div>
               <label className="label">Title *</label>
-              <input {...register("title")} className="input" placeholder="AlgoShashtra Weekly #1" />
+              <input {...register("title")} className="input" placeholder="CodingKul Weekly #1" />
               {errors.title && <p className="text-danger text-xs mt-1">{errors.title.message}</p>}
             </div>
 
             {/* Slug */}
             <div>
               <label className="label">Slug</label>
-              <input {...register("slug")} className="input font-mono text-sm" placeholder="algoshashtra-weekly-1" />
+              <input {...register("slug")} className="input font-mono text-sm" placeholder="codingkul-weekly-1" />
               {errors.slug && <p className="text-danger text-xs mt-1">{errors.slug.message}</p>}
             </div>
 

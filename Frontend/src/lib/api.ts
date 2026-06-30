@@ -156,6 +156,31 @@ export const dashboardApi = {
       .then((r) => r.data.data),
 };
 
+// ── Profile API ──────────────────────────────────────────────────────────────
+
+import type { ProfileResponse, ProfileUpdateInput, Purchase, Subscription } from "@/types/profile";
+
+export const profileApi = {
+  get: () => api.get<{ success: boolean; data: ProfileResponse }>("/profile").then((r) => r.data.data),
+  update: (data: ProfileUpdateInput) =>
+    api.patch<{ success: boolean; data: ProfileResponse }>("/profile", data).then((r) => r.data.data),
+  getPurchases: () => api.get<{ success: boolean; data: Purchase[] }>("/profile/purchases").then((r) => r.data.data),
+  getSubscription: () =>
+    api.get<{ success: boolean; data: Subscription }>("/profile/subscription").then((r) => r.data.data),
+  invoiceDownloadUrl: (purchaseId: string) =>
+    `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/profile/invoices/${purchaseId}/download`,
+};
+
+// ── Coupon API ───────────────────────────────────────────────────────────────
+
+import type { CouponValidationResult } from "@/types/coupon";
+import type { CourseTier } from "@/types/course";
+
+export const couponApi = {
+  validate: (code: string, tier: Exclude<CourseTier, "NONE">) =>
+    api.post<{ success: boolean; data: CouponValidationResult }>("/payment/validate-coupon", { code, tier }).then((r) => r.data.data),
+};
+
 export const contestApi = {
   getUpcoming:     () => api.get<{ success: boolean; data: ApiContest[] }>("/contests/upcoming").then((r) => r.data.data),
   getPrevious:     () => api.get<{ success: boolean; data: (ApiContest & { userResult: ApiContestResult | null })[] }>("/contests/previous").then((r) => r.data.data),

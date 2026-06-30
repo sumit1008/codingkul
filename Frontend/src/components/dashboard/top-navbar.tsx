@@ -5,9 +5,30 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, Bell, Flame, Zap, Trophy, ChevronDown, LogOut, User, Crown } from "lucide-react";
 import { useAuth, TIER_LABELS } from "@/lib/auth-context";
+import { getAvatarPreset } from "@/lib/avatarPresets";
 
 interface TopNavbarProps {
   onMenuClick: () => void;
+}
+
+function AvatarBadge({ avatarPresetId, initials, sizeClass, textClass }: { avatarPresetId: number | null | undefined; initials: string; sizeClass: string; textClass: string }) {
+  if (avatarPresetId) {
+    const preset = getAvatarPreset(avatarPresetId);
+    const Icon = preset.icon;
+    return (
+      <div className={`${sizeClass} rounded-lg flex items-center justify-center shrink-0`} style={{ background: preset.gradient }}>
+        <Icon className="w-1/2 h-1/2 text-white" strokeWidth={2.5} />
+      </div>
+    );
+  }
+  return (
+    <div
+      className={`${sizeClass} rounded-lg flex items-center justify-center ${textClass} font-bold text-white shrink-0`}
+      style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
+    >
+      {initials}
+    </div>
+  );
 }
 
 export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
@@ -96,12 +117,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             onClick={() => setProfileOpen((o) => !o)}
             className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-xl transition-colors hover:bg-white/5"
           >
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold text-white shrink-0"
-              style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}
-            >
-              {user?.avatar ?? "?"}
-            </div>
+            <AvatarBadge avatarPresetId={user?.avatarPresetId} initials={user?.avatar ?? "?"} sizeClass="w-7 h-7" textClass="text-xs" />
             <span className="hidden md:block text-sm font-medium text-white">
               {user?.name?.split(" ")[0]}
             </span>
@@ -123,9 +139,7 @@ export default function TopNavbar({ onMenuClick }: TopNavbarProps) {
             >
               {/* User info */}
               <div className="px-4 py-3.5 border-b flex items-center gap-3" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ background: "linear-gradient(135deg, #6366f1, #a855f7)" }}>
-                  {user?.avatar ?? "?"}
-                </div>
+                <AvatarBadge avatarPresetId={user?.avatarPresetId} initials={user?.avatar ?? "?"} sizeClass="w-9 h-9" textClass="text-sm" />
                 <div>
                 <p className="text-sm font-semibold text-white">{user?.name}</p>
                 <p className="text-xs mt-0.5" style={{ color: "#8888aa" }}>@{user?.username}</p>
