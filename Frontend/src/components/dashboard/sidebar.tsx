@@ -116,15 +116,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <p className="text-[10px] mb-3 leading-relaxed" style={{ color: "#8888aa" }}>
               Unlock all 750+ problems, live classes & mock interviews.
             </p>
-            <button
-              className="w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"
+            <Link
+              href="/courses"
+              onClick={onClose}
+              className="flex items-center justify-center w-full h-8 rounded-lg text-xs font-semibold text-white transition-all hover:scale-[1.02]"
               style={{
                 background: "linear-gradient(135deg, #6366f1, #a855f7)",
                 boxShadow: "0 0 16px rgba(99,102,241,0.35)",
               }}
             >
-              Upgrade — ₹999/mo
-            </button>
+              Upgrade
+            </Link>
           </div>
         )}
       </div>
