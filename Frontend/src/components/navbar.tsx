@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: "DSA Sheets", type: "smart", dest: "/sheets", anchor: "sheets" },
   { label: "Pricing", type: "anchor", href: "#pricing" },
   { label: "Testimonials", type: "anchor", href: "#testimonials" },
+  { label: "Contact Us", type: "anchor", href: "/contact" },
 ] as const;
 
 export default function Navbar() {
