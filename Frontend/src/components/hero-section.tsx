@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -132,7 +131,11 @@ export default function HeroSection() {
           transition={fadeTrans(0.4)}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link href="/signup">
+          <a
+            href="https://www.youtube.com/playlist?list=PLaCbTLZTD9jg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button
               size="lg"
               className="group h-12 px-8 rounded-xl text-base font-semibold transition-all duration-300 hover:scale-105"
@@ -153,32 +156,38 @@ export default function HeroSection() {
               Start Learning Free
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-          </Link>
+          </a>
 
-          <Button
-            size="lg"
-            variant="outline"
-            className="group h-12 px-8 rounded-xl text-base font-semibold transition-all duration-300 hover:scale-105"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              color: "#e8e8f0",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor =
-                "rgba(99,102,241,0.5)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                "0 0 20px rgba(99,102,241,0.1)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor =
-                "rgba(255,255,255,0.15)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-            }}
+          <a
+            href="https://www.youtube.com/watch?v=kCXWY2IWqcc&list=PLaCbTLZTD9jg&index=2"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Play className="mr-2 w-4 h-4 text-indigo-400" />
-            Watch Demo
-          </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="group h-12 px-8 rounded-xl text-base font-semibold transition-all duration-300 hover:scale-105"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                color: "#e8e8f0",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor =
+                  "rgba(99,102,241,0.5)";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                  "0 0 20px rgba(99,102,241,0.1)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor =
+                  "rgba(255,255,255,0.15)";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+              }}
+            >
+              <Play className="mr-2 w-4 h-4 text-indigo-400" />
+              Watch Demo
+            </Button>
+          </a>
         </motion.div>
 
         {/* Stats row */}
